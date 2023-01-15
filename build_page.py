@@ -207,7 +207,7 @@ if __name__ == '__main__':
         for title, url, published,summary in zip(data["title"], data["url"], data["published"],data["summary"]):
             content = get_article(url)
             toc=create_toc(content)
-            img = get("Douban/external", item=url + ".webp", purpose=2)
+            img = get("img/feature", item=url + ".webp", purpose=2)
             frame = create_blog_page(blog=blog, article_url=url,article_title=title).format(h1=title, time=published, img=img, toc=toc, summary=summary, content=content,footer=footer)
             to_page(page=frame, filename=url)
 
