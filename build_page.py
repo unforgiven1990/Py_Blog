@@ -184,7 +184,7 @@ if __name__ == '__main__':
         blog_articles=[]
         for title, url, published,summary in zip(data["title"], data["url"], data["published"],data["summary"]):
             summary=cut_summary(summary)
-            img = get("Douban/external", item=url+".webp", purpose=2)
+            img = get("img/feature", item=url+".webp", purpose=2)
             a_title=f"<a href='{get(folder='page',item=url+'.html',purpose=2)}'>"+title+"</a>"
             blog_short=get("template",item="blog_short.html",purpose=3)
             blog_articles+=[blog_short.format(title=a_title,published=published, summary=summary, img=img)]
