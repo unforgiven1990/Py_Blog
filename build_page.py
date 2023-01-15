@@ -69,14 +69,12 @@ def get_all_images(CN_name):
         return
 
     root_path_en = f"Douban/Show/upload"
-    shopify_url = "https://cdn.shopifycdn.net/s/files/1/0687/0145/4658/files/"
     a_imgs=[]
     for (root, dirs, files) in os.walk(root_path_en, topdown=True):
         for file in files:
             if cn_name_pinyin in file:
-                shutil.copyfile(f"Douban/Show/upload/{file}", f"img/{clean_en_name}.webp")
-                clean_en_name = replace_cn_name(file)
-                tag = get(item="img.html").format(src=f"../img/{clean_en_name}.webp")
+                shutil.copyfile(f"Douban/Show/upload/{file}", f"img/{file}.webp")
+                tag = get(item="img.html").format(src=f"../img/{file}.webp")
                 a_imgs+=[tag]
     return "".join(a_imgs)
 
