@@ -171,7 +171,7 @@ def get_article(url):
 
 
 if __name__ == '__main__':
-    for blog in ["Sinolino"]: #reserve place for future multiple website
+    for blog in ["Chinese Variety"]: #reserve place for future multiple website
 
         """build index pages"""
         data = pd.read_excel("Douban/external/data.xlsx")
