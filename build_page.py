@@ -57,8 +57,8 @@ def get(folder="template", item="h1.html", purpose=3):
 
 
 def to_page(page,filename):
-    Path(f"page").mkdir(parents=True, exist_ok=True)
-    with open(fr"page/{filename}.html", "w", encoding="utf-8") as file:
+    Path(f"blog").mkdir(parents=True, exist_ok=True)
+    with open(fr"blog/{filename}.html", "w", encoding="utf-8") as file:
         file.write(str(page))
 
 def get_all_images(CN_name):
@@ -80,7 +80,7 @@ def get_all_images(CN_name):
 
 
 def create_blog_page(blog,article_url, article_title):
-    nav_element=get(folder="template",item="nav_element.html",purpose=3).format(icon='',name='blog', href="../page/index.html")
+    nav_element=get(folder="template",item="nav_element.html",purpose=3).format(icon='',name='blog', href="../blog/index.html")
     nav = get(folder="template", item="nav.html", purpose=3).format(elements=nav_element)
     body_container=get(folder="template", item="body_container_blog.html", purpose=3)
     speechify_js=get(folder="asset", item="speechify.js", purpose=2)
@@ -90,7 +90,7 @@ def create_blog_page(blog,article_url, article_title):
 
 
 def create_index_page(blog):
-    nav_element=get(folder="template",item="nav_element.html",purpose=3).format(icon='',name='blog', href="../page/index.html")
+    nav_element=get(folder="template",item="nav_element.html",purpose=3).format(icon='',name='blog', href="../blog/index.html")
     nav = get(folder="template", item="nav.html", purpose=3).format(elements=nav_element)
     body_container=get(folder="template", item="body_container_index.html", purpose=3)
 
@@ -183,7 +183,7 @@ if __name__ == '__main__':
         for title, url, published,summary in zip(data["title"], data["url"], data["published"],data["summary"]):
             summary=cut_summary(summary)
             img = get("img/feature", item=url+".webp", purpose=2)
-            a_title=f"<a href='{get(folder='page',item=url+'.html',purpose=2)}'>"+title+"</a>"
+            a_title=f"<a href='{get(folder='blog',item=url+'.html',purpose=2)}'>"+title+"</a>"
             blog_short=get("template",item="blog_short.html",purpose=3)
             blog_articles+=[blog_short.format(title=a_title,published=published, summary=summary, img=img)]
 
