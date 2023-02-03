@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Project Management Index</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link href="../asset/cj.css" rel="stylesheet">
+    <link href="../asset/scrollspy.css" rel="stylesheet">
+    <link rel="icon" href="../asset/logo.ico">
+    
+</head>
+
+<body >
+    <nav class="navbar navbar-expand-lg" aria-label="Eighth navbar example">
+  <div class="container">
+      <a href="../blog/index.html" class="navbar-brand fw-bold">
+          Project Management</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarinstance" aria-controls="navbarinstance" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarinstance">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+     <a class="nav-link" href="{navElement_href}" >
+         <i class="fa-solid {navElement_icon}">
+         </i>blog
+     </a>
+</li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+    <div class="container-fluid">
+    <div class="row">
+
+        <div class="col-4 px-1 position-fixed" id="sticky-sidebar">
+           <div id="indicator" ></div>
+        </div>
+        <div class="col " id="main">
+            <div class="container max-width-50" >
+                <h1><h1>2B data report design</h1></h1>
+                <time class="text-secondary">03.02.2024</time>
+                <img src="" class="mt-3">
+                <div><div>
+
+</div></div>
+                <p class="mb-5"></p>
+                <p class="mb-5 ">this is a mocup summary</p>
+                <p>Editor's Note: How do product managers efficiently build B-side business data reports to improve efficiency while also driving subsequent business processes? Among them, you need to understand the corresponding underlying data types, and then dock the corresponding requirements. In this article, the author summarizes the design ideas of B-side business data reports with his own experience, let's take a look together.</p><p>To do B-side business systems, building system functions, supporting business processes and improving efficiency are the most core and basic modules. When the business process has a certain support, the large amount of data generated, and how to use data statistics to promote business development to the second phase of the system.</p><p>Many product managers do business data reporting is only concerned about business expectations, what data statistics, and then determine the definition of the product presented and that's it. Seems simple, but if one does not have a good idea to build, the middle will encounter many pits, or data out and no real guidance.</p><p>I learned from my own experience, summed up a simple and clear design business data report ideas and share with you, I hope there is some inspiration or help.</p><p>First, do not rush to define data indicators, first clear what the underlying data</p><p>To do data reporting is, many product managers collect the demand, it is straightforward to see what indicators to analyze, what statistics, often ignoring the most core things, that is, to support the underlying data statistics, which is the first step in the design of statistical reports.</p><p>Do any data statistics, all data are derived from its underlying data, that is, what is the object of your statistics, and what underlying information he has as well as associated information.</p><p>Take my order customer complaint statistics, for example, each customer complaint in the customer service system will generate a customer complaint work orders, then my statistical order customer complaint statistics object is the customer complaint work orders, work orders is my lowest level of data.</p><p>So first of all, I have to clarify what core information and related information of the work order. Sorted by the following chart can be found, the work order itself records the basic information, processing information and associated orders / SKU information, by the order / SKU and can be associated with the order / SKU related information, information is very expandable.</p><p>The most common underlying data on the basic information of its statistical objects and their associated information, the core is to clarify his composition and structure, its role is mainly in the following points.</p><p>1. clarify whether the underlying data supporting the statistics is perfect</p><p>When I first started to do data reporting, I did not think about the underlying data, and directly defined the calculation of statistics, only to find that the system did not even make records of certain fields at the bottom, and could not support data statistics, which then went back around to do the underlying records first, in order to do data statistics, which is also a pit that I have stepped on.</p><p>So combing the underlying data is also to confirm whether the system has accurate records of the data points that support my statistics, and the underlying data is complete in order to support the subsequent data statistics.</p><p>2. clearly know the data aggregation dimensions that can be supported</p><p>When you know what key information your statistical objects have, you can already clearly know what kind of aggregated statistics can be done later and their correlation. For example, the statistics of customer complaints, as long as the work orders have information or its associated information, I can aggregate to present, such as business asks you can statistics of a country region of customer complaints, you should know very well can support, the follow-up only for the business needs to do extraction can be.</p><p>3. easy to develop understanding</p><p>Many companies do data statistics have a special data department to deal with, not business development directly, they may not understand the business data is not very thorough, so the product combed the underlying data structure, and the development of synchronization when the development also has a good understanding of the overall business data, to facilitate the subsequent development of design more in line with business needs.</p><p>I spent more time to explain the importance and significance of the underlying data, in my opinion, when the product is clear statistics underlying data structure is basically half of the success, the next only need to string these data together.</p><p>Second, demand collection, determine the business key indicators and analysis ideas</p><p>After sorting out the underlying data and structure, you can understand the detailed needs of the business, often this time the business will say that they want to see a lot of various data, what comes to mind on the proposed. At this point as a product must not be brought in by the business, you have to stay awake and work with the business in the communication process to sort out.</p><p>What are the key indicators of data statistics and their calculation definitions?</p><p>What are the other impact or related indicators for key indicators?</p><p>At the same time, what is the idea of data analysis to find key abnormal business?</p><p>Finally, what are the dimensions from which data indicators are generally viewed for comparison?</p><p>In the demand collection stage must be clear above four requirements, basically our data report design ideas are gradually clear.</p><p>Third, all the information will be logically strung together to form our data reporting product solution</p><p>With our underlying data structure and business clear requirements, the next step can be product design, sharing a few core ideas and points of attention in the product design process.</p><p>1. pay attention to the choice of charts, each chart must have the actual meaning of presentation</p><p>We can have many types of charts to show our data, such as line charts, pie charts, bar charts, etc.. What chart to choose to show our data indicators, the core idea is what you want to express, you look at the chart can be derived from what information?</p><p>For example, if I analyze the proportion of various types of customer complaints, it looks like the proportion of pie is very appropriate, so I can know how the distribution is, but in fact, the business is more concerned about the trend of the proportion, the business needs to know which type has become more and which type has become less, and know what type of problem is more serious recently, then this kind of demand is more appropriate to use line chart.</p><p>So the choice of any kind of chart must have its practical significance. 2.</p><p>2. the design of the report must fit the analysis idea, after reading the report can draw certain conclusions</p><p>Generally speaking, the report design can start from two angles to determine the structure of my entire data report: vertical top-down and horizontal comparison.</p><p>1) Vertical top-down</p><p>This means that we should first present our key data indicators, and then go from the top-down idea of total to sub-total, and then present our other related indicators layer by layer, so that we can gradually locate what related indicators are influenced by the changes in our key indicators.</p><p>One of the core ideas of our report design is that there must be a logical relationship between all the statistical charts, so that when users look at the data from the top down, they can follow your ideas to analyze layer by layer and see the impact factors of data changes in the end of the report, so as to draw conclusions.</p><p>This is also the core objective of business reports, must avoid the user to look at the report just to see, without any conclusions output.</p><p>2) Horizontal comparison</p><p>This refers to the perspective from which we can look at our data reports more comprehensively, to carry out data comparison of different dimensions, in fact, we can provide the report filtering conditions, need to ensure that each condition is meaningful and purposeful.</p><p>Such as statistical orders customer complaints data, can provide users with a variety of filtering conditions such as country / commodity / channel and so on multiple aggregated dimensions to present, this part is actually we are sorting out the underlying data can already be refined to apply things. From the idea of horizontal comparison can give the business a more comprehensive perspective to analyze the relevant data, so that the conclusion is more accurate.</p><p>The above is my practical work for doing B-side business data report statistics of some insights, to sum up in a word is to figure out the data you have on hand, and then the data will be logical, organized and purposeful string on the end of the matter.</p><p>Translated with www.DeepL.com/Translator (free version)</p>
+                <div id="footer">
+                  <div class="container text-center">
+                    <p class="text-muted credit" style="color:#fff">Project Management @ 2023</p>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../asset/cj.js"  ></script>
+    <script type="text/javascript" src="../asset/scrollspy.js"  ></script>
+    <script type="text/javascript" src="../asset/speechify.js"  ></script>
+</body>
+</html>

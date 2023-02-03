@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Project Management Index</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link href="../asset/cj.css" rel="stylesheet">
+    <link href="../asset/scrollspy.css" rel="stylesheet">
+    <link rel="icon" href="../asset/logo.ico">
+    
+</head>
+
+<body >
+    <nav class="navbar navbar-expand-lg" aria-label="Eighth navbar example">
+  <div class="container">
+      <a href="../blog/index.html" class="navbar-brand fw-bold">
+          Project Management</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarinstance" aria-controls="navbarinstance" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarinstance">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+     <a class="nav-link" href="{navElement_href}" >
+         <i class="fa-solid {navElement_icon}">
+         </i>blog
+     </a>
+</li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+    <div class="container-fluid">
+    <div class="row">
+
+        <div class="col-4 px-1 position-fixed" id="sticky-sidebar">
+           <div id="indicator" ></div>
+        </div>
+        <div class="col " id="main">
+            <div class="container max-width-50" >
+                <h1><h1>2B data input scenario and design principle</h1></h1>
+                <time class="text-secondary">03.02.2022</time>
+                <img src="" class="mt-3">
+                <div><div>
+
+</div></div>
+                <p class="mb-5"></p>
+                <p class="mb-5 ">this is a mocup summary</p>
+                <p>Editor's introduction: In TO B products, we often encounter the design of filling out forms, from various form scenarios to generating forms and other steps are the most basic in TO B scenarios, different scenarios of designing forms and design points should also be distinguished and noted; the author of this article shares 8 kinds of filling out scenarios and design points, let's learn together.</p><p>As the saying goes: &quot;A glimpse of a leopard in a tube is a glimpse of a leopard.</p><p>This article summarizes the design methods of TO B products by analyzing 8 kinds of order filling scenarios, discussing the reasons for their occurrence, prototype implementation, and design elements.</p><p>TO B, we are on our way~~</p><p>A, TO B products and TO C products design differences</p><p>Guo Qilin has a line in the Deyun Society flirting with his father, which I think can be used as the opening tone of this article - Dad's happiness you can't imagine.</p><p>The flirtation is a flirtation, but the words are not bad; people in different living environments have very different values; similarly, TO B products and TO C products, which are the products of different living situations, have different values.</p><p>Although filling in the list is a common function in both contexts, the product concept and product design of the two fall short of a thousand miles; there are 8 kinds of filling scenarios, and this article shows the first 5 kinds of filling scenarios in the TO B context; each of them has been practiced in the project, with scenario research, prototype design, summary of key points and methodological thinking.</p><p>These 5 kinds of filling scenarios are the most basic contents of TO B scenarios, which are &quot;basic filling scenarios, automatic generation scenarios, template filling scenarios, importing filling scenarios and copying filling scenarios&quot;.</p><p>Second, TO B products 8 kinds of filling scenarios KANO model diagram</p><p>We use the KANO model to categorize these 8 kinds of filling scenarios, and the construction order of the 8 kinds of filling scenarios can also be carried out step by step from the bottom to the top according to this pyramid.</p><p>The difference is that TO C can do a good job of the basic type, while TO B has too many roles and scenarios, so it is necessary to build the basic type and expectation type.</p><p>Three, basic filling scenarios</p><p>1. Concept Explanation</p><p>Basic filling scenario is the most popular form of filling, in short, is to open a blank page from zero to fill out a single, this filling scenario I will generally be divided into &quot;one page to fill out a single&quot; and &quot;pagination to fill out a single&quot; two types of design forms.</p><p>These two types of design forms are definitely not randomly used, in a number of project practice we summarized some points for your reference.</p><p>The following I will focus on &quot;what does it look like? Under what conditions? Design points?&quot; These 3 steps to explain separately. 2.</p><p>2. One page fill in the list</p><p>What does it look like?</p><p>The following is an example of the design of &quot;one-page form&quot;.</p><p>Under what conditions?</p><p>This design form is very simple and generally used in the following cases.</p><p>fields are linked to each other.</p><p>No clear order of filling, you can fill in the bottom half of the content first and then slide up to fill in the top half of the content.</p><p>Filling in less content.</p><p>Design points?</p><p>The entire fill sheet page should be divided into regions, and the region should have a clear categorization name, to facilitate positioning in the operation and maintenance services.</p><p>To be the first to fill in the field, with hints or signs to do to inform; or, the first to fill in the field to do the default settings, the default for the last time to fill in the single content.</p><p>To compress all the contents of the completed order into a two-page layout as much as possible, otherwise the user will lose patience and confidence.</p><p>If the lower part of the content and the upper part of the content of the linkage, the following content can be hidden first, which can reduce the user's confusion in filling orders.</p><p>2. page-filling</p><p>What does it look like?</p><p>The following is a design example of &quot;page-filling&quot;.</p><p>Under what conditions?</p><p>There is no linkage between the fields in each area, for example, there is no need to return to the first step to modify the content after modifying the second step.</p><p>The whole page has a clear order of filling, must fill in the top content first, and then fill in the end of the content, then suitable for page-filling.</p><p>there is a clear distinction between required and non-required; non-required content is not filled in, and does not affect the normal use of the product.</p><p>Design points?</p><p>step names on each page should be precise enough.</p><p>mandatory content placed on the first page, non-required content placed on the second page; convenient for users to quickly use the product.</p><p>Each page should not contain too much content, try not to pull the page up and down to complete a page to fill in the form.</p><p>Fourth, automatic generation of filling scenarios</p><p>1. Why do you need to automatically generate the fill-in scenario</p><p>The highest level of filling orders is &quot;not filling orders&quot;.</p><p>In TO B product design, each single is a cost challenge journey; from the end-to-end data flow perspective, the most ideal all data will be automatically assembled without manual entry; but now because of the chimney system architecture, data are fragmented in various systems, so manual entry is forced to become inevitable.</p><p>Automatic generation of filling scenarios is the automatic collection of data. Although the reality is harsh, but the dream is still there.</p><p>For example, basic data such as customer data, project data, and supplier data can be maintained without the need to be within multiple systems; each system establishes an open API system. Reduce the data maintenance cost of the edge system is the necessary design form of TO B products.</p><p>2. Design points of automatic generation of order filling scenarios</p><p>There are many scenarios for automatic generation of order filling, and we summarize its key points as follows.</p><p>Each TO B system must be open API; in TO B no set of system is unique is missing, all systems are connected to serve the enterprise employees comprehensively.</p><p>In the process of implementation, the basic data is best unified in the data center, which can improve the stability of data and reduce API.</p><p>V. Template filling scenario</p><p>1. Why do you need a template to fill out a single scene</p><p>In the B-side scenario, there are the following 3 reasons why the order filler must have a template order filling scenario.</p><p>Low frequency of business occurrence, maybe only 1~2 times a year, so the order filler often forgets the content of the last order filler; then the order filler only needs to fill in the content according to the last order filler.</p><p>The positions of order fillers in the enterprise are fixed, and the work content of order fillers is fixed, so only a few specific templates need to be maintained.</p><p>The B-side system is very complex, and the order filler has no incentive to learn the operation of the product, and only temporarily hold the Buddha's feet when filling orders. 2.</p><p>2. Template to fill the order design points</p><p>How to design a template to fill the form is too simple, I will not post the product prototype diagram. Just list the key points of the template to fill out the design.</p><p>The basic functions of template form filling are: add (one-click template generation function on the form filling page and document detail page), edit, single delete, single export, rename.</p><p>The expanded functions of template filler are: classification, sharing, batch delete, batch export; classification is for the case of too many templates, which can be seen according to the operational data; sharing can be considered together with the &quot;share filler scenario&quot; in this paper.</p><p>Template fill list must be embedded in the fill list portal, because if the template fill list is independent, the function will not be found.</p><p>Sixth, the import of filling scenarios</p><p>1. why import fill scenarios</p><p>Import fill scenario refers to the import of forms to achieve the filling of the content of the document, the inevitability of the import fill scenario is caused by &quot;a single fill in too much content&quot;. 2.</p><p>2. The main points of importing and filling scenario design</p><p>Import fill scenario is nothing more than an EXCEL table in accordance with the fixed format into the platform, the prototype is not necessary to put, wasting everyone's traffic. Directly into the key points.</p><p>EXCEL table template must be online, that is, the location of the template download and import location to be in a district, and the template should be clearly identified within the required content, filling samples.</p><p>Import must be done before the verification; very much not recommended part of the verification through to allow the import. This will enhance the cost of form maintenance.</p><p>Support the content after importing, a key to clear.</p><p>Seven, copy the filling scenario</p><p>1. why copy fill scenario</p><p>Copy fill single is to perform a one-click copy action on the document, the action can copy all the contents of the document, thereby reducing the cost of filling the user; &quot;copy fill single scene&quot; and &quot;template fill single scene&quot; is relatively similar, the difference is that the former focus on the specificity of the single, the need for a comprehensive The difference is that the former focuses on the specificity of the single, the need to copy the specificity of the single fill content; and the latter focuses on the category of the single, is to summarize a certain type of document type. 2.</p><p>2. Key points of the design of the copy-fill scene</p><p>the button for copying the order filling is generally reflected in the history document list page, positioned in the operation area of each order.</p><p>Copy the original page, to copy as comprehensive as possible; because you do not know the user is that area do not know to fill, do not want to fill; perhaps the user copy the original page, just because the summary content do not want to write again.</p><p>Copy filling is an auxiliary process, to be embedded in the filling process, to be truly activated.</p><p>The remaining &quot;business generation source, sharing filling scenario, AI voice filling scenario&quot; will be shared in the next article.</p>
+                <div id="footer">
+                  <div class="container text-center">
+                    <p class="text-muted credit" style="color:#fff">Project Management @ 2023</p>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../asset/cj.js"  ></script>
+    <script type="text/javascript" src="../asset/scrollspy.js"  ></script>
+    <script type="text/javascript" src="../asset/speechify.js"  ></script>
+</body>
+</html>
