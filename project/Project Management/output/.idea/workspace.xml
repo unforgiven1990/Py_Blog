@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a6a79f0a-49dc-4fe5-98ca-f3bbf7b669a5" name="Default Changelist" comment="first try">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/output.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="TaskManager">
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="168" y="58" width="694" height="515" key="Vcs.Push.Dialog.v2" timestamp="1675461892255">
+      <screen x="0" y="0" width="1097" height="577" />
+    </state>
+    <state x="168" y="58" width="694" height="515" key="Vcs.Push.Dialog.v2/0.0.1097.577/-1920.0.1097.617@0.0.1097.577" timestamp="1675461892255" />
+    <state x="325" y="188" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1675461738592">
+      <screen x="0" y="0" width="1097" height="577" />
+    </state>
+    <state x="325" y="188" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1097.577/-1920.0.1097.617@0.0.1097.577" timestamp="1675461738592" />
+  </component>
+</project>

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$USER_HOME$/OneDrive/Py_Sinolino/.idea/Py_Sinolino.iml" filepath="$USER_HOME$/OneDrive/Py_Sinolino/.idea/Py_Sinolino.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Py_Blog.iml" filepath="$PROJECT_DIR$/.idea/Py_Blog.iml" />
     </modules>
   </component>
 </project>
