@@ -10,20 +10,270 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9feac7f6-60ca-432f-a9e1-cbfe50d3b1e3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Py_Blog.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Py_Sinolino.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/build_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/output.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scrap_data.py" beforeDir="false" />
+    <list default="true" id="9feac7f6-60ca-432f-a9e1-cbfe50d3b1e3" name="Default Changelist" comment="clean up">
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/2B Product thoughts.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/2B SDK design - 8 tips  .docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/2B data input scenario and design principle.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/2B data report design.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/2B educational product design .docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/2b data labeling design.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/3 to 1 object.psd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/3to1.psd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/AB testing guide for xxx.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/Ecommerce backend management system design.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/SaaS sales model.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/Sales-Management_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/Search_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/Stock-management_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/The difference between product management and portfolio management.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/analytical-skill_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/analytical_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/barry看世界.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/brand-management_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/budget-management_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/business-analytics_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/business-architecture_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/business-culture_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/business-idea_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/business-intelligence_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/business-method_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/business-model_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/business-plan_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/business-principle_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/business-psychology_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/business-relations_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/business-skill_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/business-strategy_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/communication_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/competitive-advantage_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/consulting-skills_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/consulting_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/corporate-culture_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/corporate-learning_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/cost-management_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/critical-thinking_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/customer-acquisition_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/customer-relation-management_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/customer-retention_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/data-management_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/decision-making_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/decision-management_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/document-management_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/financial-management_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/how to turn a 2B product into a 2C product.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/information-management_related_us_2023-01-28 (1).xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/information-management_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/innovation_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/input.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/input1.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/internet-literacy_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/investment-management_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/keywords.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/keywords1.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/knowledge-management_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/leadership_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/learning_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/logistic-management_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/logo.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/logo.tif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/management-tool_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/negotiation_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/networking_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/operation-management_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/portfolio-management_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/presentation_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/problem-solving_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/process-management_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/product-management_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/product-strategy_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/production-management_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/project-management_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/public-relation_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/quality-management_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/reasoning_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/resource-management_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/risk-management_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/security-management_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/software-management_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/stakeholder-management_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/startup-idea_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/strategic-planning_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/supply-chain-management_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/team-management_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/teamwork_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/test article.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/thinking_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/time-management_related_us_2023-01-28.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/users.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/videos.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/woshipm_article_operate.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/woshipm_article_pd.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/三个层面，解读情感化设计.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/圆中的猫头鹰.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/崔璀cc.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/思维扫地僧.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/思维说.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/直面人性.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/shelf/Default_Changelist/老明读书.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/asset/cj.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/asset/cj.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/asset/logo.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/asset/scrollspy.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/asset/scrollspy.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/asset/speechify.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/blog/2B Product thoughts.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/blog/2B SDK design - 8 tips  .html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/blog/2B data input scenario and design principle.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/blog/2B data report design.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/blog/2B educational product design .html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/blog/2b data labeling design.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/blog/AB testing guide for xxx.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/blog/Ecommerce backend management system design.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/blog/SaaS sales model.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/blog/The difference between product management and portfolio management.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project Management/output/blog/how to turn a 2B product into a 2C product.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/careercrashcourse.com/The difference between product management and portfolio management - 副本.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/careercrashcourse.com/The difference between product management and portfolio management.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/careercrashcourse.com/input.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template/footer.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template/navElementBlog.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template/pageBlog.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/asset/speechify.js" beforeDir="false" afterPath="$PROJECT_DIR$/asset/speechify.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/2B Product thoughts.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/2B SDK design - 8 tips  .docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/2B data input scenario and design principle.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/2B data report design.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/2B educational product design .docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/2b data labeling design.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/3 to 1 object.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/3to1.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/AB testing guide for xxx.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/Ecommerce backend management system design.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/SaaS sales model.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/Sales-Management_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/Search_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/Stock-management_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/The difference between product management and portfolio management.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/analytical-skill_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/analytical_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/barry看世界.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/brand-management_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/budget-management_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/business-analytics_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/business-architecture_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/business-culture_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/business-idea_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/business-intelligence_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/business-method_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/business-model_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/business-plan_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/business-principle_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/business-psychology_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/business-relations_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/business-skill_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/business-strategy_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/communication_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/competitive-advantage_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/consulting-skills_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/consulting_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/corporate-culture_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/corporate-learning_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/cost-management_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/critical-thinking_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/customer-acquisition_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/customer-relation-management_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/customer-retention_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/data-management_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/decision-making_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/decision-management_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/document-management_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/financial-management_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/how to turn a 2B product into a 2C product.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/information-management_related_us_2023-01-28 (1).xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/information-management_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/innovation_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/input.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/input1.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/internet-literacy_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/investment-management_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/keywords.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/keywords1.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/knowledge-management_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/leadership_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/learning_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/logistic-management_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/logo.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/logo.tif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/management-tool_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/negotiation_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/networking_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/operation-management_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/portfolio-management_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/presentation_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/problem-solving_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/process-management_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/product-management_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/product-strategy_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/production-management_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/project-management_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/public-relation_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/quality-management_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/reasoning_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/resource-management_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/risk-management_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/security-management_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/software-management_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/stakeholder-management_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/startup-idea_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/strategic-planning_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/supply-chain-management_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/team-management_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/teamwork_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/test article.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/thinking_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/time-management_related_us_2023-01-28.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/users.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/videos.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/woshipm_article_operate.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/woshipm_article_pd.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/三个层面，解读情感化设计.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/圆中的猫头鹰.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/崔璀cc.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/思维扫地僧.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/思维说.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/直面人性.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/shelf/Default_Changelist/老明读书.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/asset/cj.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/asset/cj.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/asset/logo.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/asset/scrollspy.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/asset/scrollspy.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/asset/speechify.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/blog/2B Product thoughts.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/blog/2B SDK design - 8 tips  .html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/blog/2B data input scenario and design principle.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/blog/2B data report design.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/blog/2B educational product design .html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/blog/2b data labeling design.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/blog/AB testing guide for xxx.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/blog/Ecommerce backend management system design.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/blog/SaaS sales model.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/blog/The difference between product management and portfolio management.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/Project Management/output/blog/how to turn a 2B product into a 2C product.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/body_container_blog.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/bodyContainerBlog.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/body_container_index.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/bodyContainerIndex.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/nav.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/nav.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/nav_element.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/navElement.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,14 +284,51 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="2LFPTkizZfI3gHfh9CCTwvw2jkG" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/template" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Users\sizhe.huang\OneDrive\Project\Python Project\Archiv\Py_Blog\template" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Py_Blog" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -52,6 +339,14 @@
       <option name="presentableId" value="Default" />
       <updated>1675463866698</updated>
     </task>
+    <task id="LOCAL-00001" summary="clean up">
+      <created>1675464740228</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1675464740228</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -64,5 +359,32 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="clean up" />
+    <option name="LAST_COMMIT_MESSAGE" value="clean up" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1076" height="22" key="GridCell.Tab.0.bottom" timestamp="1675471710278">
+      <screen x="0" y="0" width="1097" height="577" />
+    </state>
+    <state width="1076" height="22" key="GridCell.Tab.0.bottom/0.0.1097.577/-1920.0.1097.617@0.0.1097.577" timestamp="1675471710278" />
+    <state width="1076" height="22" key="GridCell.Tab.0.center" timestamp="1675471710278">
+      <screen x="0" y="0" width="1097" height="577" />
+    </state>
+    <state width="1076" height="22" key="GridCell.Tab.0.center/0.0.1097.577/-1920.0.1097.617@0.0.1097.577" timestamp="1675471710278" />
+    <state width="1076" height="22" key="GridCell.Tab.0.left" timestamp="1675471710278">
+      <screen x="0" y="0" width="1097" height="577" />
+    </state>
+    <state width="1076" height="22" key="GridCell.Tab.0.left/0.0.1097.577/-1920.0.1097.617@0.0.1097.577" timestamp="1675471710278" />
+    <state width="1076" height="22" key="GridCell.Tab.0.right" timestamp="1675471710278">
+      <screen x="0" y="0" width="1097" height="577" />
+    </state>
+    <state width="1076" height="22" key="GridCell.Tab.0.right/0.0.1097.577/-1920.0.1097.617@0.0.1097.577" timestamp="1675471710278" />
+    <state x="295" y="188" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1675471908590">
+      <screen x="0" y="0" width="1097" height="577" />
+    </state>
+    <state x="295" y="188" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1097.577/-1920.0.1097.617@0.0.1097.577" timestamp="1675471908590" />
   </component>
 </project>
