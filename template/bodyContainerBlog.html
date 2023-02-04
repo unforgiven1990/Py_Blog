@@ -1,21 +1,20 @@
 <div class="container-fluid">
     <div class="row">
 
-        <div class="col-4 px-1 position-fixed" id="sticky-sidebar">
+        <div class="col-3 px-3 position-fixed" id="sticky-sidebar">
            <div id="indicator" ></div>
         </div>
-        <div class="col " id="main">
+
+        <div class="col-12"  >
             <div class="container max-width-50" >
                 {$h1}
-                <time class="text-secondary">{published}</time>
-                <img src={img} class="mt-3">
+                {img}
                 <div>{toc}</div>
-                <p class="mb-5"></p>
-                {content}
-                <div id="footer">
-                  <div class="container text-center">
-                    <p class="text-muted credit" style="color:#fff">{$footer}</p>
-                  </div>
+
+                <div id="main" >
+                    <time id="time" class="text-secondary">{published}</time>
+                    <p  class="mb-5"></p>
+                    {content}
                 </div>
             </div>
         </div>

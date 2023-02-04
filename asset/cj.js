@@ -7,10 +7,9 @@ spy.Indicator({
   element: indicator
 });
 
-
-
 var spy = new ScrollSpy({
     delay: 10
 });
+
 
 });

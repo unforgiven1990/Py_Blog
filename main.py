@@ -41,7 +41,7 @@ fully extendable, adjustable
 def create_toc(content):
     #this toc is only used for mobile version, for desktop version the toc is sticky
     result=""
-    content=BeautifulSoup(content)
+    content=BeautifulSoup(content, "html.parser")
     for counter, h2 in enumerate(content.select("h2")):
         result=result+f"<li class='nodot'><a href='#header_{counter+1}'>"+h2.text+"</a></li>"
     return "<ul class='mt-3 bg-light mobile_toc' >Summary: "+result+"</ul>"
@@ -62,12 +62,12 @@ def get_template(name,way=3):
     else:
         return get(path=f"template/{name}.html", way=way)
 
-def get_content(pname, file, way=3):
+def get_content(blog_url, file, way=3):
     """get content like how tocebome project manager.html"""
     if ".html" in  file:
-        return get(path=f"{pname}/{file}", way=way)
+        return get(path=f"{blog_url}/{file}", way=way)
     else:
-        return get(path=f"{pname}/{file}.html", way=way)
+        return get(path=f"{blog_url}/{file}.html", way=way)
 
 
 def get_d_template(way=3):
@@ -108,6 +108,50 @@ def resolve(template):
     template = template.format(**d_template)
 
     return resolve(template) if len(a_replaced) >0 else template
+
+
+
+def content_h2list(content):
+    """
+    add a list to all h2 titles
+    """
+    soup = BeautifulSoup(content, 'html.parser')
+    for counter, h2 in enumerate(soup.find_all(name="h2")):
+        h2.string=f"{counter+1}. {h2.string}"
+    return str(soup)
+
+def content_scrollspy(content):
+    """
+    1. the generated html file is not directly scrollspyable
+    2. convert <h2><p> to <section><h2><p></section>
+    """
+    soup=BeautifulSoup(content,'html.parser')
+    new_content=""
+    current_section=""
+    current_title=""
+    for child in soup.findChildren():
+        if child.name=="h2" or current_section:#open section by h2 or still opened
+            current_section+=str(child)
+        else:
+            new_content +=str(child)
+            continue
+
+
+        if child.name=="h2":
+            current_title = child.string
+
+        if child.name=="p": #close section
+            new_content+=f'<section class="scrollspy mt-5" spy-title="{current_title}">{current_section}</section>'
+            current_section=""
+
+    return new_content
+
+
+def content_addlinks(content):
+    return content
+
+def content_addimg(content):
+    return content
 
 
 def fpart(template, d_fit):
@@ -162,13 +206,13 @@ def create_blog(d_blog):
         "head": "",
         "current_year": date.today().year,
     }
+    d_content={**d_blog,**d_content}
 
 
     #define folder
     d_path={#path relative from the python program
         "iroot": f"{blog_url}",
         "iasset": f"asset",
-        "input.xlsx": f"{blog_url}/input.xlsx",
         "oroot": f"../{blog_url}",
         "oblog": f"../{blog_url}/blog",
         "oasset": f"../{blog_url}/asset",
@@ -191,28 +235,57 @@ def create_blog(d_blog):
     copy_tree(d_path["iasset"],d_path["oasset"])
 
     #create input.xlsx automatically
-    if os.path.isfile(d_path["input.xlsx"]):
-        df_input=pd.read_excel(d_path["input.xlsx"]).set_index("index")
+    input_xlsx=f'{d_path["iroot"]}/input.xlsx'
+    if os.path.isfile(input_xlsx):
+        df_input=pd.read_excel(input_xlsx).set_index("document")
     else:
-        df_input=pd.DataFrame(columns=["index","url","h1","published","comment"]).set_index("index")
-        df_input.to_excel(d_path["input.xlsx"])
+        df_input=pd.DataFrame(columns=["document","url","h1","published","comment"]).set_index("document")
+        df_input.to_excel(input_xlsx)
 
     #update input.xlsx
     for file in get_files(d_path['iroot'],".docx"):
-        index=str(file).replace(".docx","")
-        if index not in df_input.index:
+        document=str(file).replace(".docx","")
+        url=document.lower()
+        url=url.replace(" ","-")
+        if document not in df_input.index:
             #if index doesn't exist, then assume other attributes are default
             #if index exists, other attributes can be manually channged
-            df_input.at[index,"url"]=index
-            df_input.at[index,"h1"]=index
-            df_input.at[index,"published"]=time.strftime("%Y-%m-%d")
-    df_input.to_excel(d_path["input.xlsx"])
+            df_input.at[document, "document"] = document
+            df_input.at[document, "url"]=url
+            df_input.at[document,"h1"]=document
+            df_input.at[document,"published"]=time.strftime("%Y-%m-%d")
+    df_input.to_excel(input_xlsx)
 
     #create blog article
     for index in df_input.index:
         # convert each docx input to html input
-        f = open(f"{d_path['iroot']}/{index}.docx", 'rb')
-        content = mammoth.convert_to_html(f).value.encode('utf8')
+        #f = open(f"{d_path['iroot']}/{index}.docx", 'rb')
+        if False:
+            f = open(f"{d_path['iroot']}/{index}.docx", "r", encoding='utf-8').read()
+            document = mammoth.convert_to_html(f)
+            content = document.value.encode('utf8')
+            output_file(page=content,filename=f"{d_path['iroot']}/{index}.html", pname=blog_url)
+        elif False:
+            with open(f"{d_path['iroot']}/{index}.docx", "rb") as docx_file:
+                result = mammoth.extract_raw_text(docx_file)
+                text = result.value  # The raw text
+                with open(f"{d_path['iroot']}/{index}.html", 'w') as text_file:
+                    text_file.write(text)
+
+            content=get(f"{d_path['iroot']}/{index}.html",way=3)
+        else:
+            with open(f"{d_path['iroot']}/{index}.docx", "rb") as docx_file:
+                result = mammoth.convert_to_html(docx_file)
+                content = result.value
+
+
+        #content modification
+        content=content_h2list(content)
+        content=content_scrollspy(content)
+        content=content_addlinks(content)
+        content=content_addimg(content)
+
+
 
         #make template
         pageBlog=get_template("pageBlog")
@@ -224,23 +297,30 @@ def create_blog(d_blog):
             "title": df_input.at[index,"h1"],
             "published": df_input.at[index,"published"],
             "url_index": "../index.html",
+            "img": "",
             #"content": get_content(pname=pname, file=index, way=3),
             "content":content,
+            "toc": create_toc(content)
         }
         d_content_blog={**d_content,**d_content_blog}
 
         pageBlog = fpart(template=pageBlog,d_fit=d_content_blog)
-        output_file(pageBlog, d_path["oblog"] + f"/{index}.html", pname=blog_url)
+        web_url=df_input.at[index,"url"]
+        output_file(pageBlog, d_path["oblog"] + f"/{web_url}.html", pname=blog_url)
 
 
     #create index page
     a_articles = []
     for h1, url, published in zip(df_input["h1"], df_input["url"], df_input["published"]):
-        summary = "this is a summary of "+h1
-        img = "noe"
-        h1 = f"<a href='blog/{url}.html'>" + h1 + "</a>"
+        d_article={
+            "summary": "this is a summary of "+h1,
+            "img": "",
+            "href": f'blog/{url}.html',
+            "h2": f"<a href='blog/{url}.html'>" + h1 + "</a>",
+            "published": published,
+        }
         blog_short = get_template(name="blog_short", way=3)
-        a_articles += [blog_short.format(h2=h1, published=published, summary=summary, img=img)]
+        a_articles += [blog_short.format(**d_article)]
 
 
     # fill the list until 3x elements so the list can be used for next function
@@ -268,7 +348,7 @@ if __name__ == '__main__':
     d_blog={
         "blog_url":"careercrashcourse.com",
         "blog_logo":"Career Crash Course",
-        "blog_normal":"careercrashcourse",
+        "blog_normal":"CareerCrashCourse",
     }
     create_blog(d_blog=d_blog)
 
