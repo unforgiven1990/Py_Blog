@@ -6,6 +6,7 @@ from selenium.webdriver.common.by import By
 import undetected_chromedriver as uc
 import os.path
 from selenium import webdriver
+from distutils.dir_util import copy_tree
 from datetime import date
 import time
 import glob, os
@@ -100,7 +101,7 @@ def resolve(template):
     d_template=get_d_template(way=3)
     for var in [fn for _, fn, _, _ in Formatter().parse(template) if fn is not None]:
         if "$" in var  and var in d_template.keys():
-            print(f"{var} in replace array")
+            print(f"{var} in can be replaced")
             a_replaced+=[var]
         else:
             d_template[var]="{"+var+"}"
@@ -117,7 +118,6 @@ def fpart(template, d_fit):
             d_fit[var]= "{" + var + "}"
         else:
             print(f"available {var}")
-    print(template)
     return template.format(**d_fit)
 
 
@@ -130,47 +130,75 @@ def get_files(path,ending=".docx"):
                 a_results+=[f]
     return a_results
 
+def grouped(iterable, n):
+    "s -> (s0,s1,s2,...sn-1), (sn,sn+1,sn+2,...s2n-1), (s2n,s2n+1,s2n+2,...s3n-1), ..."
+    return zip(*[iter(iterable)]*n)
 
-def create_blog(pname):
+def cut_summary(summary, maxlen=150):
+    if len(summary) < maxlen:
+        return summary
+
+    traversed_chars=''
+    for char in summary:
+        traversed_chars+=char
+        break_loop=True if len(traversed_chars) > maxlen else False
+        if break_loop and char==" ":
+            return traversed_chars +"..."
+    return traversed_chars +" ..." # should stop but didnt found any whitespace to stop
+
+def create_blog(d_blog):
     """
     1. create individual blog pages bz rekursively fitting
     2. create index page
     3. output always copy to new file
     """
 
-    #create folder
-    path={#path relative from the python program
-        "iroot": f"{pname}",
-        "iasset": f"{pname}/asset",
-        "input.xlsx": f"{pname}/input.xlsx",
-        "oroot": f"../{pname}",
-        "oblog": f"../{pname}/blog",
-        "oasset": f"../{pname}/asset",
+    #define content
+    blog_url=d_blog["blog_url"]
+    d_content = {
+        "blog_logo": d_blog["blog_logo"],
+        "blog_normal": d_blog["blog_normal"],
+        "title": d_blog["blog_normal"],
+        "head": "",
+        "current_year": date.today().year,
     }
 
-    Path(path["iroot"]).mkdir(parents=True, exist_ok=True) # input folder
-    Path(path["oroot"]).mkdir(parents=True, exist_ok=True) # output folder
 
-    #clean up every folder except .idea
-    for (root, dirs, files) in os.walk(path["oroot"], topdown=True):
-        for dir in dirs:
-            if ".idea" != dir:
-                print(f"delete {root}/{dir} ")
-                #os.remove(f"{root}/{dir}")
+    #define folder
+    d_path={#path relative from the python program
+        "iroot": f"{blog_url}",
+        "iasset": f"asset",
+        "input.xlsx": f"{blog_url}/input.xlsx",
+        "oroot": f"../{blog_url}",
+        "oblog": f"../{blog_url}/blog",
+        "oasset": f"../{blog_url}/asset",
+    }
 
-    #todo. atm manually delete asset and blog folder
+    #create folder
+    for key,val in d_path.items():
+        try:
+            Path(val).mkdir(parents=True, exist_ok=True) # output folder
+        except:
+            pass
 
+    #remove old data from output folder if exist
+    for to_delete in [d_path["oasset"], d_path["oblog"]]:
+        for (root, dirs, files) in os.walk(to_delete, topdown=True):
+            for file in files:
+                os.remove(f"{root}/{file}")
 
-    #create input xlsx automatically
-    if os.path.isfile(path["input.xlsx"]):
-        df_input=pd.read_excel(path["input.xlsx"]).set_index("index")
+    #copy latest asset (css, js) files to output
+    copy_tree(d_path["iasset"],d_path["oasset"])
+
+    #create input.xlsx automatically
+    if os.path.isfile(d_path["input.xlsx"]):
+        df_input=pd.read_excel(d_path["input.xlsx"]).set_index("index")
     else:
         df_input=pd.DataFrame(columns=["index","url","h1","published","comment"]).set_index("index")
-        df_input.to_excel(path["input.xlsx"])
-
+        df_input.to_excel(d_path["input.xlsx"])
 
     #update input.xlsx
-    for file in get_files(path['iroot'],".docx"):
+    for file in get_files(d_path['iroot'],".docx"):
         index=str(file).replace(".docx","")
         if index not in df_input.index:
             #if index doesn't exist, then assume other attributes are default
@@ -178,41 +206,69 @@ def create_blog(pname):
             df_input.at[index,"url"]=index
             df_input.at[index,"h1"]=index
             df_input.at[index,"published"]=time.strftime("%Y-%m-%d")
-    df_input.to_excel(path["input.xlsx"])
+    df_input.to_excel(d_path["input.xlsx"])
 
-
-
-
-
-    # now create blog
+    #create blog article
     for index in df_input.index:
         # convert each docx input to html input
-        f = open(f"{path['iroot']}/{index}.docx", 'rb')
+        f = open(f"{d_path['iroot']}/{index}.docx", 'rb')
         content = mammoth.convert_to_html(f).value.encode('utf8')
 
         #make template
         pageBlog=get_template("pageBlog")
         pageBlog=resolve(pageBlog)
 
-
         #make content
-        d_content={
-            "blog": pname,
+        d_content_blog={
             "h1": df_input.at[index,"h1"],
             "title": df_input.at[index,"h1"],
-            "head": "",
-            "current_year": date.today().year,
             "published": df_input.at[index,"published"],
+            "url_index": "../index.html",
             #"content": get_content(pname=pname, file=index, way=3),
             "content":content,
         }
+        d_content_blog={**d_content,**d_content_blog}
 
-        pageBlog = fpart(template=pageBlog,d_fit=d_content)
-        output_file(pageBlog, path["oblog"] + f"/{index}.html", pname=pname)
+        pageBlog = fpart(template=pageBlog,d_fit=d_content_blog)
+        output_file(pageBlog, d_path["oblog"] + f"/{index}.html", pname=blog_url)
 
 
+    #create index page
+    a_articles = []
+    for h1, url, published in zip(df_input["h1"], df_input["url"], df_input["published"]):
+        summary = "this is a summary of "+h1
+        img = "noe"
+        h1 = f"<a href='blog/{url}.html'>" + h1 + "</a>"
+        blog_short = get_template(name="blog_short", way=3)
+        a_articles += [blog_short.format(h2=h1, published=published, summary=summary, img=img)]
+
+
+    # fill the list until 3x elements so the list can be used for next function
+    row_on_index = 3
+    a_articles += [""] * (row_on_index - (len(a_articles) % row_on_index))
+
+    columns = []
+    for list_of_items in grouped(a_articles, row_on_index):
+        list_with_col = [f'<div class="col">{x}</div>' for x in list_of_items]
+        column = get_template(name="row_0",way=3).format("".join(list_with_col))
+        columns += [column]
+
+    d_content_index = {
+        "url_index": "index.html",
+        "_content": "".join(columns),
+    }
+    d_content_index = {**d_content, **d_content_index}
+    pageIndex = get_template("pageIndex")
+    pageIndex = resolve(pageIndex)
+    pageIndex = fpart(pageIndex,d_content_index)
+    output_file(pageIndex, d_path["oroot"] + f"/index.html", pname=blog_url)
 
 
 if __name__ == '__main__':
-    create_blog(pname="careercrashcourse.com")
+    d_blog={
+        "blog_url":"careercrashcourse.com",
+        "blog_logo":"Career Crash Course",
+        "blog_normal":"careercrashcourse",
+    }
+    create_blog(d_blog=d_blog)
 
