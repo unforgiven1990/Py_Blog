@@ -11,19 +11,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9feac7f6-60ca-432f-a9e1-cbfe50d3b1e3" name="Default Changelist" comment="clean up">
-      <change afterPath="$PROJECT_DIR$/asset/careercrashcourse.com.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/asset/shoulderofgiants.com.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backup.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/careercrashcourse.com/Business requirement management for corporate systems.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/careercrashcourse.com/How to break down complex process.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/careercrashcourse.com/How to design a corporate system UI.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/careercrashcourse.com/Intelligent B-side product analysis and design ideas.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/careercrashcourse.com/Saas Product Design Principle.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/careercrashcourse.com/how to design a 2b data table.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shoulderofgiants.com/input.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/asset/cj.css" beforeDir="false" afterPath="$PROJECT_DIR$/asset/cj.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/asset/cj.js" beforeDir="false" afterPath="$PROJECT_DIR$/asset/cj.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/asset/logo.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/asset/speechify.js" beforeDir="false" afterPath="$PROJECT_DIR$/asset/speechify.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/careercrashcourse.com/The difference between product management and portfolio management.docx" beforeDir="false" afterPath="$PROJECT_DIR$/careercrashcourse.com/The difference between product management and portfolio management.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/careercrashcourse.com/The difference between product management and portfolio management - 副本 (2).docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/careercrashcourse.com/The difference between product management and portfolio management - 副本 (3).docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/careercrashcourse.com/The difference between product management and portfolio management - 副本 (4).docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/careercrashcourse.com/The difference between product management and portfolio management - 副本 (5).docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/careercrashcourse.com/The difference between product management and portfolio management - 副本 (6).docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/careercrashcourse.com/The difference between product management and portfolio management - 副本 (7).docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/careercrashcourse.com/The difference between product management and portfolio management - 副本 - 副本 (2).docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/careercrashcourse.com/The difference between product management and portfolio management - 副本 - 副本 (3).docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/careercrashcourse.com/The difference between product management and portfolio management - 副本 - 副本 (4).docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/careercrashcourse.com/The difference between product management and portfolio management - 副本 - 副本 (5).docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/careercrashcourse.com/The difference between product management and portfolio management - 副本 - 副本 (6).docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/careercrashcourse.com/The difference between product management and portfolio management - 副本 - 副本.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/careercrashcourse.com/The difference between product management and portfolio management - 副本.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/careercrashcourse.com/The difference between product management and portfolio management.docx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/careercrashcourse.com/input.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/careercrashcourse.com/input.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/template/blog_short.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/blog_short.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/template/bodyContainerBlog.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/bodyContainerBlog.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/bodyContainerIndex.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/bodyContainerIndex.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/template/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/h1.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/h1.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/template/pageBlog.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/pageBlog.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/template/pageIndex.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/pageIndex.html" afterDir="false" />
     </list>
@@ -47,7 +64,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../careercrashcourse.com" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Py_Sinolino (for chinese variety only)" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -112,7 +129,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675476969421</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="clean up">
+      <created>1675490757961</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1675490757961</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -132,26 +156,26 @@
     <option name="LAST_COMMIT_MESSAGE" value="clean up" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="329" y="44" key="FileChooserDialogImpl" timestamp="1675487063847">
+    <state x="329" y="44" key="FileChooserDialogImpl" timestamp="1675514701718">
       <screen x="0" y="0" width="1097" height="577" />
     </state>
-    <state x="329" y="44" key="FileChooserDialogImpl/0.0.1097.577/-1920.0.1097.617@0.0.1097.577" timestamp="1675487063847" />
-    <state width="1076" height="260" key="GridCell.Tab.0.bottom" timestamp="1675490395332">
+    <state x="329" y="44" key="FileChooserDialogImpl/0.0.1097.577/-1920.0.1097.617@0.0.1097.577" timestamp="1675514701718" />
+    <state width="1076" height="141" key="GridCell.Tab.0.bottom" timestamp="1675605885031">
       <screen x="0" y="0" width="1097" height="577" />
     </state>
-    <state width="1076" height="260" key="GridCell.Tab.0.bottom/0.0.1097.577/-1920.0.1097.617@0.0.1097.577" timestamp="1675490395332" />
-    <state width="1076" height="260" key="GridCell.Tab.0.center" timestamp="1675490395332">
+    <state width="1076" height="141" key="GridCell.Tab.0.bottom/0.0.1097.577/-1920.0.1097.617@0.0.1097.577" timestamp="1675605885031" />
+    <state width="1076" height="141" key="GridCell.Tab.0.center" timestamp="1675605885031">
       <screen x="0" y="0" width="1097" height="577" />
     </state>
-    <state width="1076" height="260" key="GridCell.Tab.0.center/0.0.1097.577/-1920.0.1097.617@0.0.1097.577" timestamp="1675490395332" />
-    <state width="1076" height="260" key="GridCell.Tab.0.left" timestamp="1675490395332">
+    <state width="1076" height="141" key="GridCell.Tab.0.center/0.0.1097.577/-1920.0.1097.617@0.0.1097.577" timestamp="1675605885031" />
+    <state width="1076" height="141" key="GridCell.Tab.0.left" timestamp="1675605885031">
       <screen x="0" y="0" width="1097" height="577" />
     </state>
-    <state width="1076" height="260" key="GridCell.Tab.0.left/0.0.1097.577/-1920.0.1097.617@0.0.1097.577" timestamp="1675490395332" />
-    <state width="1076" height="260" key="GridCell.Tab.0.right" timestamp="1675490395332">
+    <state width="1076" height="141" key="GridCell.Tab.0.left/0.0.1097.577/-1920.0.1097.617@0.0.1097.577" timestamp="1675605885031" />
+    <state width="1076" height="141" key="GridCell.Tab.0.right" timestamp="1675605885031">
       <screen x="0" y="0" width="1097" height="577" />
     </state>
-    <state width="1076" height="260" key="GridCell.Tab.0.right/0.0.1097.577/-1920.0.1097.617@0.0.1097.577" timestamp="1675490395332" />
+    <state width="1076" height="141" key="GridCell.Tab.0.right/0.0.1097.577/-1920.0.1097.617@0.0.1097.577" timestamp="1675605885031" />
     <state width="1076" height="260" key="GridCell.Tab.1.bottom" timestamp="1675490395333">
       <screen x="0" y="0" width="1097" height="577" />
     </state>

@@ -36,6 +36,28 @@ fully extendable, adjustable
 """
 
 
+def read_time(content):
+    def myround(x, base=0.5):
+        return base * round(x / base)
+
+    words=len(content.split(" "))
+    speed=250 #per min
+    min=words/speed
+    min=myround(min,base=0.5)
+    if min.is_integer():
+        min=int(min)
+    return f"{min} min read"
+
+def cut_summary(summary, maxlen=50):
+    if len(summary) < maxlen:
+        return summary
+    traversed_chars=''
+    for char in summary:
+        traversed_chars+=char
+        break_loop = True if len(traversed_chars) > maxlen else False
+        if break_loop and char==" ":
+            return traversed_chars +"..."
+    return traversed_chars +" ..." # should stop but didnt found any whitespace to stop
 
 
 def create_toc(content):
@@ -101,7 +123,6 @@ def resolve(template):
     d_template=get_d_template(way=3)
     for var in [fn for _, fn, _, _ in Formatter().parse(template) if fn is not None]:
         if "$" in var  and var in d_template.keys():
-            print(f"{var} in can be replaced")
             a_replaced+=[var]
         else:
             d_template[var]="{"+var+"}"
@@ -117,33 +138,42 @@ def content_h2list(content):
     """
     soup = BeautifulSoup(content, 'html.parser')
     for counter, h2 in enumerate(soup.find_all(name="h2")):
-        h2.string=f"{counter+1}. {h2.string}"
+        formated_h2=[]
+        for word in h2.string.split(" "):
+            if not word.isupper():
+                formated_h2+=[word.title()]
+            else:
+                formated_h2 += [word]
+        formated_h2=" ".join(formated_h2)
+        formated_h2=formated_h2[:-1] if formated_h2[-1]==":" else formated_h2
+        h2.string=f"{counter+1}. {formated_h2}"
+
     return str(soup)
 
 def content_scrollspy(content):
     """
     1. the generated html file is not directly scrollspyable
     2. convert <h2><p> to <section><h2><p></section>
+    3. the first element of any document must be h2,everything before will be disregarded
     """
     soup=BeautifulSoup(content,'html.parser')
     new_content=""
     current_section=""
     current_title=""
-    for child in soup.findChildren():
-        if child.name=="h2" or current_section:#open section by h2 or still opened
-            current_section+=str(child)
-        else:
-            new_content +=str(child)
-            continue
+    for child in soup.findChildren(recursive=False):
+        if child.name=="h2":#open section by h2 or still opened
+            # close previous section
+            if current_title: # check to prevent first h2 having not title
+                new_content += f'<section class="scrollspy mt-5" spy-title="{current_title}">{current_section}</section>'
+                current_section = "" #reset
 
-
-        if child.name=="h2":
+            # open new section
             current_title = child.string
-
-        if child.name=="p": #close section
-            new_content+=f'<section class="scrollspy mt-5" spy-title="{current_title}">{current_section}</section>'
-            current_section=""
-
+            current_section += str(child)
+        else:# element is not h2, will all be moved together
+            current_section += str(child)
+    else:
+        new_content += f'<section class="scrollspy mt-5" spy-title="{current_title}">{current_section}</section>'
     return new_content
 
 
@@ -158,10 +188,9 @@ def fpart(template, d_fit):
     """fits a template partically"""
     for var in [fn for _, fn, _, _ in Formatter().parse(template) if fn is not None]:
         if var not in d_fit:
-            print(f"proxied {var}")
             d_fit[var]= "{" + var + "}"
         else:
-            print(f"available {var}")
+            pass
     return template.format(**d_fit)
 
 
@@ -257,6 +286,7 @@ def create_blog(d_blog):
     df_input.to_excel(input_xlsx)
 
     #create blog article
+    d_summary={}
     for index in df_input.index:
         # convert each docx input to html input
         #f = open(f"{d_path['iroot']}/{index}.docx", 'rb')
@@ -284,7 +314,7 @@ def create_blog(d_blog):
         content=content_scrollspy(content)
         content=content_addlinks(content)
         content=content_addimg(content)
-
+        print(content)
 
 
         #make template
@@ -294,14 +324,16 @@ def create_blog(d_blog):
         #make content
         d_content_blog={
             "h1": df_input.at[index,"h1"],
-            "title": df_input.at[index,"h1"],
+            "title": d_content["blog_normal"],
             "published": df_input.at[index,"published"],
             "url_index": "../index.html",
             "img": "",
+            "read_time": read_time(content),
             #"content": get_content(pname=pname, file=index, way=3),
             "content":content,
             "toc": create_toc(content)
         }
+        d_summary[index]=content
         d_content_blog={**d_content,**d_content_blog}
 
         pageBlog = fpart(template=pageBlog,d_fit=d_content_blog)
@@ -311,9 +343,9 @@ def create_blog(d_blog):
 
     #create index page
     a_articles = []
-    for h1, url, published in zip(df_input["h1"], df_input["url"], df_input["published"]):
+    for index,h1, url, published in zip(df_input.index, df_input["h1"], df_input["url"], df_input["published"]):
         d_article={
-            "summary": "this is a summary of "+h1,
+            "summary": cut_summary(d_summary[index],maxlen=100),
             "img": "",
             "href": f'blog/{url}.html',
             "h2": f"<a href='blog/{url}.html'>" + h1 + "</a>",
@@ -329,7 +361,7 @@ def create_blog(d_blog):
 
     columns = []
     for list_of_items in grouped(a_articles, row_on_index):
-        list_with_col = [f'<div class="col">{x}</div>' for x in list_of_items]
+        list_with_col = [f'<div class="col row_index mb-5">{x}</div>' for x in list_of_items]
         column = get_template(name="row_0",way=3).format("".join(list_with_col))
         columns += [column]
 
@@ -349,6 +381,15 @@ if __name__ == '__main__':
         "blog_url":"careercrashcourse.com",
         "blog_logo":"Career Crash Course",
         "blog_normal":"CareerCrashCourse",
+        "lang":"en",
+    }
+    create_blog(d_blog=d_blog)
+
+    d_blog = {
+        "blog_url": "shoulderofgiants.com",
+        "blog_logo": "Shoulder of Giants",
+        "blog_normal": "Shoulder of Giants",
+        "lang": "en",
     }
     create_blog(d_blog=d_blog)
 

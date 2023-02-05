@@ -38,12 +38,27 @@ margin-top:6rem;
 
 h1,h2,h3,h4,h5,h6{
 margin-bottom:1rem;
+font-weight:700;
+}
+
+h1{
+font-size: calc(1.9rem );
 }
 
 h2{
 font-size: calc(1.4rem );
 }
+.metainfo{
+font-size: calc(0.8rem );
+}
 
+nav{
+//background-color:#e7e7e7;
+}
+
+.dAwIzq{
+   margin-top: 0px!important;
+}
 
 time{
 font-size:0.8rem;
@@ -58,6 +73,10 @@ max-height:50vh;
 margin-top:14px;
 }
 
+.row_index{
+margin:10px;
+}
+
 .spy-clickable.spy-active{
 padding-left:10px;
 }
@@ -67,7 +86,7 @@ font-size:0.8rem;
 }
 
 #indicator{
-padding-left:10px;
+padding-left:0px;
 }
 
 .nodot{
