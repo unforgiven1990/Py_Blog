@@ -70,11 +70,16 @@ max-height:50vh;
 }
 
 .spy-clickable{
-margin-top:14px;
+margin-top:5px;
 }
 
 .row_index{
-margin:10px;
+padding:10px;
+}
+
+#main p, #main strong, #main li{
+color:#353535;
+line-height:1.8rem;
 }
 
 .spy-clickable.spy-active{
@@ -82,7 +87,7 @@ padding-left:10px;
 }
 
 .scrollspy-indicator-container li{
-font-size:0.8rem;
+font-size:0.7rem;
 }
 
 #indicator{

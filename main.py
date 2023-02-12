@@ -7,6 +7,7 @@ import undetected_chromedriver as uc
 import os.path
 from selenium import webdriver
 from distutils.dir_util import copy_tree
+import os, time, datetime
 from datetime import date
 import time
 import glob, os
@@ -135,6 +136,7 @@ def resolve(template):
 def content_h2list(content):
     """
     add a list to all h2 titles
+
     """
     soup = BeautifulSoup(content, 'html.parser')
     for counter, h2 in enumerate(soup.find_all(name="h2")):
@@ -145,6 +147,12 @@ def content_h2list(content):
             else:
                 formated_h2 += [word]
         formated_h2=" ".join(formated_h2)
+
+        #check if old title already has enumeration
+        first=formated_h2[0:1]
+        if first in "0123456789":
+            formated_h2=formated_h2[2:]
+
         formated_h2=formated_h2[:-1] if formated_h2[-1]==":" else formated_h2
         h2.string=f"{counter+1}. {formated_h2}"
 
@@ -155,6 +163,7 @@ def content_scrollspy(content):
     1. the generated html file is not directly scrollspyable
     2. convert <h2><p> to <section><h2><p></section>
     3. the first element of any document must be h2,everything before will be disregarded
+    also returns the first paragraph of the text which can be summarized later
     """
     soup=BeautifulSoup(content,'html.parser')
     new_content=""
@@ -183,6 +192,16 @@ def content_addlinks(content):
 def content_addimg(content):
     return content
 
+def content_target_blank(content):
+    """makes all links open externally in browser and not replace current browser
+    """
+    soup=BeautifulSoup(content, "html.parser")
+    a_a=soup.find_all("a")
+    for a in a_a:
+        a["target"]="_blank"
+    return str(soup)
+
+
 
 def fpart(template, d_fit):
     """fits a template partically"""
@@ -208,6 +227,9 @@ def grouped(iterable, n):
     return zip(*[iter(iterable)]*n)
 
 def cut_summary(summary, maxlen=150):
+    if not summary:
+        return summary
+
     if len(summary) < maxlen:
         return summary
 
@@ -218,6 +240,24 @@ def cut_summary(summary, maxlen=150):
         if break_loop and char==" ":
             return traversed_chars +"..."
     return traversed_chars +" ..." # should stop but didnt found any whitespace to stop
+
+
+def helper(element):
+    print(type(element))
+    print(element.name)
+    if element.string:
+        return element.string
+    else:
+        return ""
+
+def get_firstparagraph(content):
+    """get first paragraph of any content"""
+    soup=BeautifulSoup(content, "html.parser")
+    a_p=soup.findChildren("h2", recursive=True)
+    for h2 in a_p:
+        h2.string=""
+    #result="".join([helper(x) for x in a_p if x.name !="h2"])
+    return soup.getText()
 
 def create_blog(d_blog):
     """
@@ -276,13 +316,23 @@ def create_blog(d_blog):
         document=str(file).replace(".docx","")
         url=document.lower()
         url=url.replace(" ","-")
+
+        published = os.path.getmtime(d_path['iroot']+"/"+file)
+        published=datetime.datetime.fromtimestamp(published)
+        published=f"{published.year}.{published.month}.{published.day}"
+
+        updated = os.path.getctime(d_path['iroot'] + "/" + file)
+        updated = datetime.datetime.fromtimestamp(updated)
+        updated = f"{updated.year}.{updated.month}.{updated.day}"
+
         if document not in df_input.index:
             #if index doesn't exist, then assume other attributes are default
             #if index exists, other attributes can be manually channged
             df_input.at[document, "document"] = document
             df_input.at[document, "url"]=url
             df_input.at[document,"h1"]=document
-            df_input.at[document,"published"]=time.strftime("%Y-%m-%d")
+            df_input.at[document,"published"]=published
+            df_input.at[document,"updated"]=updated
     df_input.to_excel(input_xlsx)
 
     #create blog article
@@ -314,7 +364,7 @@ def create_blog(d_blog):
         content=content_scrollspy(content)
         content=content_addlinks(content)
         content=content_addimg(content)
-        print(content)
+        content=content_target_blank(content)
 
 
         #make template
@@ -326,6 +376,7 @@ def create_blog(d_blog):
             "h1": df_input.at[index,"h1"],
             "title": d_content["blog_normal"],
             "published": df_input.at[index,"published"],
+            "updated": df_input.at[index,"updated"],
             "url_index": "../index.html",
             "img": "",
             "read_time": read_time(content),
@@ -333,7 +384,7 @@ def create_blog(d_blog):
             "content":content,
             "toc": create_toc(content)
         }
-        d_summary[index]=content
+        d_summary[index]=get_firstparagraph(content) # returns the first parahraph of the content
         d_content_blog={**d_content,**d_content_blog}
 
         pageBlog = fpart(template=pageBlog,d_fit=d_content_blog)
@@ -345,7 +396,7 @@ def create_blog(d_blog):
     a_articles = []
     for index,h1, url, published in zip(df_input.index, df_input["h1"], df_input["url"], df_input["published"]):
         d_article={
-            "summary": cut_summary(d_summary[index],maxlen=100),
+            "summary": cut_summary(d_summary[index],maxlen=150),
             "img": "",
             "href": f'blog/{url}.html',
             "h2": f"<a href='blog/{url}.html'>" + h1 + "</a>",
@@ -355,15 +406,19 @@ def create_blog(d_blog):
         a_articles += [blog_short.format(**d_article)]
 
 
-    # fill the list until 3x elements so the list can be used for next function
-    row_on_index = 3
-    a_articles += [""] * (row_on_index - (len(a_articles) % row_on_index))
+    if False:
+        # fill the list until 3x elements so the list can be used for next function
+        row_on_index = 3
+        a_articles += [""] * (row_on_index - (len(a_articles) % row_on_index))
 
-    columns = []
-    for list_of_items in grouped(a_articles, row_on_index):
-        list_with_col = [f'<div class="col row_index mb-5">{x}</div>' for x in list_of_items]
-        column = get_template(name="row_0",way=3).format("".join(list_with_col))
-        columns += [column]
+        columns = []
+        for list_of_items in grouped(a_articles, row_on_index):
+            list_with_col = [f'<div class="col col-md-4 row_index mb-5 ">{x}</div>' for x in list_of_items]
+            column = get_template(name="row_0",way=3).format("".join(list_with_col))
+            columns += [column]
+    else:
+        columns = get_template(name="row_0",way=3).format("".join([f"<div class='col col-md-4 row_index mb-5'>{x}</div>" for x in a_articles]))
+
 
     d_content_index = {
         "url_index": "index.html",
