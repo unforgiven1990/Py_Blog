@@ -133,7 +133,7 @@ def resolve(template):
 
 
 
-def content_h2list(content):
+def content_h2list(content, index):
     """
     add a list to all h2 titles
 
@@ -141,11 +141,18 @@ def content_h2list(content):
     soup = BeautifulSoup(content, 'html.parser')
     for counter, h2 in enumerate(soup.find_all(name="h2")):
         formated_h2=[]
+
+        try :
+            h2.string.split(" ")
+        except:
+            print(f"{index} bugged")
+            continue
+
         for word in h2.string.split(" "):
-            if not word.isupper():
-                formated_h2+=[word.title()]
-            else:
-                formated_h2 += [word]
+                if not word.isupper():
+                    formated_h2+=[word.title()]
+                else:
+                    formated_h2 += [word]
         formated_h2=" ".join(formated_h2)
 
         #check if old title already has enumeration
@@ -157,6 +164,11 @@ def content_h2list(content):
         h2.string=f"{counter+1}. {formated_h2}"
 
     return str(soup)
+
+def remove_leadingnumber(url):
+    from string import digits
+    return url.lstrip(digits)
+
 
 def content_scrollspy(content):
     """
@@ -189,8 +201,13 @@ def content_scrollspy(content):
 def content_addlinks(content):
     return content
 
-def content_addimg(content):
-    return content
+def content_addimgalt(content,index):
+    """add alt attribute to images"""
+    soup = BeautifulSoup(content, "html.parser")
+    a_img = soup.find_all("img")
+    for counter,img in enumerate(a_img):
+        img["alt"] = f"{index} {counter}"
+    return str(soup)
 
 def content_target_blank(content):
     """makes all links open externally in browser and not replace current browser
@@ -250,6 +267,18 @@ def helper(element):
     else:
         return ""
 
+def get_banner(content):
+    """get first image of any content"""
+    soup = BeautifulSoup(content, "html.parser")
+    a_p = soup.findChildren("img", recursive=True)
+    if a_p:
+        print("yes")
+        return a_p[0]
+    else:
+        print("no")
+        return ""
+
+
 def get_firstparagraph(content):
     """get first paragraph of any content"""
     soup=BeautifulSoup(content, "html.parser")
@@ -258,6 +287,10 @@ def get_firstparagraph(content):
         h2.string=""
     #result="".join([helper(x) for x in a_p if x.name !="h2"])
     return soup.getText()
+
+def format_date(obj):
+    return f"{obj.year}.{obj.month}.{obj.day}"
+
 
 def create_blog(d_blog):
     """
@@ -303,80 +336,62 @@ def create_blog(d_blog):
     #copy latest asset (css, js) files to output
     copy_tree(d_path["iasset"],d_path["oasset"])
 
+
     #create input.xlsx automatically
     input_xlsx=f'{d_path["iroot"]}/input.xlsx'
-    if os.path.isfile(input_xlsx):
-        df_input=pd.read_excel(input_xlsx).set_index("document")
-    else:
-        df_input=pd.DataFrame(columns=["document","url","h1","published","comment"]).set_index("document")
-        df_input.to_excel(input_xlsx)
+    df_input=pd.DataFrame(columns=["document","url","h1","published","comment"]).set_index("document")
+    df_input.to_excel(input_xlsx)
+
 
     #update input.xlsx
     for file in get_files(d_path['iroot'],".docx"):
         document=str(file).replace(".docx","")
         url=document.lower()
+        url = remove_leadingnumber(url).lstrip()
         url=url.replace(" ","-")
+        #if url starts with number, also replace
+
 
         published = os.path.getmtime(d_path['iroot']+"/"+file)
         published=datetime.datetime.fromtimestamp(published)
-        published=f"{published.year}.{published.month}.{published.day}"
 
         updated = os.path.getctime(d_path['iroot'] + "/" + file)
         updated = datetime.datetime.fromtimestamp(updated)
-        updated = f"{updated.year}.{updated.month}.{updated.day}"
 
         if document not in df_input.index:
             #if index doesn't exist, then assume other attributes are default
             #if index exists, other attributes can be manually channged
             df_input.at[document, "document"] = document
             df_input.at[document, "url"]=url
-            df_input.at[document,"h1"]=document
+            df_input.at[document,"h1"]=document.title()
             df_input.at[document,"published"]=published
             df_input.at[document,"updated"]=updated
+    df_input=df_input.sort_values("published", ascending=False)
     df_input.to_excel(input_xlsx)
+
 
     #create blog article
     d_summary={}
+    d_banner={}
     for index in df_input.index:
         # convert each docx input to html input
-        #f = open(f"{d_path['iroot']}/{index}.docx", 'rb')
-        if False:
-            f = open(f"{d_path['iroot']}/{index}.docx", "r", encoding='utf-8').read()
-            document = mammoth.convert_to_html(f)
-            content = document.value.encode('utf8')
-            output_file(page=content,filename=f"{d_path['iroot']}/{index}.html", pname=blog_url)
-        elif False:
-            with open(f"{d_path['iroot']}/{index}.docx", "rb") as docx_file:
-                result = mammoth.extract_raw_text(docx_file)
-                text = result.value  # The raw text
-                with open(f"{d_path['iroot']}/{index}.html", 'w') as text_file:
-                    text_file.write(text)
-
-            content=get(f"{d_path['iroot']}/{index}.html",way=3)
-        else:
-            with open(f"{d_path['iroot']}/{index}.docx", "rb") as docx_file:
-                result = mammoth.convert_to_html(docx_file)
-                content = result.value
-
+        with open(f"{d_path['iroot']}/{index}.docx", "rb") as docx_file:
+            result = mammoth.convert_to_html(docx_file)
+            content = result.value
 
         #content modification
-        content=content_h2list(content)
+        content=content_h2list(content,index)
         content=content_scrollspy(content)
         content=content_addlinks(content)
-        content=content_addimg(content)
+        content=content_addimgalt(content,index)
         content=content_target_blank(content)
-
-
-        #make template
-        pageBlog=get_template("pageBlog")
-        pageBlog=resolve(pageBlog)
 
         #make content
         d_content_blog={
             "h1": df_input.at[index,"h1"],
             "title": d_content["blog_normal"],
-            "published": df_input.at[index,"published"],
-            "updated": df_input.at[index,"updated"],
+            "published": format_date(df_input.at[index,"published"]),
+            "updated": format_date(df_input.at[index,"updated"]),
             "url_index": "../index.html",
             "img": "",
             "read_time": read_time(content),
@@ -385,11 +400,14 @@ def create_blog(d_blog):
             "toc": create_toc(content)
         }
         d_summary[index]=get_firstparagraph(content) # returns the first parahraph of the content
+        d_banner[index]=get_banner(content)
         d_content_blog={**d_content,**d_content_blog}
 
+        # make template
+        pageBlog = get_template("pageBlog")
+        pageBlog = resolve(pageBlog)
         pageBlog = fpart(template=pageBlog,d_fit=d_content_blog)
-        web_url=df_input.at[index,"url"]
-        output_file(pageBlog, d_path["oblog"] + f"/{web_url}.html", pname=blog_url)
+        output_file(pageBlog, d_path["oblog"] + f"/{df_input.at[index,'url']}.html", pname=blog_url)
 
 
     #create index page
@@ -397,29 +415,15 @@ def create_blog(d_blog):
     for index,h1, url, published in zip(df_input.index, df_input["h1"], df_input["url"], df_input["published"]):
         d_article={
             "summary": cut_summary(d_summary[index],maxlen=150),
+            "banner": d_banner[index],
             "img": "",
             "href": f'blog/{url}.html',
             "h2": f"<a href='blog/{url}.html'>" + h1 + "</a>",
-            "published": published,
+            "published": format_date(published),
         }
-        blog_short = get_template(name="blog_short", way=3)
+        blog_short = get_template(name="indexBlog.html", way=3)
         a_articles += [blog_short.format(**d_article)]
-
-
-    if False:
-        # fill the list until 3x elements so the list can be used for next function
-        row_on_index = 3
-        a_articles += [""] * (row_on_index - (len(a_articles) % row_on_index))
-
-        columns = []
-        for list_of_items in grouped(a_articles, row_on_index):
-            list_with_col = [f'<div class="col col-md-4 row_index mb-5 ">{x}</div>' for x in list_of_items]
-            column = get_template(name="row_0",way=3).format("".join(list_with_col))
-            columns += [column]
-    else:
-        columns = get_template(name="row_0",way=3).format("".join([f"<div class='col col-md-4 row_index mb-5'>{x}</div>" for x in a_articles]))
-
-
+    columns = get_template(name="row.html",way=3).format("".join([f"<div class='col col-md-4 row_index mb-5'>{x}</div>" for x in a_articles]))
     d_content_index = {
         "url_index": "index.html",
         "_content": "".join(columns),
