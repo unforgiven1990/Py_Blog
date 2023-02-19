@@ -48,6 +48,24 @@ font-size: calc(1.9rem );
 h2{
 font-size: calc(1.4rem );
 }
+
+h3{
+font-size: calc(1.2rem );
+}
+
+
+#table1,#table2,#table3{
+height:150px;
+width:100%;
+overflow:hidden;
+}
+
+.row{
+margin-left:0px !important;
+margin-right:0px !important;
+}
+
+
 .metainfo{
 font-size: calc(0.8rem );
 }

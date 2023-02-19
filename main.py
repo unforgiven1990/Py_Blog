@@ -317,6 +317,7 @@ def create_blog(d_blog):
         "iasset": f"asset",
         "oroot": f"../{blog_url}",
         "oblog": f"../{blog_url}/blog",
+        "otool": f"../{blog_url}/tool",
         "oasset": f"../{blog_url}/asset",
     }
 
@@ -435,6 +436,17 @@ def create_blog(d_blog):
     output_file(pageIndex, d_path["oroot"] + f"/index.html", pname=blog_url)
 
 
+    if d_blog["blog_url"]=="sicksheet.com":
+        #create excel merger function
+        pageExcel = get_template("pageExcel.html")
+        pageExcel = resolve(pageExcel)
+        pageExcel = fpart(pageExcel, d_content_index)
+        output_file(pageExcel, d_path["oroot"] + f"/join.html", pname=blog_url)
+        output_file(pageExcel, d_path["oroot"] + f"/index.html", pname=blog_url)
+
+
+
+
 if __name__ == '__main__':
     d_blog={
         "blog_url":"careercrashcourse.com",
@@ -444,10 +456,21 @@ if __name__ == '__main__':
     }
     create_blog(d_blog=d_blog)
 
+
     d_blog = {
         "blog_url": "shoulderofgiants.com",
         "blog_logo": "Shoulder of Giants",
-        "blog_normal": "Shoulder of Giants",
+        "blog_normal": "ShoulderofGiants",
+        "lang": "en",
+    }
+    create_blog(d_blog=d_blog)
+
+
+
+    d_blog = {
+        "blog_url": "sicksheet.com",
+        "blog_logo": "SickSheet",
+        "blog_normal": "SickSheet",
         "lang": "en",
     }
     create_blog(d_blog=d_blog)
