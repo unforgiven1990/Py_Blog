@@ -113,7 +113,9 @@ def get_d_template(way=3):
 
 
 
-def output_file(page, filename, pname):
+def output_file(page, filename, removehtml=False):
+    if removehtml:
+        filename=filename.replace(".html")
     with open(fr"{filename}", "w", encoding="utf-8") as file:
         file.write(str(page))
 
@@ -308,12 +310,16 @@ def create_blog(d_blog):
         "head": "",
         "current_year": date.today().year,
     }
+
+    if d_blog["blog_url"]=="sicksheet.com":
+        d_content["$nav"]="$navSickSheet"
     d_content={**d_blog,**d_content}
 
 
     #define folder
     d_path={#path relative from the python program
         "iroot": f"{blog_url}",
+        "iimg": f"{blog_url}/img",
         "iasset": f"asset",
         "oroot": f"../{blog_url}",
         "oblog": f"../{blog_url}/blog",
@@ -334,8 +340,12 @@ def create_blog(d_blog):
             for file in files:
                 os.remove(f"{root}/{file}")
 
+
     #copy latest asset (css, js) files to output
     copy_tree(d_path["iasset"],d_path["oasset"])
+
+    #also copy pictures from asset folder into folder
+    copy_tree(d_path["iimg"], d_path["oasset"])
 
 
     #create input.xlsx automatically
@@ -408,7 +418,7 @@ def create_blog(d_blog):
         pageBlog = get_template("pageBlog")
         pageBlog = resolve(pageBlog)
         pageBlog = fpart(template=pageBlog,d_fit=d_content_blog)
-        output_file(pageBlog, d_path["oblog"] + f"/{df_input.at[index,'url']}.html", pname=blog_url)
+        output_file(pageBlog, d_path["oblog"] + f"/{df_input.at[index,'url']}.html")
 
 
     #create index page
@@ -433,7 +443,7 @@ def create_blog(d_blog):
     pageIndex = get_template("pageIndex")
     pageIndex = resolve(pageIndex)
     pageIndex = fpart(pageIndex,d_content_index)
-    output_file(pageIndex, d_path["oroot"] + f"/index.html", pname=blog_url)
+    output_file(pageIndex, d_path["oroot"] + f"/index.html")
 
 
     if d_blog["blog_url"]=="sicksheet.com":
@@ -441,8 +451,8 @@ def create_blog(d_blog):
         pageExcel = get_template("pageExcel.html")
         pageExcel = resolve(pageExcel)
         pageExcel = fpart(pageExcel, d_content_index)
-        output_file(pageExcel, d_path["oroot"] + f"/join.html", pname=blog_url)
-        output_file(pageExcel, d_path["oroot"] + f"/index.html", pname=blog_url)
+        output_file(pageExcel, d_path["oroot"] + f"/join.html")
+        #output_file(pageExcel, d_path["oroot"] + f"/index.html", pname=blog_url)
 
 
 
