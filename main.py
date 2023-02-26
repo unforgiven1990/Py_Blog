@@ -61,6 +61,12 @@ def cut_summary(summary, maxlen=50):
     return traversed_chars +" ..." # should stop but didnt found any whitespace to stop
 
 
+
+def remove_leadingnumber(url):
+    from string import digits
+    return url.lstrip(digits)
+
+
 def create_toc(content):
     #this toc is only used for mobile version, for desktop version the toc is sticky
     result=""
@@ -68,6 +74,33 @@ def create_toc(content):
     for counter, h2 in enumerate(content.select("h2")):
         result=result+f"<li class='nodot'><a href='#header_{counter+1}'>"+h2.text+"</a></li>"
     return "<ul class='mt-3 bg-light mobile_toc' >Summary: "+result+"</ul>"
+
+def grouped(iterable, n):
+    "s -> (s0,s1,s2,...sn-1), (sn,sn+1,sn+2,...s2n-1), (s2n,s2n+1,s2n+2,...s3n-1), ..."
+    return zip(*[iter(iterable)]*n)
+
+def format_date(obj):
+    return f"{obj.year}.{obj.month}.{obj.day}"
+
+def get_firstparagraph(content):
+    """get first paragraph of any content"""
+    soup=BeautifulSoup(content, "html.parser")
+    a_p=soup.findChildren("h2", recursive=True)
+    for h2 in a_p:
+        h2.string=""
+    #result="".join([helper(x) for x in a_p if x.name !="h2"])
+    return soup.getText()
+
+
+def get_banner(content):
+    """get first image of any content"""
+    soup = BeautifulSoup(content, "html.parser")
+    a_p = soup.findChildren("img", recursive=True)
+    if a_p:
+        return a_p[0]
+    else:
+        return ""
+
 
 
 def get(path="h1.html", way=3):
@@ -110,14 +143,67 @@ def get_d_template(way=3):
         d_template[d_way[way]]=get_template(template)
     return d_template
 
-
+def get_files(path,ending=".docx"):
+    a_results=[]
+    for root, dirs, files in os.walk(path):
+        for f in files:
+            if os.path.splitext(f)[1] == ending:
+                fullpath = os.path.join(root, f)
+                a_results+=[f]
+    return a_results
 
 
 def output_file(page, filename, removehtml=False):
     if removehtml:
         filename=filename.replace(".html")
+
+    # two slashes means root e.g. ../sicksheet.com/index.html
+    #if more than 2 slashes , then add 1 slash back to every url
+    if filename.count("/")>2:
+        #replace all url
+        soup=BeautifulSoup(page, "html.parser")
+
+        #replace elements in nav
+        nav=soup.find("nav")
+        for a in nav.find_all("a"):
+            a['href'] = "../"+a['href']
+        page = str(soup)
+
+        # replace elements in head Script
+        head = soup.find("head")
+        for script in head.find_all("script"):
+            if "https" not in script["src"]:
+                script['src'] = "../" + script['src']
+
+        # replace elements in head Script
+        head = soup.find("head")
+        for link in head.find_all("link"):
+            if "https" not in link["href"]:
+                link['href'] = "../" + link['href']
+
+        page = str(soup)
+
+
+    #calculate all url as if they are from root, then adjust to relative path locally in python to make it locally visible without localhost. online works anyway
+    # if  inpu is root/index.html, then replace ../ with /
+    # if  inpu is root/folder/index.html, then all url without ../
+
+    #check if directory exists
+    directory="/".join([x for x in filename.split("/")[:-1]])
+    if not os.path.isdir(directory):
+        Path(directory).mkdir(parents=True, exist_ok=True)
+
     with open(fr"{filename}", "w", encoding="utf-8") as file:
         file.write(str(page))
+
+def fpart(template, d_fit):
+    """fits a template partically"""
+    for var in [fn for _, fn, _, _ in Formatter().parse(template) if fn is not None]:
+        if var not in d_fit:
+            d_fit[var]= "{" + var + "}"
+        else:
+            pass
+    return template.format(**d_fit)
 
 
 def resolve(template):
@@ -166,10 +252,6 @@ def content_h2list(content, index):
         h2.string=f"{counter+1}. {formated_h2}"
 
     return str(soup)
-
-def remove_leadingnumber(url):
-    from string import digits
-    return url.lstrip(digits)
 
 
 def content_scrollspy(content):
@@ -222,76 +304,15 @@ def content_target_blank(content):
 
 
 
-def fpart(template, d_fit):
-    """fits a template partically"""
-    for var in [fn for _, fn, _, _ in Formatter().parse(template) if fn is not None]:
-        if var not in d_fit:
-            d_fit[var]= "{" + var + "}"
-        else:
-            pass
-    return template.format(**d_fit)
 
 
-def get_files(path,ending=".docx"):
-    a_results=[]
-    for root, dirs, files in os.walk(path):
-        for f in files:
-            if os.path.splitext(f)[1] == ending:
-                fullpath = os.path.join(root, f)
-                a_results+=[f]
-    return a_results
-
-def grouped(iterable, n):
-    "s -> (s0,s1,s2,...sn-1), (sn,sn+1,sn+2,...s2n-1), (s2n,s2n+1,s2n+2,...s3n-1), ..."
-    return zip(*[iter(iterable)]*n)
-
-def cut_summary(summary, maxlen=150):
-    if not summary:
-        return summary
-
-    if len(summary) < maxlen:
-        return summary
-
-    traversed_chars=''
-    for char in summary:
-        traversed_chars+=char
-        break_loop=True if len(traversed_chars) > maxlen else False
-        if break_loop and char==" ":
-            return traversed_chars +"..."
-    return traversed_chars +" ..." # should stop but didnt found any whitespace to stop
 
 
-def helper(element):
-    print(type(element))
-    print(element.name)
-    if element.string:
-        return element.string
-    else:
-        return ""
-
-def get_banner(content):
-    """get first image of any content"""
-    soup = BeautifulSoup(content, "html.parser")
-    a_p = soup.findChildren("img", recursive=True)
-    if a_p:
-        print("yes")
-        return a_p[0]
-    else:
-        print("no")
-        return ""
 
 
-def get_firstparagraph(content):
-    """get first paragraph of any content"""
-    soup=BeautifulSoup(content, "html.parser")
-    a_p=soup.findChildren("h2", recursive=True)
-    for h2 in a_p:
-        h2.string=""
-    #result="".join([helper(x) for x in a_p if x.name !="h2"])
-    return soup.getText()
 
-def format_date(obj):
-    return f"{obj.year}.{obj.month}.{obj.day}"
+
+
 
 
 def create_blog(d_blog):
@@ -304,15 +325,13 @@ def create_blog(d_blog):
     #define content
     blog_url=d_blog["blog_url"]
     d_content = {
-        "blog_logo": d_blog["blog_logo"],
-        "blog_normal": d_blog["blog_normal"],
         "title": d_blog["blog_normal"],
         "head": "",
         "current_year": date.today().year,
+        "url_index": "index.html",
+        "url_blog": "blog/index.html",
     }
 
-    if d_blog["blog_url"]=="sicksheet.com":
-        d_content["$nav"]="$navSickSheet"
     d_content={**d_blog,**d_content}
 
 
@@ -323,16 +342,16 @@ def create_blog(d_blog):
         "iasset": f"asset",
         "oroot": f"../{blog_url}",
         "oblog": f"../{blog_url}/blog",
-        "otool": f"../{blog_url}/tool",
         "oasset": f"../{blog_url}/asset",
     }
 
-    #create folder
+
+    """
+    #create folder optional. it is already done in saving step
     for key,val in d_path.items():
-        try:
+        if not os.path.isdir(val):
             Path(val).mkdir(parents=True, exist_ok=True) # output folder
-        except:
-            pass
+            """
 
     #remove old data from output folder if exist
     for to_delete in [d_path["oasset"], d_path["oblog"]]:
@@ -343,10 +362,7 @@ def create_blog(d_blog):
 
     #copy latest asset (css, js) files to output
     copy_tree(d_path["iasset"],d_path["oasset"])
-
-    #also copy pictures from asset folder into folder
     copy_tree(d_path["iimg"], d_path["oasset"])
-
 
     #create input.xlsx automatically
     input_xlsx=f'{d_path["iroot"]}/input.xlsx'
@@ -360,7 +376,6 @@ def create_blog(d_blog):
         url=document.lower()
         url = remove_leadingnumber(url).lstrip()
         url=url.replace(" ","-")
-        #if url starts with number, also replace
 
 
         published = os.path.getmtime(d_path['iroot']+"/"+file)
@@ -374,11 +389,23 @@ def create_blog(d_blog):
             #if index exists, other attributes can be manually channged
             df_input.at[document, "document"] = document
             df_input.at[document, "url"]=url
-            df_input.at[document,"h1"]=document.title()
-            df_input.at[document,"published"]=published
-            df_input.at[document,"updated"]=updated
+            df_input.at[document, "h1"]=document.title()
+            df_input.at[document, "published"]=published
+            df_input.at[document, "updated"]=updated
     df_input=df_input.sort_values("published", ascending=False)
     df_input.to_excel(input_xlsx)
+
+
+
+    #create nav dynamically for all webpages
+    nav_element1 = fpart(get_template("navLi.html"),{"nav_text":"Blog","nav_url":"blog/index.html"})
+    if d_blog["blog_url"]=="sicksheet.com":
+        nav_element2 = fpart(get_template("navLi.html"),{"nav_text":"Tools", "nav_url":"tools/index.html"})
+    else:
+        nav_element2=""
+    d_content["navli"]="".join([nav_element2, nav_element1])
+    nav = fpart(get_template("nav.html"),d_content)
+    d_content["nav"] = nav
 
 
     #create blog article
@@ -403,7 +430,6 @@ def create_blog(d_blog):
             "title": d_content["blog_normal"],
             "published": format_date(df_input.at[index,"published"]),
             "updated": format_date(df_input.at[index,"updated"]),
-            "url_index": "../index.html",
             "img": "",
             "read_time": read_time(content),
             #"content": get_content(pname=pname, file=index, way=3),
@@ -415,73 +441,83 @@ def create_blog(d_blog):
         d_content_blog={**d_content,**d_content_blog}
 
         # make template
-        pageBlog = get_template("pageBlog")
-        pageBlog = resolve(pageBlog)
-        pageBlog = fpart(template=pageBlog,d_fit=d_content_blog)
-        output_file(pageBlog, d_path["oblog"] + f"/{df_input.at[index,'url']}.html")
+        pageBlogArticle = get_template("pageBlogArticle.html")
+        pageBlogArticle = resolve(pageBlogArticle)
+        pageBlogArticle = fpart(template=pageBlogArticle,d_fit=d_content_blog)
+        output_file(pageBlogArticle, d_path["oblog"] + f"/{df_input.at[index,'url']}.html")
 
 
-    #create index page
+    #create blog index page
     a_articles = []
     for index,h1, url, published in zip(df_input.index, df_input["h1"], df_input["url"], df_input["published"]):
         d_article={
             "summary": cut_summary(d_summary[index],maxlen=150),
             "banner": d_banner[index],
             "img": "",
-            "href": f'blog/{url}.html',
-            "h2": f"<a href='blog/{url}.html'>" + h1 + "</a>",
+            "href": f'{url}.html',
+            "h2": f"<a href='{url}.html'>" + h1 + "</a>",
             "published": format_date(published),
         }
-        blog_short = get_template(name="indexBlog.html", way=3)
+        blog_short = get_template(name="indexBlogItem.html", way=3)
         a_articles += [blog_short.format(**d_article)]
-    columns = get_template(name="row.html",way=3).format("".join([f"<div class='col col-md-4 row_index mb-5'>{x}</div>" for x in a_articles]))
+    columns = "".join([f"<div class='col col-md-4 row_index mb-5'>{x}</div>" for x in a_articles])
     d_content_index = {
         "url_index": "index.html",
-        "_content": "".join(columns),
+        "_content": columns,
     }
     d_content_index = {**d_content, **d_content_index}
-    pageIndex = get_template("pageIndex")
-    pageIndex = resolve(pageIndex)
-    pageIndex = fpart(pageIndex,d_content_index)
+    pageBlogIndex = get_template("pageBlogIndex.html")
+    pageBlogIndex = resolve(pageBlogIndex)
+    pageBlogIndex = fpart(pageBlogIndex,d_content_index)
+    output_file(pageBlogIndex, d_path["oroot"] + f"/blog/index.html")
+
+
+    #index page
+    pageIndex = get_template("pageIndex.html")
+    if d_blog["blog_url"]=="sicksheet.com":
+        pageIndex = pageIndex.format(redirect='tools/index.html')
+    else:
+        pageIndex = pageIndex.format(redirect='blog/index.html')
     output_file(pageIndex, d_path["oroot"] + f"/index.html")
 
 
     if d_blog["blog_url"]=="sicksheet.com":
-        #create excel merger function
+        #create Tool Details: Join
         pageExcel = get_template("pageExcel.html")
         pageExcel = resolve(pageExcel)
         pageExcel = fpart(pageExcel, d_content_index)
         output_file(pageExcel, d_path["oroot"] + f"/join.html")
-        #output_file(pageExcel, d_path["oroot"] + f"/index.html", pname=blog_url)
 
+        #create Tool Index
+        pageToolIndex = get_template("pageToolIndex.html")
+        pageToolIndex = resolve(pageToolIndex)
+        pageToolIndex = fpart(pageToolIndex, d_content_index)
+        output_file(pageToolIndex, d_path["oroot"] + f"/tools/index.html")
 
 
 
 if __name__ == '__main__':
-    d_blog={
-        "blog_url":"careercrashcourse.com",
-        "blog_logo":"Career Crash Course",
-        "blog_normal":"CareerCrashCourse",
-        "lang":"en",
-    }
-    create_blog(d_blog=d_blog)
 
-
-    d_blog = {
+    websites=[
+    {
+        "blog_url": "careercrashcourse.com",
+        "blog_logo": "CareerCrashCourse",
+        "blog_normal": "CareerCrashCourse",
+        "lang": "en",
+    },
+    {
         "blog_url": "shoulderofgiants.com",
         "blog_logo": "Shoulder of Giants",
         "blog_normal": "ShoulderofGiants",
         "lang": "en",
-    }
-    create_blog(d_blog=d_blog)
-
-
-
-    d_blog = {
+    },
+    {
         "blog_url": "sicksheet.com",
         "blog_logo": "SickSheet",
         "blog_normal": "SickSheet",
         "lang": "en",
-    }
-    create_blog(d_blog=d_blog)
+    }]
+
+    for d_blog in websites:
+        create_blog(d_blog=d_blog)
 

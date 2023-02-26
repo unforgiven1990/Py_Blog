@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700");
+
 *, *:before, *:after {
   box-sizing: border-box;
 }
@@ -44,7 +44,7 @@ height:60px;
   top: 32px;
   height: 0;
   width: 4px;
-  background-color: #192fcd;
+  background-color: #0d6efd;
 }
 .step .info {
   margin-bottom: 30px;
@@ -72,7 +72,7 @@ height:60px;
   height: 32px;
   background-color: white;
   border-radius: 50%;
-  border: 2px solid #192fcd;
+  border: 2px solid #0d6efd;
   flex-shrink: 0;
   display: flex;
   justify-content: center;
@@ -83,7 +83,7 @@ height:60px;
   margin-right: 14px;
 }
 .number.completed {
-  background-color: #192fcd;
+  background-color: #0d6efd;
   color:white;
 }
 .number svg {
