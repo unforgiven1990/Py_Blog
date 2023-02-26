@@ -452,6 +452,8 @@ def create_blog(d_blog):
     for index,h1, url, published in zip(df_input.index, df_input["h1"], df_input["url"], df_input["published"]):
         d_article={
             "summary": cut_summary(d_summary[index],maxlen=150),
+            "metadescription": cut_summary(d_summary[index],maxlen=150),
+            "metakeywords": h1,
             "banner": d_banner[index],
             "img": "",
             "href": f'{url}.html',
@@ -475,9 +477,17 @@ def create_blog(d_blog):
     #index page
     pageIndex = get_template("pageIndex.html")
     if d_blog["blog_url"]=="sicksheet.com":
-        pageIndex = pageIndex.format(redirect='tools/index.html', title=d_blog["blog_url"])
+        d_page_index = {
+            "redirect": "tools/index.html",
+            "title": d_blog["blog_url"],
+        }
     else:
-        pageIndex = pageIndex.format(redirect='blog/index.html', title=d_blog["blog_url"])
+        d_page_index = {
+            "redirect":"blog/index.html",
+            "title": d_blog["blog_url"],
+        }
+    d_page_index={**d_page_index,**d_content_index}
+    pageIndex = fpart(pageIndex, d_page_index)
     output_file(pageIndex, d_path["oroot"] + f"/index.html")
 
 
@@ -485,8 +495,14 @@ def create_blog(d_blog):
         #create Tool Details: Join
         pageExcel = get_template("pageExcel.html")
         pageExcel = resolve(pageExcel)
-        pageExcel = fpart(pageExcel, d_content_index)
+        d_meta_join={
+            "metadescription":"A online free tool that merges two spreadsheets together. The tool is easy to use, free and purely online.",
+            "metakeywords":"Online, Spreadsheet, Tool, Join, Merge",
+        }
+        d_content_join={**d_meta_join,**d_content_index}
+        pageExcel = fpart(pageExcel, d_content_join)
         output_file(pageExcel, d_path["oroot"] + f"/join.html")
+
 
         #create Tool Index
         pageToolIndex = get_template("pageToolIndex.html")
@@ -504,18 +520,24 @@ if __name__ == '__main__':
         "blog_logo": "CareerCrashCourse",
         "blog_normal": "CareerCrashCourse",
         "lang": "en",
+        "metadescription": "This blog is a collection of useful career tips to help you climb up the career ladder.",
+        "metakeywords": "career, tips, corporate ladder",
     },
     {
         "blog_url": "shoulderofgiants.com",
         "blog_logo": "Shoulder of Giants",
         "blog_normal": "ShoulderofGiants",
         "lang": "en",
+        "metadescription": "A collection of spreadsheet tools online. Each tool is specifically design to solve one spreadsheet problem.",
+        "metakeywords": "Online, Spreadsheet, Micro Saas",
     },
     {
         "blog_url": "sicksheet.com",
         "blog_logo": "SickSheet",
         "blog_normal": "SickSheet",
         "lang": "en",
+        "metadescription": "This blog is a collection of useful career tips to help you climb up the career ladder.",
+        "metakeywords": "career, tips, corporate ladder",
     }]
 
     for d_blog in websites:

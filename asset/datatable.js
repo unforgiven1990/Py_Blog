@@ -165,7 +165,7 @@ $('#jointype').change(function() {
 function showjoinimg(){
 //depending on what join type is selected, show related image
 jointype = $("#jointype option:selected").val()
-$("#joinimg").attr("src", "asset/"+jointype+".png");
+$("#joinimg").attr("src", "asset/"+jointype+".svg");
 }
 
 
