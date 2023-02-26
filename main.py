@@ -475,9 +475,9 @@ def create_blog(d_blog):
     #index page
     pageIndex = get_template("pageIndex.html")
     if d_blog["blog_url"]=="sicksheet.com":
-        pageIndex = pageIndex.format(redirect='tools/index.html')
+        pageIndex = pageIndex.format(redirect='tools/index.html', title=d_blog["blog_url"])
     else:
-        pageIndex = pageIndex.format(redirect='blog/index.html')
+        pageIndex = pageIndex.format(redirect='blog/index.html', title=d_blog["blog_url"])
     output_file(pageIndex, d_path["oroot"] + f"/index.html")
 
 
