@@ -192,12 +192,14 @@ def output_file(page, filename, removehtml=False):
     #check if directory exists
     directory="/".join([x for x in filename.split("/")[:-1]])
     if not os.path.isdir(directory):
+        print("directory is ",directory)
+        print("file name is ",filename)
         Path(directory).mkdir(parents=True, exist_ok=True)
 
     with open(fr"{filename}", "w", encoding="utf-8") as file:
         file.write(str(page))
 
-def fpart(template, d_fit):
+def pformat(template, d_fit):
     """fits a template partically"""
     for var in [fn for _, fn, _, _ in Formatter().parse(template) if fn is not None]:
         if var not in d_fit:
@@ -308,7 +310,46 @@ def content_target_blank(content):
 
 
 
+def tool_index_col():
+    """go through all available tools and create one col for it"""
+    result=''
+    for tool,data in data_tool.items():
+        d_replace={
+            "tool": tool,
+            "h1":data["h1"],
+            "metadescription":data["metadescription"],
+        }
+        result+=pformat(get_template("col.html"), d_replace)
+    return result
 
+
+
+
+def tool_steps(tooldata):
+    result=""
+    for counter, d_step in enumerate(tooldata["toolsteps"]):
+        onestep=get_template("component_step.html").format(**{
+            "stepnumber":counter+1,
+            "steptitle": d_step["steptitle"],
+            "stepdescription":d_step["stepdescription"],
+            "stepcontent":d_step["stepcontent"],
+        })
+        result+=onestep
+    return result
+
+def tool_QA(tooldata):
+    result = ""
+
+    #get the generla QA
+    d_all_AQ={**tooldata["QA"],**data_general_AQ}
+    for counter, (question,answer) in enumerate(d_all_AQ.items()):
+        oneQA = get_template("component_faq.html").format(**{
+            "QAnumber": counter+1,
+            "QAquestion": question,
+            "QAanswer": answer,
+        })
+        result += oneQA
+    return result
 
 
 
@@ -357,7 +398,6 @@ def create_blog(d_blog):
             for file in files:
                 os.remove(f"{root}/{file}")
 
-
     #copy latest asset (css, js) files to output
     copy_tree(d_path["iasset"],d_path["oasset"])
     copy_tree(d_path["isasset"], d_path["oasset"])
@@ -367,14 +407,12 @@ def create_blog(d_blog):
     df_input=pd.DataFrame(columns=["document","url","h1","published","comment"]).set_index("document")
     df_input.to_excel(input_xlsx)
 
-
     #update input.xlsx
     for file in get_files(d_path['iroot'],".docx"):
         document=str(file).replace(".docx","")
         url=document.lower()
         url = remove_leadingnumber(url).lstrip()
         url=url.replace(" ","-")
-
 
         published = os.path.getmtime(d_path['iroot']+"/"+file)
         published=datetime.datetime.fromtimestamp(published)
@@ -396,13 +434,13 @@ def create_blog(d_blog):
 
 
     #create nav dynamically for all webpages
-    nav_element1 = fpart(get_template("navLi.html"),{"nav_text":"Blog","nav_url":"blog/index.html"})
+    nav_element1 = pformat(get_template("nav_li.html"), {"nav_text": "Blog", "nav_url": "blog/index.html"})
     if d_blog["blog_url"]=="sicksheet.com":
-        nav_element2 = fpart(get_template("navLi.html"),{"nav_text":"Tools", "nav_url":"tools/index.html"})
+        nav_element2 = pformat(get_template("nav_li.html"), {"nav_text": "Tools", "nav_url": "tools/index.html"})
     else:
         nav_element2=""
     d_content["navli"]="".join([nav_element2, nav_element1])
-    nav = fpart(get_template("nav.html"),d_content)
+    nav = pformat(get_template("nav.html"), d_content)
     d_content["nav"] = nav
 
 
@@ -439,9 +477,9 @@ def create_blog(d_blog):
         d_content_blog={**d_content,**d_content_blog}
 
         # make template
-        pageBlogArticle = get_template("pageBlogArticle.html")
+        pageBlogArticle = get_template("page_blog_article.html")
         pageBlogArticle = resolve(pageBlogArticle)
-        pageBlogArticle = fpart(template=pageBlogArticle,d_fit=d_content_blog)
+        pageBlogArticle = pformat(template=pageBlogArticle, d_fit=d_content_blog)
         output_file(pageBlogArticle, d_path["oblog"] + f"/{df_input.at[index,'url']}.html")
 
 
@@ -458,7 +496,7 @@ def create_blog(d_blog):
             "h2": f"<a href='{url}.html'>" + h1 + "</a>",
             "published": format_date(published),
         }
-        blog_short = get_template(name="indexBlogItem.html", way=3)
+        blog_short = get_template(name="col2.html", way=3)
         a_articles += [blog_short.format(**d_article)]
     columns = "".join([f"<div class='col col-md-4 row_index mb-5'>{x}</div>" for x in a_articles])
     d_content_index = {
@@ -466,14 +504,14 @@ def create_blog(d_blog):
         "_content": columns,
     }
     d_content_index = {**d_content, **d_content_index}
-    pageBlogIndex = get_template("pageBlogIndex.html")
+    pageBlogIndex = get_template("page_blog_index.html")
     pageBlogIndex = resolve(pageBlogIndex)
-    pageBlogIndex = fpart(pageBlogIndex,d_content_index)
+    pageBlogIndex = pformat(pageBlogIndex, d_content_index)
     output_file(pageBlogIndex, d_path["oroot"] + f"/blog/index.html")
 
 
     #index page
-    pageIndex = get_template("pageIndex.html")
+    pageIndex = get_template("page_index.html")
     if d_blog["blog_url"]=="sicksheet.com":
         d_page_index = {
             "redirect": "tools/index.html",
@@ -485,29 +523,42 @@ def create_blog(d_blog):
             "title": d_blog["blog_url"],
         }
     d_page_index={**d_page_index,**d_content_index}
-    pageIndex = fpart(pageIndex, d_page_index)
+    pageIndex = pformat(pageIndex, d_page_index)
     output_file(pageIndex, d_path["oroot"] + f"/index.html")
 
-
     if d_blog["blog_url"]=="sicksheet.com":
-        for tool in ["join","transpose"]:
-            pageExcel = get_template("pageSheet.html")
-            pageExcel = fpart(pageExcel, {"toolbody": "{$tool_"+tool+"}"})
-            pageExcel = resolve(pageExcel)
-            d_meta_join={
-                "metadescription":"A online free tool that merges two spreadsheets together. The tool is easy to use, free and purely online.",
-                "metakeywords":"Online, Spreadsheet, Tool, Join, Merge",
+        #generate individual tool
+        for tool,tooldata in data_tool.items():
+            #create the final replacement dict to replace the template
+            d_tool={
+                "tool":tool,
+                "h1":tooldata["h1"],
+                "h1description":tooldata["h1description"],
+                "toolsteps":tool_steps(tooldata),
+                "QAcontent":tool_QA(tooldata),
+                "title":tooldata["title"],
+                "metadescription":tooldata["metadescription"],
+                "metakeywords":tooldata["metakeywords"],
             }
-            d_content_join={**d_meta_join,**d_content_index}
-            pageExcel = fpart(pageExcel, d_content_join)
-            output_file(pageExcel, d_path["oroot"] + f"/{tool}.html")
+            d_tool={**d_content,**d_tool}
+            toolbody=get_template("component_tool.html")
+            pageTool = get_template("page_tool_function.html")
+            pageTool = pformat(pageTool, {"toolbody": toolbody, "nav":nav})
+            pageTool = resolve(pageTool)
+            pageTool= pformat(pageTool, d_tool)
+            pageTool= pformat(pageTool, d_tool) #twice because we also use variables in the data
+            output_file(pageTool, d_path["oroot"] + f"/{tool}.html")
 
-
-        #create Tool Index
-        pageToolIndex = get_template("pageToolIndex.html")
+        #create Tool Index Dynamically
+        pageToolIndex = get_template("page_tool_index.html")
         pageToolIndex = resolve(pageToolIndex)
-        pageToolIndex = fpart(pageToolIndex, d_content_index)
+        d_tool_index={"cols":tool_index_col()}
+        d_tool_index={**d_content_index,**d_tool_index}
+        pageToolIndex = pformat(pageToolIndex, d_tool_index)
         output_file(pageToolIndex, d_path["oroot"] + f"/tools/index.html")
+
+
+
 
 
 

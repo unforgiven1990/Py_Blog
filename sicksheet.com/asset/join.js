@@ -142,12 +142,10 @@ $(document).ready(function() {
     hot3 =$("#table3").handsontable('getInstance')
 
     hot1.addHook('afterChange', (row, amount) => {
-        myvalidation()
         myjoin()
     })
 
     hot2.addHook('afterChange', (row, amount) => {
-        myvalidation()
         myjoin()
     })
 
