@@ -1,4 +1,5 @@
 import pandas as pd
+from data import *
 import numpy as np
 from bs4 import BeautifulSoup
 import selenium
@@ -338,20 +339,17 @@ def create_blog(d_blog):
     #define folder
     d_path={#path relative from the python program
         "iroot": f"{blog_url}",
-        "iimg": f"{blog_url}/img",
-        "iasset": f"asset",
+        "isasset": f"{blog_url}/asset", #input of Specific asset
+        "iasset": f"asset", #input of General Asset
         "oroot": f"../{blog_url}",
         "oblog": f"../{blog_url}/blog",
         "oasset": f"../{blog_url}/asset",
     }
 
-
-    """
-    #create folder optional. it is already done in saving step
-    for key,val in d_path.items():
+    #is needed, don't remove
+    for key, val in d_path.items():
         if not os.path.isdir(val):
-            Path(val).mkdir(parents=True, exist_ok=True) # output folder
-            """
+            Path(val).mkdir(parents=True, exist_ok=True)  # output folder
 
     #remove old data from output folder if exist
     for to_delete in [d_path["oasset"], d_path["oblog"]]:
@@ -362,7 +360,7 @@ def create_blog(d_blog):
 
     #copy latest asset (css, js) files to output
     copy_tree(d_path["iasset"],d_path["oasset"])
-    copy_tree(d_path["iimg"], d_path["oasset"])
+    copy_tree(d_path["isasset"], d_path["oasset"])
 
     #create input.xlsx automatically
     input_xlsx=f'{d_path["iroot"]}/input.xlsx'
@@ -492,16 +490,17 @@ def create_blog(d_blog):
 
 
     if d_blog["blog_url"]=="sicksheet.com":
-        #create Tool Details: Join
-        pageExcel = get_template("pageExcel.html")
-        pageExcel = resolve(pageExcel)
-        d_meta_join={
-            "metadescription":"A online free tool that merges two spreadsheets together. The tool is easy to use, free and purely online.",
-            "metakeywords":"Online, Spreadsheet, Tool, Join, Merge",
-        }
-        d_content_join={**d_meta_join,**d_content_index}
-        pageExcel = fpart(pageExcel, d_content_join)
-        output_file(pageExcel, d_path["oroot"] + f"/join.html")
+        for tool in ["join","transpose"]:
+            pageExcel = get_template("pageSheet.html")
+            pageExcel = fpart(pageExcel, {"toolbody": "{$tool_"+tool+"}"})
+            pageExcel = resolve(pageExcel)
+            d_meta_join={
+                "metadescription":"A online free tool that merges two spreadsheets together. The tool is easy to use, free and purely online.",
+                "metakeywords":"Online, Spreadsheet, Tool, Join, Merge",
+            }
+            d_content_join={**d_meta_join,**d_content_index}
+            pageExcel = fpart(pageExcel, d_content_join)
+            output_file(pageExcel, d_path["oroot"] + f"/{tool}.html")
 
 
         #create Tool Index
@@ -513,33 +512,6 @@ def create_blog(d_blog):
 
 
 if __name__ == '__main__':
-
-    websites=[
-    {
-        "blog_url": "careercrashcourse.com",
-        "blog_logo": "CareerCrashCourse",
-        "blog_normal": "CareerCrashCourse",
-        "lang": "en",
-        "metadescription": "This blog is a collection of useful career tips to help you climb up the career ladder.",
-        "metakeywords": "career, tips, corporate ladder",
-    },
-    {
-        "blog_url": "shoulderofgiants.com",
-        "blog_logo": "Shoulder of Giants",
-        "blog_normal": "ShoulderofGiants",
-        "lang": "en",
-        "metadescription": "A collection of spreadsheet tools online. Each tool is specifically design to solve one spreadsheet problem.",
-        "metakeywords": "Online, Spreadsheet, Micro Saas",
-    },
-    {
-        "blog_url": "sicksheet.com",
-        "blog_logo": "SickSheet",
-        "blog_normal": "SickSheet",
-        "lang": "en",
-        "metadescription": "This blog is a collection of useful career tips to help you climb up the career ladder.",
-        "metakeywords": "career, tips, corporate ladder",
-    }]
-
-    for d_blog in websites:
+    for d_blog in data_websites:
         create_blog(d_blog=d_blog)
 
