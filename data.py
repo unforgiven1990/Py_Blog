@@ -1,4 +1,5 @@
-
+from datetime import *
+from main import get,pformat
 """
 blog data are stored in word files
 tool data are stored in dict/obj
@@ -6,14 +7,57 @@ website meta data are stored in dict
 """
 
 
-data_tool={
+def nav(a_li,d_website):
+    result=[]
+    for li in a_li:
+        nav_li=pformat(get("nav_li.html"), li)
+        result+=[nav_li]
+    result="".join(result)
+    result= pformat(get("nav.html"), {"navli":result})
+    result=pformat(result,d_website)
+    return result
+
+
+def tool_steps(tooldata,d_website):
+    result=""
+    for counter, d_step in enumerate(tooldata):
+        onestep=get("component_tool_step.html").format(**{
+            "stepnumber":counter+1,
+            "steptitle": d_step["steptitle"],
+            "stepdescription":d_step["stepdescription"],
+            "stepcontent":d_step["stepcontent"],
+        })
+        result+=onestep
+    result = pformat(result, d_website)
+    return result
+
+
+
+def tool_faq(tooldata,d_website):
+    result = ""
+    #get the generla QA
+    d_all_AQ={**tooldata, **d_general_faq}
+    for counter, (question,answer) in enumerate(d_all_AQ.items()):
+        oneQA = get("component_tool_faq.html").format(**{
+            "faq_number": counter+1,
+            "faq_question": question,
+            "faq_answer": answer,
+        })
+        result += oneQA
+    result = pformat(result, d_website)
+    return result
+
+
+
+d_tools={
     "join":{
+        "tool":"join",
         "h1":"Join Tables Online",
         "h1description": "Merge and join Excel sheets directly online in just 3 steps.",
-        "title": "Join Table Online • {blog_url}",
+        "title": "Join Table Online",
         "metadescription": "An free online too to join spreadsheets online. Easy to use and completely free. No login required.",
         "metakeywords": "Online, Spreadsheet, Join, Merge",
-        "QA":{
+        tool_faq:{
             "Q: What is the difference between Left Join, Right Join, Inner Join and Outer Join?":"""A:
         <ul>
           <li><b>Inner Join</b>: Returns records that have matching values in <b>both tables</b></li>
@@ -23,7 +67,7 @@ data_tool={
         </ul>""",
             "Q: I uploaded both sheets, but it doesn't produce results.": "A: Make sure the key of each sheet is in the first column and that they are named <b>exactly the same</b>. You can edit the column name in the online table directly.",
         },
-        "toolsteps":[
+        tool_steps:[
             {"steptitle":"Input Left Table",
              "stepdescription":"Copy paste your first table here.",
              "stepcontent":'<div id="table1"></div>',
@@ -48,19 +92,18 @@ data_tool={
               "stepcontent":'<div id="table3"></div><button id="download" type="button" class="btn btn-primary width50" style="display:inline-block;width:100%;margin:0px;" > Download</button>',
               },
         ],
-        "js":"",
-        "css":"",
     },
 
 
     "transpose":{
+        "tool":"transpose",
         "h1":"Transpose Tables Online",
         "h1description": "Transpose Excel sheets directly online.",
-        "title": "Transpose Table Online • {blog_url}",
+        "title": "Transpose Table Online",
         "metadescription": "An free online too to transpose spreadsheets online. Easy to use and completely free. No login required.",
         "metakeywords": "Online, Spreadsheet, Transpose",
-        "QA":{},
-        "toolsteps":[
+        tool_faq:{},
+        tool_steps:[
             {"steptitle":"Input Left Table",
              "stepdescription":"Copy paste your first table here.",
              "stepcontent":'<div id="table1"></div>',
@@ -85,15 +128,13 @@ data_tool={
               "stepcontent":'<div id="table3"></div><button id="download" type="button" class="btn btn-primary width50" style="display:inline-block;width:100%;margin:0px;" > Download</button>',
               },
         ],
-        "js": "",
-        "css": "",
     }
 }
 
 
 
 
-data_general_AQ={
+d_general_faq={
             "Q: Can I upload my data as .xlsx or .csv file?":"A: Upload data as .xlsx or .csv file is not supported yet. You can copy paste your data from excel into the website table above.",
             "Q: Can it handle big data sets?":"A: Upload data as .xlsx or .csv file is not supported yet.   A: Yes it can handle tables up to 6000 columns and rows. If you encounter lag, you can reduce the sheet size.",
             "Q: It is normal that it lags a couple of seconds during copy paste?": "A: Yes this is normal for a web based application (especially when the data set is large).",
@@ -102,32 +143,46 @@ data_general_AQ={
         }
 
 
+d_static = {
+        "current_year": date.today().year,
+        "url_index": "index.html",
+        "url_blog": "blog/index.html",
+        #"footer": get_template("footer.html"),
+    }
 
 
-data_websites=[
+d_websites=[
     {
         "blog_url": "careercrashcourse.com",
         "blog_logo": "CareerCrashCourse",
-        "blog_normal": "CareerCrashCourse",
+        "title": "CareerCrashCourse",
         "lang": "en",
         "metadescription": "This blog is a collection of useful career tips to help you climb up the career ladder.",
         "metakeywords": "career, tips, corporate ladder",
+        "redirect": "blog/index.html",
+         nav:[{"nav_text":"Blog","nav_url": "blog/index.html"},]
     },
     {
         "blog_url": "shoulderofgiants.com",
         "blog_logo": "Shoulder of Giants",
-        "blog_normal": "ShoulderofGiants",
+        "title": "ShoulderofGiants",
         "lang": "en",
         "metadescription": "A collection of spreadsheet tools online. Each tool is specifically design to solve one spreadsheet problem.",
         "metakeywords": "Online, Spreadsheet, Micro Saas",
+        "redirect": "blog/index.html",
+        nav:[{"nav_text":"Blog","nav_url": "blog/index.html"},]
     },
     {
         "blog_url": "sicksheet.com",
-        "blog_logo": "SickSheet",
-        "blog_normal": "SickSheet",
+        "blog_logo": "SICK.SHEET",
+        "title": "SickSheet",
         "lang": "en",
         "metadescription": "This blog is a collection of useful career tips to help you climb up the career ladder.",
         "metakeywords": "career, tips, corporate ladder",
+        "redirect": "tools/index.html",
+        nav:[{"nav_text":"Tools","nav_url": "tools/index.html"},
+             {"nav_text":"Blog","nav_url": "blog/index.html"},]
     }]
+
 
 

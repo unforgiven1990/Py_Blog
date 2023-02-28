@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang={lang}>
 <head>
-    <title>{title}</title>
     <meta charset="UTF-8">
     <meta name="description" content="{metadescription}">
     <meta name="keywords" content="{metakeywords}">
@@ -21,13 +20,16 @@
     <link href="asset/cj.css" rel="stylesheet">
     <link href="asset/sicksheet.css" rel="stylesheet">
     <link rel="icon" href="asset/{blog_url}.ico">
-    {head}
 </head>
 
 <body class="px-3 px-md-0">
     {nav}
     {toolbody}
-    {$footer}
+    <div id="footer" class="mt-6">
+  <div class="container text-center">
+    <p class="text-muted credit" style="color:#fff"> <a href="https://{blog_url}">{blog_url}</a> @ {current_year}</p>
+  </div>
+</div>
     <script>
     </script>
 </body>
