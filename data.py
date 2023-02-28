@@ -52,7 +52,7 @@ def tool_faq(tooldata,d_website):
 d_tools={
     "join":{
         "tool":"join",
-        "h1":"Join Tables Online",
+        "h1":"Join Tables",
         "h1description": "Merge and join Excel sheets directly online in just 3 steps.",
         "title": "Join Table Online",
         "metadescription": "An free online too to join spreadsheets online. Easy to use and completely free. No login required.",
@@ -87,7 +87,7 @@ d_tools={
                             <img id="joinimg" alt="Join type image as Venn Diagram" src="" loading="lazy" width="350" height="190" >
                         """,
               },
-             {"steptitle":"Download Result",
+             {"steptitle":"Download Joined Result",
               "stepdescription":"Copy or Download your result in CSV.",
               "stepcontent":'<div id="table3"></div><button id="download" type="button" class="btn btn-primary width50" style="display:inline-block;width:100%;margin:0px;" > Download</button>',
               },
@@ -97,38 +97,79 @@ d_tools={
 
     "transpose":{
         "tool":"transpose",
-        "h1":"Transpose Tables Online",
+        "h1":"Transpose Tables",
         "h1description": "Transpose Excel sheets directly online.",
         "title": "Transpose Table Online",
         "metadescription": "An free online too to transpose spreadsheets online. Easy to use and completely free. No login required.",
         "metakeywords": "Online, Spreadsheet, Transpose",
         tool_faq:{},
         tool_steps:[
-            {"steptitle":"Input Left Table",
-             "stepdescription":"Copy paste your first table here.",
+            {"steptitle":"Input Table",
+             "stepdescription":"Copy paste your table here.",
              "stepcontent":'<div id="table1"></div>',
              },
-             {"steptitle":"Input Right Table",
-              "stepdescription":"Copy paste your second table here.",
-              "stepcontent":'<div id="table2"></div>',
-              },
-             {"steptitle":"Choose Join Type",
-              "stepdescription":"Choose the Join type.",
-              "stepcontent":"""<select id="jointype" class="form-select width50" style="display:inline-block;width:100%;margin:0px;" >
-                                  <option value="left" selected>Left Join</option>
-                                  <option value="right">Right Join</option>
-                                  <option value="inner">Inner Join</option>
-                                  <option value="outer">Outer Join</option>
-                                </select>
-                            <img id="joinimg" alt="Join type image as Venn Diagram" src="" loading="lazy" width="350" height="190" >
-                        """,
-              },
-             {"steptitle":"Download Result",
+             {"steptitle":"Download Transposed Result",
               "stepdescription":"Copy or Download your result in CSV.",
-              "stepcontent":'<div id="table3"></div><button id="download" type="button" class="btn btn-primary width50" style="display:inline-block;width:100%;margin:0px;" > Download</button>',
+              "stepcontent":'<div id="table2"></div><button id="download" type="button" class="btn btn-primary width50" style="display:inline-block;width:100%;margin:0px;" > Download</button>',
               },
         ],
-    }
+    },
+
+
+    "sort":{
+        "tool":"sort",
+        "h1":"Sort Tables",
+        "h1description": "Sort Excel sheets directly online.",
+        "title": "Sort Table Online",
+        "metadescription": "An free online too to sort spreadsheets online. Easy to use and completely free. No login required.",
+        "metakeywords": "Online, Spreadsheet, Sort",
+        tool_faq:{},
+        tool_steps:[
+            {"steptitle":"Input Table",
+             "stepdescription":"Copy paste your table here.",
+             "stepcontent":'<div id="table1"></div>',
+             },
+            {"steptitle":"Select Option",
+             "stepdescription":"Select sorting column and type",
+             "stepcontent":"""<select id="sortcol" class="form-select width50" style="display:inline-block;width:100%;margin:0px;" >
+                                </select>
+                            <select id="asc" class="form-select width50" style="display:inline-block;width:100%;margin:0px;" >
+                                <option value=true >Ascending</option>
+                                <option value=false >Descending</option>
+                            </select>
+                        """,
+             },
+             {"steptitle":"Download Sorted Result",
+              "stepdescription":"Copy or Download your result in CSV.",
+              "stepcontent":'<div id="table2"></div><button id="download" type="button" class="btn btn-primary width50" style="display:inline-block;width:100%;margin:0px;" > Download</button>',
+              },
+        ],
+    },
+
+    "tail":{
+        "tool":"tail",
+        "h1":"Last n Rows",
+        "h1description": "Get the last n rows of an Excel sheets directly online.",
+        "title": "Get Last n Rows Online",
+        "metadescription": "An free online too to get the last n rows of a spreadsheets online. Easy to use and completely free. No login required.",
+        "metakeywords": "Online, Spreadsheet, Tail, last row",
+        tool_faq:{},
+        tool_steps:[
+            {"steptitle":"Input Table",
+             "stepdescription":"Copy paste your table here.",
+             "stepcontent":'<div id="table1"></div>',
+             },
+            {"steptitle":"Select Option",
+             "stepdescription":"Select sorting column and type",
+             "stepcontent":"""<input id="n" type="range" class="form-range" min="1" max="100">
+                        """,
+             },
+             {"steptitle":"Download Result",
+              "stepdescription":"Copy or Download your result in CSV.",
+              "stepcontent":'<div id="table2"></div><button id="download" type="button" class="btn btn-primary width50" style="display:inline-block;width:100%;margin:0px;" > Download</button>',
+              },
+        ],
+    },
 }
 
 
@@ -147,7 +188,6 @@ d_static = {
         "current_year": date.today().year,
         "url_index": "index.html",
         "url_blog": "blog/index.html",
-        #"footer": get_template("footer.html"),
     }
 
 

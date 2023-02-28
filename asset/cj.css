@@ -9,6 +9,13 @@ padding-left:0;
 padding-right:0;
 }
 
+.h1underline{
+text-decoration-line: underline;
+text-decoration-style: "solid";
+text-decoration-color: #0d6efd;
+text-decoration-thickness: 5px;
+}
+
 .upper{
     text-transform: uppercase;
 }
