@@ -48,13 +48,6 @@ def tool_faq(tooldata,d_website):
     return result
 
 
-
-def c_input():
-    return
-
-def c_configure():
-    return
-
 def c_download():
     return
 
@@ -77,12 +70,16 @@ d_tools={
         </ul>""",
             "Q: I uploaded both sheets, but it doesn't produce results.": "A: Make sure the key of each sheet is in the first column and that they are named <b>exactly the same</b>. You can edit the column name in the online table directly.",
         },
-        tool_steps:{
-            c_input: {"steptitle":"Input Left Table",
+        tool_steps:[
+            {"steptitle":"Input Left Table",
              "stepdescription":"Copy paste your first table here.",
              "stepcontent":'<div id="table1"></div>',
              },
-             c_configure: {"steptitle":"Configure",
+             {"steptitle":"Input Right Table",
+              "stepdescription":"Copy paste your second table here.",
+              "stepcontent":'<div id="table2"></div><div id="leftalert" class="alert alert-danger" role="alert" style="display:none;"></div>',
+              },
+             {"steptitle":"Configure",
               "stepdescription":"Choose the Join type.",
               "stepcontent":"""<select id="jointype" class="form-select width50" style="display:inline-block;width:100%;margin:0px;" >
                                   <option value="left" selected>Left Join</option>
@@ -93,11 +90,11 @@ d_tools={
                             <img id="joinimg" alt="Join type image as Venn Diagram" src="" loading="lazy" width="350" height="190" >
                         """,
               },
-             c_download: {"steptitle":"Download",
+             {"steptitle":"Download",
               "stepdescription":"Copy or Download your result in CSV.",
               "stepcontent":'<div id="table3"></div><button id="download" type="button" class="btn btn-primary width50" style="display:inline-block;width:100%;margin:0px;" > Download</button>',
               },
-        },
+        ],
     },
 
 
