@@ -1,15 +1,3 @@
-function initiate_options() {
-    $('#n').attr('max', data1 = 100)
-    $('#n').change(function() {
-        tool()
-    })
-
-    $('#sample').click(function() {
-        tool()
-    })
-}
-
-
 function tool() {
     //get data
     data1 = hot1.getData()
@@ -37,13 +25,8 @@ function tool() {
 
 //init function
 function init() {
-    hot1.addHook('afterChange', (row, amount) => {
-        initiate_options()
-        tool()
-    })
-
-    //called everytime input refreshes
-    initiate_options()
-
-    //called only first time
+    listener_table([hot1])
+    listener_configure(["#sample","#n"])
+     $('#n').attr('max', data1 = 100)
+    tool()
 }

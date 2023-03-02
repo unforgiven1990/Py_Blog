@@ -1,5 +1,5 @@
 from datetime import *
-from main_page import get,getc,getcf, pformat
+from function import get,getc,getcf, pformat
 """
 blog data are stored in word files
 tool data are stored in dict/obj

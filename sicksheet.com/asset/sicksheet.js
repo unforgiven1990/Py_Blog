@@ -100,6 +100,22 @@ function downloadEXCEL() {
 
 
 
+function listener_configure(array){
+    $.each(array, function(key, val) {
+        $(val).change(function() {
+                tool()
+        })
+    })
+}
+
+function listener_table(array){
+    $.each(array, function(key, val) {
+         val.addHook('afterChange', (row, amount) => {
+            tool()
+        })
+    })
+}
+
 
 function main() {
     /*

@@ -1,15 +1,3 @@
-function initiate_options() {
-    max=hot1.countRows()-1
-    $('#endn').attr('max', max)
-    $('#startn').attr('max', max)
-
-    $('#startn').attr('min', 0)
-    $('#endn').attr('min', 0)
-
-
-}
-
-
 function tool() {
     //get data
     data1 = hot1.getData()
@@ -40,23 +28,15 @@ function tool() {
 
 //init function
 function init() {
-    hot1.addHook('afterChange', (row, amount) => {
-        initiate_options()
-        tool()
-    })
-
-    $('#startn').change(function() {
-        tool()
-    })
-
-    $('#endn').change(function() {
-        tool()
-    })
-
-    initiate_options()
+    listener_table([hot1])
+    listener_configure(["#startn","#endn"])
 
     max=hot1.countRows()-1
+    $('#endn').attr('max', max)
+    $('#startn').attr('max', max)
+    $('#startn').attr('min', 0)
+    $('#endn').attr('min', 0)
     $('#startn').value(0)
     $('#endn').value(Math.round(max*0.7))
-
+    tool()
 }

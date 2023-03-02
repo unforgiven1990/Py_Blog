@@ -1,9 +1,4 @@
-function initiate_options() {
-    //button add listener
-    $('#shuffle').click(function() {
-        tool()
-    })
-}
+
 
 function tool() {
 console.log("tool shuffle")
@@ -29,9 +24,7 @@ console.log("tool shuffle")
 
 //init function
 function init() {
-    hot1.addHook('afterChange', (row, amount) => {
-        initiate_options()
-        tool()
-    })
-    initiate_options()
+    listener_table([hot1])
+    listener_configure(["#shuffle"])
+    tool()
 }

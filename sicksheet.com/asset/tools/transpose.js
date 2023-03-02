@@ -23,8 +23,6 @@ function tool() {
 
 //init function
 function init() {
-    hot1.addHook('afterChange', (row, amount) => {
-        tool()
-    })
+    listener_table([hot1])
     tool()
 }

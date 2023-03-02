@@ -57,22 +57,18 @@ function showjoinimg() {
     $("#joinimg").attr("src", "asset/" + jointype + ".svg")
 }
 
-
 function init() {
-
-    hot1.addHook('afterChange', (row, amount) => {
-        tool()
-    })
-
-    hot2.addHook('afterChange', (row, amount) => {
-        tool()
-    })
-
+    listener_table([hot1,hot2])
     $('#jointype').change(function() {
         showjoinimg()
         tool()
     })
 
+    $('#jointype').html("")
+    $('#jointype').append('<option value="left">Left Join</option>')
+    $('#jointype').append('<option value="right">Right Join</option>')
+    $('#jointype').append('<option value="inner">Inner Join</option>')
+    $('#jointype').append('<option value="outer">Outer Join</option>')
     $("#leftalert").hide()
     showjoinimg()
     tool()

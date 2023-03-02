@@ -1,18 +1,3 @@
-function initiate_options() {
-    data1 = hot1.getData()
-    columns = data1[0]
-    $('#sortcol').html("")
-    $.each(columns, function(index, val) {
-        $('#sortcol').append('<option value="' + val + '">Sort by ' + val + '</option>')
-    })
-
-    $('#asc').html("")
-    $('#asc').append('<option value="true">In Ascending Order</option>')
-    $('#asc').append('<option value="false">In Descending Order</option>')
-
-}
-
-
 function tool() {
     //get data
     data1 = hot1.getData()
@@ -46,23 +31,24 @@ function tool() {
 function init() {
     //init function
 
-    hot1.addHook('afterChange', (row, amount) => {
-        initiate_options()
-        tool()
+    listener_table([hot1])
+    listener_configure(["#sortcol","#asc"])
+
+
+    data1 = hot1.getData()
+    columns = data1[0]
+    $('#sortcol').html("")
+    $.each(columns, function(index, val) {
+        $('#sortcol').append('<option value="' + val + '">Sort by ' + val + '</option>')
     })
 
-    $('#sortcol').change(function() {
-        tool()
-    })
-    $('#asc').change(function() {
-        tool()
-    })
-
-    initiate_options()
+    $('#asc').html("")
+    $('#asc').append('<option value="true">In Ascending Order</option>')
+    $('#asc').append('<option value="false">In Descending Order</option>')
 
     $("#sortcol").val("Age")
     $("#sortcol").trigger("change")
     //$("#sortcol").val("Age")
     //$("#sortcol").trigger("change")
-
+    tool()
 }

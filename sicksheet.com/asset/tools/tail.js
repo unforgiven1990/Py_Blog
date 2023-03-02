@@ -1,6 +1,3 @@
-function initiate_options() {
-    $('#n').attr('max', data1 = hot1.countRows()-1)
-}
 
 
 function tool() {
@@ -29,14 +26,9 @@ function tool() {
 
 //init function
 function init() {
-    hot1.addHook('afterChange', (row, amount) => {
-        initiate_options()
-        tool()
-    })
+    listener_table([hot1])
+    listener_configure(["#n"])
 
-    $('#n').change(function() {
-        tool()
-    })
-
-    initiate_options()
+    $('#n').attr('max', data1 = hot1.countRows()-1)
+    tool()
 }

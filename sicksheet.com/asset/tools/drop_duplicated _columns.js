@@ -1,12 +1,4 @@
-function initiate_options() {
-    //button add listener
-    data1 = hot1.getData()
-    columns = data1[0]
-    $('#duplicate').html("")
-    $.each(columns, function(index, val) {
-        $('#duplicate').append('<option value="' + val + '">Drop Duplicates for Column:  ' + val + '</option>')
-    })
-}
+
 
 function tool() {
 console.log("tool shuffle")
@@ -33,10 +25,15 @@ console.log("tool shuffle")
 
 //init function
 function init() {
-    hot1.addHook('afterChange', (row, amount) => {
-        initiate_options()
-        tool()
+    listener_table([hot1])
+     //button add listener
+    data1 = hot1.getData()
+    columns = data1[0]
+    $('#duplicate').html("")
+    $.each(columns, function(index, val) {
+        $('#duplicate').append('<option value="' + val + '">Drop Duplicates for Column:  ' + val + '</option>')
     })
-    initiate_options()
+
+    tool()
 }
 
