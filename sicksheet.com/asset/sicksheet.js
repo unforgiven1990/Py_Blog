@@ -116,6 +116,23 @@ function listener_table(array){
     })
 }
 
+function hot_to_dataframe(hot){
+    data1 = hot.getData()
+    colheader1 = data1[0]
+    data1.shift()
+    df = new dfjs.DataFrame(data1, colheader1)
+    return df
+}
+
+function data_to_hot(id,datawithcol){
+    $(id).handsontable(datainit(data = datawithcol))
+    hot2 = $(id).handsontable('getInstance')
+    hot2.updateSettings({
+        //readOnly: true, // make table cells read-only
+        editor: false
+    });
+}
+
 
 function main() {
     /*
