@@ -387,7 +387,7 @@ def tool_index_content():
             "h1":data["h1"],
             "h1description":data["h1description"],
         }
-        result+=pformat(get("col.html"), d_replace)
+        result+=pformat(get("card.html"), d_replace)
     return result
 
 
