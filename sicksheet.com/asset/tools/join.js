@@ -74,6 +74,7 @@ function init() {
     })
 
     $("#leftalert").hide()
-    tool()
     showjoinimg()
+    tool()
+
 }

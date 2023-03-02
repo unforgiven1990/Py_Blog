@@ -1,28 +1,25 @@
 function initiate_options() {
+    //button add listener
     data1 = hot1.getData()
     columns = data1[0]
-    $('#sortcol').html("")
-
+    $('#duplicate').html("")
     $.each(columns, function(index, val) {
-        $('#sortcol').append('<option value="' + val + '">' + val + '</option>')
+        $('#duplicate').append('<option value="' + val + '">Drop Duplicates for Column:  ' + val + '</option>')
     })
 }
 
-
 function tool() {
+console.log("tool shuffle")
     //get data
     data1 = hot1.getData()
-    sortcol = $("#sortcol option:selected").val()
-    asc = $("#asc option:selected").val()
-    asc = (asc === 'true');
     colheader1 = data1[0]
     data1.shift()
 
     //do with data-forge-ts
+    selected_col = $("#duplicate option:selected").val()
     df1 = new dfjs.DataFrame(data1, colheader1)
-    df2 = df1.sortBy(sortcol, asc)
+    df2 = df1.dropDuplicates()
     datawithcol = [df2.listColumns()].concat(df2.toArray())
-
 
     //create table
     $("#table2").handsontable(datainit(data = datawithcol))
@@ -31,31 +28,15 @@ function tool() {
         //readOnly: true, // make table cells read-only
         editor: false
     });
-
-    //add little highlight to indicate the swapped result
-    colindex = colheader1.indexOf(sortcol)
-    setColorRow(hot2, color1, colindex)
 }
 
 
-
+//init function
 function init() {
-    //init function
-
     hot1.addHook('afterChange', (row, amount) => {
         initiate_options()
         tool()
     })
-
-    $('#sortcol').change(function() {
-        tool()
-    })
-    $('#asc').change(function() {
-        tool()
-    })
-
     initiate_options()
-    //$("#sortcol").val("Age")
-    //$("#sortcol").trigger("change")
-
 }
+

@@ -1,4 +1,7 @@
-d_data = {
+
+
+function example1(){
+return {
     "#table1": [
         ['Name', 'Age', 'Car Brand'],
         ['Ali', "20", "NIO"],
@@ -14,6 +17,7 @@ d_data = {
         ['Anna', "Japan", "1.7"],
     ],
     "#table3": [],
+}
 }
 
 
@@ -110,8 +114,7 @@ function main() {
     init()// to start the tool, eg. hiding something
     */
 
-    color1 = "#d3eaf2"
-    $(".mytooltip").tooltip()
+
     for (let [index, item] of ["#table1", "#table2", "#table3"].entries()) {
         try {
             $(item).handsontable(datainit(data = d_data[item]))
@@ -119,15 +122,16 @@ function main() {
         //todo for the third table id
         }
     }
-
+    color1 = "#d3eaf2"
+    $(".mytooltip").tooltip()
     hot1 = $("#table1").handsontable('getInstance')
     hot2 = $("#table2").handsontable('getInstance')
     hot3 = $("#table3").handsontable('getInstance')
-    myexport(hot2, "Todo name")
+    myexport(hot2, $("header").data("tool"))
     init()
-
 }
 
 
 //init
-main()
+d_data = example1()
+$(document).ready(main)

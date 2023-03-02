@@ -1,5 +1,6 @@
 import pandas as pd
 from data import *
+import copy
 import numpy as np
 from bs4 import BeautifulSoup
 import selenium
@@ -101,21 +102,40 @@ def article_banner(content):
         return ""
 
 
+def get_helper(path="h1.html", way=3):
+    if way == 1:  # get path for python
+        return f"{path}"
+    elif way == 2:  # get path for html rendering like img path
+        return f"../{path}"
+    elif way == 3:  # get file content itself
+        return open(f"{path}", "r", encoding='utf-8').read()
 
 def get(name, way=3):
-    def get_helper(path="h1.html", way=3):
-        if way == 1:  # get path for python
-            return f"{path}"
-        elif way == 2:  # get path for html rendering like img path
-            return f"../{path}"
-        elif way == 3:  # get file content itself
-            return open(f"{path}", "r", encoding='utf-8').read()
-
     """get html template like h1.html"""
     if ".html" in  name:
         return get_helper(path=f"template/{name}", way=way)
     else:
         return get_helper(path=f"template/{name}.html", way=way)
+
+
+def getc(name, way=3):
+    """get component"""
+    """get html template like h1.html"""
+    if ".html" in  name:
+        return get_helper(path=f"template/component/{name}", way=way)
+    else:
+        return get_helper(path=f"template/component/{name}.html", way=way)
+
+def getcf(name, way=3, **kwargs):
+    """get component"""
+    """get html template like h1.html"""
+    if ".html" in  name:
+        template= get_helper(path=f"template/component/{name}", way=way)
+    else:
+        template= get_helper(path=f"template/component/{name}.html", way=way)
+    template=template.format(**kwargs)
+
+    return template
 
 
 def get_files(path,ending=".docx"):
@@ -180,7 +200,8 @@ def pformat(template, d_fit):
             pass
     return template.format(**d_fit)
 
-def resolve_dict(d_data):
+def resolve_dict_automatic(d_data):
+    """automatic resolve"""
     """ resolve the dict with form {function: data} to {data:data} """
     result=d_data.copy()
     for key,val in d_data.items():
@@ -189,6 +210,58 @@ def resolve_dict(d_data):
 
     #after each solve, check data of each dict
     return result
+
+
+def resolve_dict_manual(d_data):
+    """manual resolve
+    the resolve is manual, but it makes the dict very nice and good for translation
+
+    1. all _stepn needs to be convereted to
+    2. all _Qn and _An needs to be convereted to FAQ
+    """
+    d_steps={x:y for x,y in d_data.items() if x.startswith("_step")}
+    tool_steps = ""
+    for counter, (stepcounter, component) in enumerate(d_steps.items()):
+        component["stepnumber"]=counter+1
+        tool_steps += get("component_tool_step.html").format(**component)
+    d_data["tool_steps"] = pformat(tool_steps, d_website)
+
+    d_helper = {**d_data, **d_general_faq}  # add general FAQ
+    a_Q=[y for x,y in d_helper.items() if x.startswith("_Q")]
+    a_A=[y for x,y in d_helper.items() if x.startswith("_A")]
+    tool_faq = ""
+    for counter, (question, answer) in enumerate(zip(a_Q,a_A)):
+        tool_faq += get("component_tool_faq.html").format(**{
+            "faq_number": counter + 1,
+            "faq_question": "Q: "+question,
+            "faq_answer": "A: "+answer,
+        })
+    d_data["tool_faq"] = pformat(tool_faq, d_website)
+    return d_data #returns dict
+
+
+def resolve_dict_manual2(tool, d_tool_s):
+    """manual resolve
+    the resolve is manual, but it makes the dict very nice and good for translation
+
+    1. all _stepn needs to be convereted to
+    2. all _Qn and _An needs to be convereted to FAQ
+    """
+    d_tool_s["tool_steps"] = general_tool_content(tool, d_tool_s)
+
+    d_helper = {**d_tool_s, **d_general_faq}  # add general FAQ
+    a_Q=[y for x,y in d_helper.items() if x.startswith("_Q")]
+    a_A=[y for x,y in d_helper.items() if x.startswith("_A")]
+    tool_faq = ""
+    for counter, (question, answer) in enumerate(zip(a_Q,a_A)):
+        tool_faq += get("component_tool_faq.html").format(**{
+            "faq_number": counter + 1,
+            "faq_question": "Q: "+question,
+            "faq_answer": "A: "+answer,
+        })
+    d_tool_s["tool_faq"] = pformat(tool_faq, d_website)
+    return d_tool_s #returns dict
+
 
 
 def resolve_template(template): #no use atm
@@ -308,11 +381,11 @@ def content_target_blank(content,index):
 def tool_index_content():
     """go through all available tools and create one col for it"""
     result=''
-    for tool,data in d_tools.items():
+    for tool,data in d_tools_s.items():
         d_replace={
             "tool": tool,
             "h1":data["h1"],
-            "metadescription":data["metadescription"],
+            "h1description":data["h1description"],
         }
         result+=pformat(get("col.html"), d_replace)
     return result
@@ -328,7 +401,7 @@ def create_blog(d_website):
     """---------------- folder manipulation here ----------------"""
     #define content
     d_website={**d_website, **d_static}
-    d_website= resolve_dict(d_website)
+    d_website= resolve_dict_automatic(d_website)
 
     #define folder
     d_expath={#path relative from the python program
@@ -453,12 +526,14 @@ def create_blog(d_website):
     #tool function
     if d_website["blog_url"]== "sicksheet.com":
         #generate individual tool
-        for tool,d_tool in d_tools.items():
+        for tool,d_tool in d_tools_s.items():
+
             #create the final replacement dict to replace the template
-            d_tool = resolve_dict(d_tool) # resolve dict to make function out of dict data
+            d_tool = resolve_dict_manual2(tool=tool, d_tool_s=d_tool) # resolve dict to make function out of dict data
             d_tool={**d_website,**d_tool} #merge dicts together. second thing overwrites first
 
             page_tool = pformat(get("page_tool_function.html"), {"toolbody": get("component_tool.html")})
+            print("tool is ", tool)
             page_tool = pformat(page_tool, d_tool)
             save(page_tool, d_expath["oroot"] + f"/{tool}.html")
 
@@ -467,6 +542,127 @@ def create_blog(d_website):
         page_tool_index = pformat(page_tool_index, {**d_blog_index, **{"cols":tool_index_content()}})
         save(page_tool_index, d_expath["oroot"] + f"/tools/index.html")
 
+
+def general_tool_content(tool, d_tool_txt_s):
+    """returning normal template
+    1. takes Data
+    2. takes html template
+    3. outputs general page content
+    """
+
+    #specific text
+    d_tool_txt_s={**d_tools_txt_g, **d_tool_txt_s} #add normal data and specific data togehter
+
+
+
+    #standard template:  3 steps.
+    d_tool_content_g={
+        "input.content":getcf("hot.html",id="table1"),
+        "configure.content":"no specific config",
+        "download.content":getcf("hot.html",id="table2")+getcf("button.html",id="download",label="Download"),
+    }
+
+    #other templates are custom1, custom2, custom3, custom4
+
+
+    #specific content
+    if tool in globals().keys():
+        f_tool = globals()[tool]
+        d_tool_content_s,d_tool_txt_s=f_tool(copy.deepcopy(d_tool_content_g),copy.deepcopy(d_tool_txt_s))
+    else:
+        d_tool_content_s = d_tool_content_g
+
+
+    #Heirat: merge content and template together to step
+    d_result={}
+    counter=1
+    for key in ["input","input2","configure","download"]: #input2 only used for join.
+        if not [x for x in d_tool_txt_s.keys() if x.startswith(f"{key}.")]:
+            continue
+        d_result[key]=get("component_tool_step.html").format(**{
+            "step_n":counter,
+            "step_h1":d_tool_txt_s[f"{key}.title"],
+            "step_descr":d_tool_txt_s[f"{key}.descr"],
+            "step_data": d_tool_content_s[f"{key}.content"],
+        })
+        counter+=1
+    return "".join(d_result.values())
+
+
+def join(d_tool_content_g,d_tool_txt_s):
+    # change input 1 text
+    d_tool_txt_s["input.title"] = "Input Right Table"
+    d_tool_txt_s["input.descr"] = "Paste in your right table here."
+
+    #create custom step
+    d_tool_txt_s["input2.title"] = "Input Left Table"
+    d_tool_txt_s["input2.descr"] = "Paste in your left table here."
+    d_tool_content_g["input2.content"] = getcf("hot.html", id="table2")
+
+    #add configure
+    d_tool_content_g["configure.content"] = get("configure/join.html")
+
+    #change download
+    table3 = getcf("hot.html", id="table3")
+    download = getcf("button.html", id="download", label="Download")
+    d_tool_content_g["download.content"] = table3 + download
+
+    return [d_tool_content_g, d_tool_txt_s]
+
+def transpose(d_tool_content_g,d_tool_txt_s):
+    for key in list(d_tool_content_g.keys()):
+        if key.startswith("configure."):
+            d_tool_content_g.pop(key)
+
+    for key in list(d_tool_txt_s.keys()):
+        if key.startswith("configure."):
+            d_tool_txt_s.pop(key)
+    return [d_tool_content_g,d_tool_txt_s]
+
+
+def sort(d_tool_content_g,d_tool_txt_s):
+    slide1=getcf("select.html",id="sortcol")
+    slide2=getcf("select.html",id="asc")
+    d_tool_content_g["configure.content"]=slide1+slide2
+    return [d_tool_content_g,d_tool_txt_s]
+
+def head(d_tool_content_g,d_tool_txt_s):
+    range = getcf("range.html", id="n", label="First n Rows")
+    d_tool_content_g["configure.content"] = range
+    return [d_tool_content_g,d_tool_txt_s]
+
+
+def tail(d_tool_content_g,d_tool_txt_s):
+    range = getcf("range.html", id="n",label="Last n Rows")
+    d_tool_content_g["configure.content"] = range
+    return [d_tool_content_g,d_tool_txt_s]
+
+def slice(d_tool_content_g,d_tool_txt_s):
+    range1 = getcf("range.html", id="startn", label="Start at Row n")
+    range2 = getcf("range.html", id="endn", label="End at Row n")
+    d_tool_content_g["configure.content"] = range1+range2
+    return [d_tool_content_g,d_tool_txt_s]
+
+def sample(d_tool_content_g,d_tool_txt_s):
+    range = getcf("range.html", id="n", label="Sample n Rows")
+    button = getcf("button.html", id="sample", label="Sample Rows")
+    d_tool_content_g["configure.content"] = range+button
+    return [d_tool_content_g,d_tool_txt_s]
+
+def shuffle(d_tool_content_g,d_tool_txt_s):
+    button = getcf("button.html", id="shuffle", label="Shuffle Row")
+    d_tool_content_g["configure.content"] = button
+    return [d_tool_content_g,d_tool_txt_s]
+
+def drop_duplicated_columns(d_tool_content_g,d_tool_txt_s):
+    for key in list(d_tool_content_g.keys()):
+        if key.startswith("configure."):
+            d_tool_content_g.pop(key)
+
+    for key in list(d_tool_txt_s.keys()):
+        if key.startswith("configure."):
+            d_tool_txt_s.pop(key)
+    return [d_tool_content_g,d_tool_txt_s]
 
 
 if __name__ == '__main__':

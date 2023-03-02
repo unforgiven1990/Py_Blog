@@ -85,11 +85,21 @@ def c_slider(label="Last n Rows"):
     }
 
 
+d_normal={
+    "input.title":"Input",
+    "input.descr":"Copy paste your table here.",
+    "input.content":getcf("hot.html",id="table1"),
+    "configure.title":"Configure",
+    "configure.descr":"Configure the options.",
+    "configure.content":"",
+    "download.title":"Download",
+    "download.descr":"Copy or Download your result in CSV.",
+    "download.content":getcf("hot.html",id="table2"),
+}
 
 
-
-
-djoin={
+d_tools={
+    "join":{
         "tool":"join",
         "h1":"Join Tables",
         "h1description": "Merge and join two spreadsheets based on their key column.",
@@ -109,47 +119,8 @@ djoin={
         "_step2": c_input("Input Left Right","Copy paste your second table here.",'<div id="table2"></div><div id="leftalert" class="alert alert-danger leftalert"></div>'),
         "_step3": c_configure(stepcontent=get("configure/join.html")),
         "_step4": c_download(tableid="table3")
-    }
-
-
-#same for all tools, g for general
-d_tools_txt_g={
-    "input.title":"Input",
-    "input.descr":"Copy paste your table here.",
-    "input.content":"",
-    "configure.title":"Configure",
-    "configure.descr":"Configure the options.",
-    "configure.content":"",
-    "download.title":"Download",
-    "download.descr":"Copy or Download your result in CSV.",
-    "download.content":"",
-}
-
-#s for specific. specific tool dict
-d_tools_s={
-
-    "join":{
-"tool":"join",
-        "h1":"Join Tables",
-        "h1description": "Merge and join two spreadsheets based on their key column.",
-        "title": "Join Table Online",
-        "metadescription": "An free online tool to join spreadsheets online. Easy to use and completely free. No login required.",
-        "metakeywords": "Online, Spreadsheet, Join, Merge",
-        "_Q1": "What is the difference between Left Join, Right Join, Inner Join and Outer Join?",
-        "_A1": """<ul>
-          <li><b>Inner Join</b>: Returns records that have matching values in <b>both tables</b></li>
-          <li><b>Left (Outer) Join</b>: Returns all records from the <b>left table</b>, and the matched records from the right table</li>
-          <li><b>Right (Outer) Join</b>: Returns all records from the <b>right table</b>, and the matched records from the left table</li>
-          <li><b>Full (Outer) Join</b>: Returns all records when there is a match in <b>either left or right table</b></li>
-        </ul>""",
-        "_Q2":"I uploaded both sheets, but it doesn't produce results.",
-        "_A2":"A: Make sure the key of each sheet is in the first column and that they are named <b>exactly the same</b>. You can edit the column name in the online table directly.",
-        "_step1": c_input("Input Left Table","Copy paste your first table here."),
-        "_step2": c_input("Input Left Right","Copy paste your second table here.",'<div id="table2"></div><div id="leftalert" class="alert alert-danger leftalert"></div>'),
-        "_step3": c_configure(stepcontent=get("configure/join.html")),
-        "_step4": c_download(tableid="table3")
-
     },
+
 
     "transpose":{
         "tool":"transpose",
@@ -158,7 +129,10 @@ d_tools_s={
         "title": "Transpose Table Online",
         "metadescription": "An free online tool to transpose spreadsheets online. Easy to use and completely free. No login required.",
         "metakeywords": "Online, Spreadsheet, Transpose",
+        "_step1": c_input(),
+        "_step2": c_download(),
     },
+
 
     "sort":{
         "tool":"sort",
@@ -167,20 +141,11 @@ d_tools_s={
         "title": "Sort Table Online",
         "metadescription": "An free online tool to sort spreadsheets online. Easy to use and completely free. No login required.",
         "metakeywords": "Online, Spreadsheet, Sort",
-        "configure.content": get("configure/sort.html"),#todo to remove
+        "_step1": c_input(),
+        "_step2": c_configure(stepcontent=get("configure/sort.html")),
+        "_step3": c_download(),
 
     },
-
-    "head": {
-        "tool": "head",
-        "h1": "First n Rows",
-        "h1description": "Get the first n rows of a spreadsheet.",
-        "title": "Get First n Rows Online",
-        "metadescription": "An free online tool to get the first n rows of a spreadsheets online. Easy to use and completely free. No login required.",
-        "metakeywords": "Online, Spreadsheet, Head, first row",
-        "configure.content": "First n Rows",
-    },
-
 
     "tail":{
         "tool":"tail",
@@ -189,19 +154,36 @@ d_tools_s={
         "title":"Get Last n Rows Online",
         "metadescription": "An free online tool to get the last n rows of a spreadsheets online. Easy to use and completely free. No login required.",
         "metakeywords": "Online, Spreadsheet, Tail, last row",
+        "_step1":c_input(),
+        "_step2":c_slider(),
+        "_step3":c_download(),
     },
 
 
-    "sample":{
+        "sample":{
         "tool":"sample",
         "h1":"Get Sample Rows",
         "h1description": "Get a sampled subset of rows in a spreadsheet",
         "title":"Get a sampled subset of rows in a spreadsheet",
         "metadescription": "An free online tool to get a sampled rows of a spreadsheets online. Easy to use and completely free. No login required.",
         "metakeywords": "Online, Spreadsheet, Sample, Subset",
-        "configure.content": "Sample n Percent",
+        "_step1":c_input(),
+        "_step2":c_slider(label="Sample n Percent"),
+        "_step3":c_download(),
     },
 
+
+    "head":{
+        "tool":"head",
+        "h1":"First n Rows",
+        "h1description": "Get the first n rows of a spreadsheet.",
+        "title":"Get First n Rows Online",
+        "metadescription": "An free online tool to get the first n rows of a spreadsheets online. Easy to use and completely free. No login required.",
+        "metakeywords": "Online, Spreadsheet, Head, first row",
+        "_step1":c_input(),
+        "_step2":c_slider(label="First n Rows"),
+        "_step3":c_download(),
+    },
 
     "slice": {
         "tool": "slice",
@@ -210,7 +192,15 @@ d_tools_s={
         "title": "Get a subset of Consecutive Rows.",
         "metadescription": "An free online tool to get the first n rows of a spreadsheets online. Easy to use and completely free. No login required.",
         "metakeywords": "Online, Spreadsheet, Slice",
-        "configure.content": "Start from Row n",
+        "_step1.title": d_normal["input.title"],
+        "_step1.descr": d_normal["input.descr"],
+        "_step1.content": d_normal["input.content"],
+        "_step2.title": d_normal["configure.title"],
+        "_step2.descr": d_normal["configure.descr"],
+        "_step2.content": d_normal["configure.content"],
+        "_step3.title": d_normal["download.title"],
+        "_step3.descr": d_normal["download.descr"],
+        "_step3.content": d_normal["download.content"],
     },
 
 
@@ -222,22 +212,27 @@ d_tools_s={
         "title":"Randomly shuffle rows of your spreadsheet.",
         "metadescription": "An free online tool to shuffle the rows of a spreadsheets online. Easy to use and completely free. No login required.",
         "metakeywords": "Online, Spreadsheet, Shuffle, Random",
-        "configure.content": "Shuffle Row",
+        "_step1":c_input(),
+        "_step2":c_configure(stepcontent='<button id="shuffle" type="button" class="btn btn-primary width50" style="display:inline-block;width:100%;margin:0px;" >Shuffle Rows</button>'),
+        "_step3":c_download(),
     },
 
 
-    "drop_duplicated_columns":{
-        "tool":"drop_duplicated_columns",
+    "drop duplicated columns":{
+        "tool":"drop duplicated columns",
         "h1":"Drop Duplicated Columns",
         "h1description": "Remove columns with the same name",
         "title":"Drops duplicated rows for a selected column.",
         "metadescription": "An free online tool to drop duplicated rows of a spreadsheets online. Easy to use and completely free. No login required.",
         "metakeywords": "Online, Spreadsheet, Drop Duplicates, Remove Duplicates",
+        "_step1":c_input(),
+        #"_step2":c_configure(stepcontent=get("configure/drop_duplicates.html")),
+        "_step3":c_download(),
     },
 }
 
 
-#same for all faq tools
+
 d_general_faq={
             "_Q100":"Can I upload my data as .xlsx or .csv file?",
             "_A100":"Upload data as .xlsx or .csv file is not supported yet. You can copy paste your data from excel into the website table above.",
@@ -252,7 +247,6 @@ d_general_faq={
         }
 
 
-#same for all blogs
 d_static = {
         "current_year": date.today().year,
         "url_index": "index.html",
@@ -260,7 +254,6 @@ d_static = {
     }
 
 
-#same for all websites
 d_websites=[
     {
         "blog_url": "careercrashcourse.com",

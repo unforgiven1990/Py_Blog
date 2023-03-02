@@ -3,9 +3,13 @@ function initiate_options() {
     columns = data1[0]
     $('#sortcol').html("")
     $.each(columns, function(index, val) {
-        $('#sortcol').append('<option value="' + val + '">' + val + '</option>')
+        $('#sortcol').append('<option value="' + val + '">Sort by ' + val + '</option>')
     })
-    $('#n').attr('max', data1 = hot1.countRows())
+
+    $('#asc').html("")
+    $('#asc').append('<option value="true">In Ascending Order</option>')
+    $('#asc').append('<option value="false">In Descending Order</option>')
+
 }
 
 
@@ -33,26 +37,32 @@ function tool() {
     });
 
     //add little highlight to indicate the swapped result
-    //todo
     colindex = colheader1.indexOf(sortcol)
-    console.log(colindex)
     setColorRow(hot2, color1, colindex)
 }
 
 
-//init function
+
 function init() {
+    //init function
 
     hot1.addHook('afterChange', (row, amount) => {
         initiate_options()
         tool()
     })
 
-    $('#n').change(function() {
+    $('#sortcol').change(function() {
+        tool()
+    })
+    $('#asc').change(function() {
         tool()
     })
 
     initiate_options()
+
     $("#sortcol").val("Age")
     $("#sortcol").trigger("change")
+    //$("#sortcol").val("Age")
+    //$("#sortcol").trigger("change")
+
 }
