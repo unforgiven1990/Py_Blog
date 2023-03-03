@@ -60,9 +60,9 @@ function myexport(hot, name) {
 }
 
 
-function datainit(data) {
+function datainit(mydata) {
     return {
-        data: data,
+        data: mydata,
         rowHeaders: true,
         colHeaders: true,
         contextMenu: true,
@@ -125,12 +125,12 @@ function hot_to_dataframe(hot){
 }
 
 function data_to_hot(id,datawithcol){
-    $(id).handsontable(datainit(data = datawithcol))
+    $(id).handsontable(datainit(datawithcol))
     hot2 = $(id).handsontable('getInstance')
     hot2.updateSettings({
         //readOnly: true, // make table cells read-only
         editor: false
-    });
+    })
 }
 
 

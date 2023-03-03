@@ -23,7 +23,7 @@ d_tools_txt_g={
 #s for specific. specific tool dict
 d_tools_txt_s=[
     {
-        "tool":"join",
+        "tool":"join-tables",
         "h1":"Join Tables",
         "h1description": "Merge and join two spreadsheets based on their key column.",
         "metakeywords": "Online, Spreadsheet, Join, Merge",
@@ -43,21 +43,21 @@ d_tools_txt_s=[
     },
 
     {
-        "tool":"transpose",
-        "h1":"Transpose Tables",
+        "tool":"transpose-table",
+        "h1":"Transpose Table",
         "h1description": "Swap spreadsheet column and row axis.",
         "metakeywords": "Online, Spreadsheet, Transpose",
     },
 
     {
-        "tool":"sort",
+        "tool":"sort-rows",
         "h1":"Sort Tables",
         "h1description": "Sort spreadsheet columns in ascending or descending order.",
         "metakeywords": "Online, Spreadsheet, Sort",
     },
 
     {
-        "tool": "head",
+        "tool": "first-n-rows",
         "h1": "First n Rows",
         "h1description": "Get the first n rows of a spreadsheet.",
         "metakeywords": "Online, Spreadsheet, Head, first row",
@@ -66,7 +66,7 @@ d_tools_txt_s=[
 
 
     {
-        "tool":"tail",
+        "tool":"last-n-rows",
         "h1":"Last n Rows",
         "h1description": "Get the last n rows of a spreadsheet.",
         "metakeywords": "Online, Spreadsheet, Tail, last row",
@@ -74,7 +74,7 @@ d_tools_txt_s=[
 
 
     {
-        "tool":"sample",
+        "tool":"sample-rows",
         "h1":"Get Sample Rows",
         "h1description": "Get a sampled subset of rows in a spreadsheet",
         "metakeywords": "Online, Spreadsheet, Sample, Subset",
@@ -83,7 +83,7 @@ d_tools_txt_s=[
 
 
     {
-        "tool": "slice",
+        "tool": "slice-rows",
         "h1": "Slice Rows",
         "h1description": "Get a subset of Consecutive Rows.",
         "metakeywords": "Online, Spreadsheet, Slice",
@@ -93,7 +93,7 @@ d_tools_txt_s=[
 
 
        {
-        "tool":"shuffle",
+        "tool":"shuffle-rows",
         "h1":"Shuffle Table Rows",
         "h1description": "Randomly shuffle rows of your spreadsheet.",
         "metakeywords": "Online, Spreadsheet, Shuffle, Random",
@@ -102,7 +102,7 @@ d_tools_txt_s=[
 
 
     {
-        "tool":"drop_duplicated_columns",
+        "tool":"drop-duplicated-columns",
         "h1":"Drop Duplicated Columns",
         "h1description": "Remove columns with the same name",
         "metakeywords": "Online, Spreadsheet, Drop Duplicates, Remove Duplicates",

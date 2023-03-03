@@ -4,7 +4,6 @@ function tool() {
     df = hot_to_dataframe(hot1).slice(start,end)
     datawithcol = [df.listColumns()].concat(df.toArray())
     data_to_hot("#table2",datawithcol)
-
 }
 
 
@@ -18,6 +17,7 @@ function init() {
     $('#startn').attr('max', max)
     $('#startn').attr('min', 0)
     $('#endn').attr('min', 0)
+
     $('#startn').value(0)
     $('#endn').value(Math.round(max*0.7))
     tool()

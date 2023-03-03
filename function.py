@@ -435,6 +435,14 @@ def create_blog(d_website):
             for file in files:
                 os.remove(f"{root}/{file}")
 
+    #remove old data from root directory, todo make this delete function more compact
+    for to_delete in [d_expath["oroot"]]:
+        for (root, dirs, files) in os.walk(to_delete, topdown=True):
+            for file in files:
+                if ".html" in file:
+                    os.remove(f"{root}/{file}")
+
+
     #copy latest asset (css, js) files to output
     copy_tree(d_expath["iasset"],d_expath["oasset"])
     copy_tree(d_expath["isasset"], d_expath["oasset"])
@@ -443,7 +451,6 @@ def create_blog(d_website):
     input_xlsx=f'{d_expath["iroot"]}/input.xlsx'
     df_input=pd.DataFrame(columns=["document","url","h1","published","comment"]).set_index("document")
     df_input.to_excel(input_xlsx)
-
 
     #update input.xlsx
     for file in get_files(d_expath['iroot'],".docx"):
@@ -573,8 +580,9 @@ def general_tool_content(tool, d_tool_txt_s):
     }
 
     #specific content
-    if tool in globals().keys():
-        f_tool = globals()[tool]
+    nohyphen=tool.replace("-","_")#use - for url, and _ for python
+    if nohyphen in globals().keys():
+        f_tool = globals()[nohyphen]
         d_tool_content_s,d_tool_txt_s=f_tool(copy.deepcopy(d_tool_content_g),copy.deepcopy(d_tool_txt_s))
     else:
         d_tool_content_s = d_tool_content_g
@@ -596,12 +604,12 @@ def general_tool_content(tool, d_tool_txt_s):
     return "".join(d_result.values())
 
 
-def join(d_html, d_txt):
+def join_tables(d_html, d_txt):
     # change input 1 text
     #done in table
 
     #create custom step
-    d_html["input2.content"] = getcf("hot.html", id="table2")
+    d_html["input2.content"] = getcf("hot.html", id="table2")+getcf("alert.html", id="leftalert",label="")
 
     #add configure
     select=getcf("select.html", id="jointype",)
@@ -615,7 +623,7 @@ def join(d_html, d_txt):
     return [d_html, d_txt]
 
 
-def transpose(d_html, d_txt):
+def transpose_table(d_html, d_txt):
     for key in list(d_html.keys()):
         if key.startswith("configure."):
             d_html.pop(key)
@@ -626,35 +634,35 @@ def transpose(d_html, d_txt):
     return [d_html, d_txt]
 
 
-def sort(d_html, d_txt):
+def sort_rows(d_html, d_txt):
     slide1=getcf("select.html",id="sortcol")
     slide2=getcf("select.html",id="asc")
     d_html["configure.content"]= slide1 + slide2
     return [d_html, d_txt]
 
-def head(d_html, d_txt):
+def first_n_rows(d_html, d_txt):
     range = getcf("range.html", id="n", label="First n Rows")
     d_html["configure.content"] = range
     return [d_html, d_txt]
 
-def tail(d_html, d_txt):
+def last_n_rows(d_html, d_txt):
     range = getcf("range.html", id="n",label="Last n Rows")
     d_html["configure.content"] = range
     return [d_html, d_txt]
 
-def slice(d_html, d_txt):
+def slice_rows(d_html, d_txt):
     range1 = getcf("range.html", id="startn", label="Start at Row n")
     range2 = getcf("range.html", id="endn", label="End at Row n")
     d_html["configure.content"] = range1 + range2
     return [d_html, d_txt]
 
-def sample(d_html, d_txt):
+def sample_rows(d_html, d_txt):
     range = getcf("range.html", id="n", label="Sample n Rows")
     button = getcf("button.html", id="sample", label="Sample Rows")
     d_html["configure.content"] = range + button
     return [d_html, d_txt]
 
-def shuffle(d_html, d_txt):
+def shuffle_rows(d_html, d_txt):
     button = getcf("button.html", id="shuffle", label="Shuffle Row")
     d_html["configure.content"] = button
     return [d_html, d_txt]
@@ -674,5 +682,6 @@ def drop_duplicated_columns(d_html, d_txt):
 
 if __name__ == '__main__':
     for d_website in d_websites_s:
-        create_blog(d_website=d_website)
+        if d_website["blog_url"] =="sicksheet.com":
+            create_blog(d_website=d_website)
 
