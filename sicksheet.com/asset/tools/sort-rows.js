@@ -10,30 +10,27 @@ function tool() {
     colindex = colheader1.indexOf(sortcol)
     setColorRow(hot2, color1, colindex)
 }
-
-
-
-function init() {
-    //init function
-
-    listener_table([hot1])
-    listener_configure(["#sortcol","#asc"])
-
-
+function config(){
     data1 = hot1.getData()
     columns = data1[0]
     $('#sortcol').html("")
     $.each(columns, function(index, val) {
-        $('#sortcol').append('<option value="' + val + '">Sort by ' + val + '</option>')
+        $('#sortcol').append('<option value="' + val + '">' + val + '</option>')
     })
+}
 
+
+function init() {
+    listener_table([hot1],[config])
+    listener_configure(["#sortcol","#asc"])
+    config()
+
+    //one time call
     $('#asc').html("")
-    $('#asc').append('<option value="true">In Ascending Order</option>')
-    $('#asc').append('<option value="false">In Descending Order</option>')
-
-    $("#sortcol").val("Age")
+    $('#asc').append('<option value="true">Ascending</option>')
+    $('#asc').append('<option value="false">Descending</option>')
+    var lastValue = $('#sortcol option:last-child').val()
+    $("#sortcol").val(lastValue)
     $("#sortcol").trigger("change")
-    //$("#sortcol").val("Age")
-    //$("#sortcol").trigger("change")
     tool()
 }

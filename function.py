@@ -148,7 +148,7 @@ def get_files(path,ending=".docx"):
     return a_results
 
 
-def save(page, filename, removehtml=False):
+def save(page, filename,removehtml=False,sitemap=[]):
     if removehtml:
         filename=filename.replace(".html")
 
@@ -161,10 +161,11 @@ def save(page, filename, removehtml=False):
         #replace elements in nav
         nav=soup.find("nav")
         for a in nav.find_all("a"):
-            a['href'] = "../"+a['href']
+            if not a['href'].startswith("#"):
+                a['href'] = "../"+a['href']
         page = str(soup)
 
-        # replace elements in head Script
+        # replace elements in head Link
         head = soup.find("head")
         for script in head.find_all("script"):
             if "https" not in script["src"]:
@@ -190,6 +191,11 @@ def save(page, filename, removehtml=False):
 
     with open(fr"{filename}", "w", encoding="utf-8") as file:
         file.write(str(page))
+
+    #store to sitemap
+    sitemap+=[filename.replace("../","https://www.").replace(".html","")]
+    return sitemap
+
 
 def pformat(template, d_fit):
     """fits a template partically"""
@@ -391,14 +397,34 @@ def nav(a_li,d_website):
 
 def tool_index_content():
     """go through all available tools and create one col for it"""
-    result=''
-    for data in d_tools_txt_s:
-        d_replace={
-            "tool": data["tool"],
-            "h1":data["h1"],
-            "h1description":data["h1description"],
-        }
-        result+=pformat(get("card.html"), d_replace)
+    d_stuff={"filter":d_tools_filter,
+             "text-mod":d_tools_text,
+             "math":d_tools_math,
+             "database":d_tools_database,
+             "converter":d_tools_converter
+             }
+
+    result = ''
+    #add tool card
+    for keystuff, stuff in d_stuff.items():
+        stuffresult=""
+        for data in stuff:
+            a_type='<span class="badge bg-secondary rounded-pill '+data["type"]+'">'+data["type"].replace('-',' ')+'</span>'
+            d_replace={
+                "tool": data["tool"],
+                "h1":data["h1"],
+                "h1description":data["h1description"],
+                "type":a_type,
+            }
+            stuffresult+=pformat(get("card.html"), d_replace)
+        stuffresult=f'<div class="pt-6" id="{keystuff}"><div class="row">{stuffresult}</div></div>'
+        result+=stuffresult
+
+    #add result to scrollable container
+    result=f"""
+    <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+        {result} </div>"""
+
     return result
 
 
@@ -410,9 +436,12 @@ def create_blog(d_website):
     """
 
     """---------------- folder manipulation here ----------------"""
+
+
     #define content
     d_website={**d_website, **d_websites_g}
     d_website= resolve_dict_automatic(d_website)
+    a_sitemap=[]
 
     #define folder
     d_expath={#path relative from the python program
@@ -510,7 +539,7 @@ def create_blog(d_website):
         d_banner[index]=article_banner(content)
         d_blog_article={**d_website,**d_blog_article}
         pageBlogArticle = pformat(get("page_blog_article.html"), d_blog_article)
-        save(pageBlogArticle, d_expath["oblog"] + f"/{df_input.at[index, 'url']}.html")
+        a_sitemap=save(pageBlogArticle, d_expath["oblog"] + f"/{df_input.at[index, 'url']}.html",sitemap=a_sitemap)
 
 
     #blog index page todo can be optimized in dict
@@ -531,13 +560,11 @@ def create_blog(d_website):
     columns = "".join([f"<div class='col col-md-4 row_index mb-5'>{x}</div>" for x in a_articles])
     d_blog_index = {**d_website, **{"blog_index_content": columns, }}
     pageBlogIndex = pformat(get("page_blog_index.html"), d_blog_index)
-    save(pageBlogIndex, d_expath["oroot"] + f"/blog/index.html")
+    a_sitemap=save(pageBlogIndex, d_expath["oroot"] + f"/blog/index.html",sitemap=a_sitemap)
 
     #website index page
     pageIndex = pformat(get("page_index.html"), d_blog_index)
-    save(pageIndex, d_expath["oroot"] + f"/index.html")
-
-
+    a_sitemap=save(pageIndex, d_expath["oroot"] + f"/index.html",sitemap=a_sitemap)
 
     """---------------- create Tools here ----------------"""
 
@@ -552,12 +579,18 @@ def create_blog(d_website):
 
             page_tool = pformat(get("page_tool_function.html"), {"toolbody": get("component_tool.html")})
             page_tool = pformat(page_tool, d_tool)
-            save(page_tool, d_expath["oroot"] + f"/{tool}.html")
+            a_sitemap=save(page_tool, d_expath["oroot"] + f"/{tool}.html",sitemap=a_sitemap)
 
         #tool index
         page_tool_index = get("page_tool_index.html")
         page_tool_index = pformat(page_tool_index, {**d_blog_index, **{"cols":tool_index_content()}})
-        save(page_tool_index, d_expath["oroot"] + f"/tools/index.html")
+        a_sitemap=save(page_tool_index, d_expath["oroot"] + f"/tools/index.html",sitemap=a_sitemap)
+
+
+    # create sitemap and robo.txt
+    sitemap_content = "\n".join([x for x in a_sitemap])
+    print("what ",sitemap_content)
+    a_sitemap=save(sitemap_content, d_expath["oroot"] + f"/sitemap.txt")
 
 
 
@@ -609,10 +642,10 @@ def join_tables(d_html, d_txt):
     #done in table
 
     #create custom step
-    d_html["input2.content"] = getcf("hot.html", id="table2")+getcf("alert.html", id="leftalert",label="")
+    d_html["input2.content"] = getcf("hot.html", id="table2")+getcf("alert.html", id="leftalert",label="", alert="danger")
 
     #add configure
-    select=getcf("select.html", id="jointype",)
+    select=getcf("select.html", id="jointype",label="Join Type")
     img = getcf("img.html", id="joinimg", alt="Join type image as Venn Diagram", src="", width="100%", height="",)
     d_html["configure.content"] = select + img
 
@@ -623,21 +656,62 @@ def join_tables(d_html, d_txt):
     return [d_html, d_txt]
 
 
-def transpose_table(d_html, d_txt):
+
+
+def remove_step(d_html, d_txt, step="configure."):
     for key in list(d_html.keys()):
-        if key.startswith("configure."):
+        if key.startswith(step):
             d_html.pop(key)
 
     for key in list(d_txt.keys()):
-        if key.startswith("configure."):
+        if key.startswith(step):
             d_txt.pop(key)
+
+def transpose_table(d_html, d_txt):
+    remove_step(d_html, d_txt)
     return [d_html, d_txt]
 
 
 def sort_rows(d_html, d_txt):
-    slide1=getcf("select.html",id="sortcol")
-    slide2=getcf("select.html",id="asc")
-    d_html["configure.content"]= slide1 + slide2
+    select1=getcf("select.html",id="sortcol",label="Sort Column")
+    select2=getcf("select.html",id="asc",label="Sort Order")
+    d_html["configure.content"]= select1 + select2
+    return [d_html, d_txt]
+
+def add_tables(d_html, d_txt):
+    remove_step(d_html, d_txt)
+    d_html["input.content"] = getcf("hot.html", id="table1")+getcf("alert.html", id="table1_alert",label="Some cells are not numbers.", alert="warning")
+    d_html["input2.content"] = getcf("hot.html", id="table2")+getcf("alert.html", id="table2_alert",label="Some cells are not numbers.", alert="warning")
+
+    table3 = getcf("hot.html", id="table3")
+    download = getcf("button.html", id="download", label="Download")
+    d_html["download.content"] = table3 + download
+    return [d_html, d_txt]
+
+def subtract_tables(d_html, d_txt):
+    return add_tables(d_html, d_txt)
+
+def multiply_tables(d_html, d_txt):
+    return add_tables(d_html, d_txt)
+
+def divide_tables(d_html, d_txt):
+    return add_tables(d_html, d_txt)
+
+def exponent_tables(d_html, d_txt):
+    return add_tables(d_html, d_txt)
+
+def dot_product_tables(d_html, d_txt):
+    return add_tables(d_html, d_txt)
+
+def group_by(d_html, d_txt):
+    select1=getcf("select.html",id="column",label="Group Column")
+    select2=getcf("select.html",id="operation" ,label="Operation")
+    d_html["configure.content"]= select1 + select2
+    return [d_html, d_txt]
+
+def unique_values(d_html, d_txt):
+    slide1=getcf("select.html",id="unique",label="Unique Column")
+    d_html["configure.content"]= slide1
     return [d_html, d_txt]
 
 def first_n_rows(d_html, d_txt):
@@ -645,7 +719,17 @@ def first_n_rows(d_html, d_txt):
     d_html["configure.content"] = range
     return [d_html, d_txt]
 
+def after_first_n_rows(d_html, d_txt):
+    range = getcf("range.html", id="n", label="First n Rows")
+    d_html["configure.content"] = range
+    return [d_html, d_txt]
+
 def last_n_rows(d_html, d_txt):
+    range = getcf("range.html", id="n",label="Last n Rows")
+    d_html["configure.content"] = range
+    return [d_html, d_txt]
+
+def before_last_n_rows(d_html, d_txt):
     range = getcf("range.html", id="n",label="Last n Rows")
     d_html["configure.content"] = range
     return [d_html, d_txt]
@@ -667,6 +751,116 @@ def shuffle_rows(d_html, d_txt):
     d_html["configure.content"] = button
     return [d_html, d_txt]
 
+def text_len(d_html, d_txt):
+    remove_step(d_html, d_txt)
+    return [d_html, d_txt]
+
+
+def left(d_html, d_txt):
+    range = getcf("range.html", id="n", label="Left n Characters")
+    d_html["configure.content"] = range
+    return [d_html, d_txt]
+
+def right(d_html, d_txt):
+    range = getcf("range.html", id="n", label="Right n Characters")
+    d_html["configure.content"] = range
+    return [d_html, d_txt]
+
+
+def nth_row(d_html, d_txt):
+    range = getcf("range.html", id="n", label="Right n Characters")
+    d_html["configure.content"] = range
+    return [d_html, d_txt]
+
+def except_nth_row(d_html, d_txt):
+    range = getcf("range.html", id="n", label="Right n Characters")
+    d_html["configure.content"] = range
+    return [d_html, d_txt]
+
+def even_rows(d_html, d_txt):
+    remove_step(d_html, d_txt)
+    return [d_html, d_txt]
+
+def odd_rows(d_html, d_txt):
+    remove_step(d_html, d_txt)
+    return [d_html, d_txt]
+
+def rank_table(d_html, d_txt):
+    select1 = getcf("select.html", id="axis",label="Axis")
+    select2 = getcf("select.html", id="order",label="Order")
+    select3 = getcf("select.html", id="percent",label="as Percent")
+    d_html["configure.content"] = select1+select2+select3
+    return [d_html, d_txt]
+
+def percentile_table(d_html, d_txt):
+    return rank_table(d_html, d_txt)
+
+def random_table(d_html, d_txt):
+    remove_step(d_html, d_txt,step="input.")
+    range1 = getcf("range.html", id="row", label="n Rows")
+    range2 = getcf("range.html", id="col", label="n Columns")
+    range3 = getcf("range.html", id="digits", label="n Digits")
+    d_html["configure.content"] = range1 + range2 + range3
+    return [d_html, d_txt]
+
+def round_values(d_html, d_txt):
+    range = getcf("range.html", id="n", label="Sample n Rows")
+    d_html["configure.content"] = range
+    return [d_html, d_txt]
+
+def abs_values(d_html, d_txt):
+    remove_step(d_html, d_txt)
+    return [d_html, d_txt]
+
+def round_up(d_html, d_txt):
+    remove_step(d_html, d_txt)
+    return [d_html, d_txt]
+
+def round_down(d_html, d_txt):
+    remove_step(d_html, d_txt)
+    return [d_html, d_txt]
+
+def char_to_number(d_html, d_txt):
+    remove_step(d_html, d_txt)
+    return [d_html, d_txt]
+
+def number_to_char(d_html, d_txt):
+    remove_step(d_html, d_txt)
+    return [d_html, d_txt]
+
+def remove_leading_space(d_html, d_txt):
+    remove_step(d_html, d_txt)
+    return [d_html, d_txt]
+
+def remove_trailing_space(d_html, d_txt):
+    remove_step(d_html, d_txt)
+    return [d_html, d_txt]
+
+def trim_space(d_html, d_txt):
+    remove_step(d_html, d_txt)
+    return [d_html, d_txt]
+
+def replace_space(d_html, d_txt):
+    select=getcf("select.html",id="replace",label="Replace space with")
+    d_html["configure.content"] = select
+    return [d_html, d_txt]
+
+def capitalize(d_html, d_txt):
+    remove_step(d_html, d_txt)
+    return [d_html, d_txt]
+
+def proper(d_html, d_txt):
+    remove_step(d_html, d_txt)
+    return [d_html, d_txt]
+
+def upper(d_html, d_txt):
+    remove_step(d_html, d_txt)
+    return [d_html, d_txt]
+
+def lower(d_html, d_txt):
+    remove_step(d_html, d_txt)
+    return [d_html, d_txt]
+
 def drop_duplicated_columns(d_html, d_txt):
     for key in list(d_html.keys()):
         if key.startswith("configure."):
@@ -678,9 +872,117 @@ def drop_duplicated_columns(d_html, d_txt):
     return [d_html, d_txt]
 
 
+def to_csv(d_html, d_txt):
+    remove_step(d_html, d_txt)
+    code=getcf("code.html", id="code",disabled="disabled")
+    download = getcf("button.html", id="download", label="Download")
+    d_html["download.content"] = code + download
+    return [d_html, d_txt]
 
+def to_json(d_html, d_txt):
+    return to_csv(d_html, d_txt)
+
+def to_dict(d_html, d_txt):
+    return to_csv(d_html, d_txt)
+
+def to_array(d_html, d_txt):
+    return to_csv(d_html, d_txt)
+
+def to_collection(d_html, d_txt):
+    return to_csv(d_html, d_txt)
+
+def to_text(d_html, d_txt):
+    return to_csv(d_html, d_txt)
+
+def to_dsv(d_html, d_txt):
+    code = getcf("code.html", id="code",disabled="disabled")
+    download = getcf("button.html", id="download", label="Download")
+    d_html["download.content"] = code + download
+
+    select = getcf("select.html", id="delimiter",label="Delimiter")
+    d_html["configure.content"] = select
+    return [d_html, d_txt]
+
+
+def from_csv(d_html, d_txt):
+    remove_step(d_html, d_txt)
+    code=getcf("code.html", id="code",disabled="")
+    d_html["input.content"] =code
+    return [d_html, d_txt]
+
+def from_json(d_html, d_txt):
+    return to_csv(d_html, d_txt)
+
+def from_dict(d_html, d_txt):
+    return to_csv(d_html, d_txt)
+
+def from_array(d_html, d_txt):
+    return to_csv(d_html, d_txt)
+
+def from_collection(d_html, d_txt):
+    return to_csv(d_html, d_txt)
+
+def from_text(d_html, d_txt):
+    return to_csv(d_html, d_txt)
+
+def from_dsv(d_html, d_txt):
+    code = getcf("code.html", id="code")
+    download = getcf("button.html", id="download", label="Download")
+    d_html["download.content"] = code + download
+
+    select = getcf("select.html", id="delimiter",label="Delimiter")
+    d_html["configure.content"] = select
+    return [d_html, d_txt]
+
+
+def sum(d_html, d_txt):
+    remove_step(d_html, d_txt)
+    return [d_html, d_txt]
+
+def average(d_html, d_txt):
+    remove_step(d_html, d_txt)
+    return [d_html, d_txt]
+
+def count(d_html, d_txt):
+    remove_step(d_html, d_txt)
+    return [d_html, d_txt]
+
+def min(d_html, d_txt):
+    remove_step(d_html, d_txt)
+    return [d_html, d_txt]
+
+def max(d_html, d_txt):
+    remove_step(d_html, d_txt)
+    return [d_html, d_txt]
+
+def join_text(d_html, d_txt):
+    d_html["configure.content"] = getcf("select.html", id="delimiter",label="Delimiter")+getcf("select.html", id="space",label="Add Space")
+    return [d_html, d_txt]
+
+def add_leading_zeros(d_html, d_txt):
+    d_html["configure.content"] = getcf("range.html", id="n", label="First n Rows")
+    return [d_html, d_txt]
+
+def add_trailing_zeros(d_html, d_txt):
+    return add_leading_zeros(d_html, d_txt)
+
+def remove_leading_zeros(d_html, d_txt):
+    return add_leading_zeros(d_html, d_txt)
+
+def remove_trailing_zeros(d_html, d_txt):
+    return add_leading_zeros(d_html, d_txt)
+
+
+def sort_dict_list(lst, key):
+    sorted_lst = sorted(lst, key=lambda x: x[key])
+    return sorted_lst
 
 if __name__ == '__main__':
+
+    mysorted=sort_dict_list(d_tools_txt_s,"type")
+    global sorted_d_tools_txt_s
+    sorted_d_tools_txt_s=mysorted
+
     for d_website in d_websites_s:
         if d_website["blog_url"] =="sicksheet.com":
             create_blog(d_website=d_website)

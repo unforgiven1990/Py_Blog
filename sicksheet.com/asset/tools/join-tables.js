@@ -19,9 +19,9 @@ function tool() {
         $("#jointype,#download").prop("disabled", true)
         $("#title3,#title4").addClass("text-muted")
         $("#leftalert").html("Key Error: The first columns must have the same name. <b>" + key1 + " ≠ " + key2 + "</b>")
-        setColorRow(hot1, "#f8d7da")
-        setColorRow(hot2, "#f8d7da")
-        setColorRow(hot3, "#f8d7da")
+        setColorRow(hot1, color2)
+        setColorRow(hot2, color2)
+        setColorRow(hot3, color2)
         return
     }
 

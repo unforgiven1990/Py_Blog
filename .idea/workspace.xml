@@ -14,36 +14,89 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9feac7f6-60ca-432f-a9e1-cbfe50d3b1e3" name="Default Changelist" comment="works now">
-      <change afterPath="$PROJECT_DIR$/asset/bootstrap.bundle.min.5.2.3.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asset/bootstrap.min.5.2.3.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/asset/jquery-3.6.3.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/dataframe.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/handsontable.full.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/danfo.bundle.min.1.1.2.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/abs-values.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/add-leading-zeros.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/add-tables.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/add-trailing-zeros.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/after-first-n-rows.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/average.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/before-last-n-rows.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/capitalize.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/char-to-number.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/count.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/divide-tables.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/dot-product-tables.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/even-rows.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/exponent-tables.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/from-array.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/from-collection.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/from-csv.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/from-dict.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/from-dsv.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/from-json.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/from-text.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/group-by.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/join-text.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/left.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/lower.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/max.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/multiply-tables.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/nth-row.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/number-to-char.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/odd-rows.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/percentile-table.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/proper.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/random-table.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/rank-table.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/remove-leading-space.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/remove-leading-zeros.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/remove-trailing-space.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/remove-trailing-zeros.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/replace-space.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/right.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/round-down.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/round-up.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/round-values.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/subtract-tables.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/sum.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/text-len.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/to-array.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/to-collection.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/to-csv.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/to-dict.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/to-dsv.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/to-json.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/to-text.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/trim-space.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/unique-values.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/upper.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template/component/code.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/asset/cj.css" beforeDir="false" afterPath="$PROJECT_DIR$/asset/cj.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/careercrashcourse.com/input.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/careercrashcourse.com/input.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/data.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/function.py" beforeDir="false" afterPath="$PROJECT_DIR$/function.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shoulderofgiants.com/input.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/shoulderofgiants.com/input.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sicksheet.com/asset/banner.png" beforeDir="false" afterPath="$PROJECT_DIR$/sicksheet.com/asset/others/banner.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sicksheet.com/asset/banner.psd" beforeDir="false" afterPath="$PROJECT_DIR$/sicksheet.com/asset/others/banner.psd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sicksheet.com/asset/inner.svg" beforeDir="false" afterPath="$PROJECT_DIR$/sicksheet.com/asset/img/inner.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sicksheet.com/asset/left.svg" beforeDir="false" afterPath="$PROJECT_DIR$/sicksheet.com/asset/img/left.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sicksheet.com/asset/outer.svg" beforeDir="false" afterPath="$PROJECT_DIR$/sicksheet.com/asset/img/outer.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sicksheet.com/asset/right.svg" beforeDir="false" afterPath="$PROJECT_DIR$/sicksheet.com/asset/img/right.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sicksheet.com/asset/sicksheet venn diagram.pptx" beforeDir="false" afterPath="$PROJECT_DIR$/sicksheet.com/asset/others/sicksheet venn diagram.pptx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sicksheet.com/asset/sicksheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/sicksheet.com/asset/sicksheet.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sicksheet.com/asset/sicksheet.js" beforeDir="false" afterPath="$PROJECT_DIR$/sicksheet.com/asset/sicksheet.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sicksheet.com/asset/tools/drop_duplicated_columns.js" beforeDir="false" afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/drop-duplicated-columns.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sicksheet.com/asset/tools/head.js" beforeDir="false" afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/first-n-rows.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sicksheet.com/asset/tools/join.js" beforeDir="false" afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/join-tables.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sicksheet.com/asset/tools/sample.js" beforeDir="false" afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/sample-rows.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sicksheet.com/asset/tools/shuffle.js" beforeDir="false" afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/shuffle-rows.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sicksheet.com/asset/tools/slice.js" beforeDir="false" afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/slice-rows.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sicksheet.com/asset/tools/sort.js" beforeDir="false" afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/sort-rows.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sicksheet.com/asset/tools/tail.js" beforeDir="false" afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/last-n-rows.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sicksheet.com/asset/tools/transpose.js" beforeDir="false" afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/transpose-table.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sicksheet.com/asset/tools/first-n-rows.js" beforeDir="false" afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/first-n-rows.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sicksheet.com/asset/tools/join-tables.js" beforeDir="false" afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/join-tables.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sicksheet.com/asset/tools/last-n-rows.js" beforeDir="false" afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/last-n-rows.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sicksheet.com/asset/tools/sample-rows.js" beforeDir="false" afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/sample-rows.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sicksheet.com/asset/tools/shuffle-rows.js" beforeDir="false" afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/shuffle-rows.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sicksheet.com/asset/tools/slice-rows.js" beforeDir="false" afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/slice-rows.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sicksheet.com/asset/tools/sort-rows.js" beforeDir="false" afterPath="$PROJECT_DIR$/sicksheet.com/asset/tools/sort-rows.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sicksheet.com/input.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/sicksheet.com/input.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/component/div.alert.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/component/alert.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/card.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/card.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/component/alert.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/component/alert.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/component/range.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/component/range.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/component/select.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/component/select.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/component_tool.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/component_tool.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/nav.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/nav.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/template/page_tool_function.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/page_tool_function.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/page_tool_index.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/page_tool_index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,8 +106,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -75,16 +128,16 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/template" />
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Users\sizhe.huang\OneDrive\Project\Python Project\Archiv\Py_Blog\template" />
+      <recent name="D:\Users\sizhe.huang\OneDrive\Project\Python Project\Archiv\Py_Blog\sicksheet.com\asset\tools" />
       <recent name="D:\Users\sizhe.huang\OneDrive\Project\Python Project\Archiv\Py_Blog" />
       <recent name="D:\Users\sizhe.huang\OneDrive\Project\Python Project\Archiv\Py_Blog\template\component" />
       <recent name="D:\Users\sizhe.huang\OneDrive\Project\Python Project\Archiv\Py_Blog\sicksheet.com\asset" />
-      <recent name="D:\Users\sizhe.huang\OneDrive\Project\Python Project\Archiv\Py_Blog\template\configure" />
-      <recent name="D:\Users\sizhe.huang\OneDrive\Project\Python Project\Archiv\Py_Blog\template" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Users\sizhe.huang\OneDrive\Project\Python Project\Archiv\Py_Blog\sicksheet.com\asset\img" />
@@ -288,7 +341,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677756205914</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="works now">
+      <created>1677804680559</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1677804680559</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -320,10 +380,10 @@
       <screen x="0" y="-1096" width="1280" height="720" />
     </state>
     <state x="371" y="-989" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.-1096.1280.720" timestamp="1677732062059" />
-    <state x="385" y="-883" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1677460440113">
+    <state x="385" y="-883" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1678250254449">
       <screen x="0" y="-1096" width="1280" height="720" />
     </state>
-    <state x="385" y="-883" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.-1096.1280.720" timestamp="1677460440113" />
+    <state x="385" y="-883" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.-1096.1280.720" timestamp="1678250254449" />
     <state x="329" y="44" key="FileChooserDialogImpl" timestamp="1677683082015">
       <screen x="0" y="0" width="1097" height="577" />
     </state>
@@ -332,95 +392,103 @@
     <state x="329" y="44" key="FileChooserDialogImpl/0.0.1097.577/-1920.0.1097.617@0.0.1097.577" timestamp="1675514701718" />
     <state x="384" y="-1025" key="FileChooserDialogImpl/0.0.1097.577/0.-1080.1280.720/-1080.-1084.720.1280@0.-1080.1280.720" timestamp="1675643784713" />
     <state x="384" y="-1041" key="FileChooserDialogImpl/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.-1096.1280.720" timestamp="1677240080285" />
-    <state width="1259" height="101" key="GridCell.Tab.0.bottom" timestamp="1677804616786">
+    <state width="1259" height="66" key="GridCell.Tab.0.bottom" timestamp="1678251352042">
       <screen x="0" y="-1096" width="1280" height="720" />
     </state>
-    <state width="1076" height="35" key="GridCell.Tab.0.bottom/-1920.0.1097.577/0.0.1097.577@-1920.0.1097.577" timestamp="1677334651038" />
-    <state width="1076" height="87" key="GridCell.Tab.0.bottom/-1920.0.1097.577/0.0.1097.577@0.0.1097.577" timestamp="1677683204461" />
+    <state width="1076" height="71" key="GridCell.Tab.0.bottom/-1920.0.1097.577/0.0.1097.577@-1920.0.1097.577" timestamp="1678198205122" />
+    <state width="1076" height="133" key="GridCell.Tab.0.bottom/-1920.0.1097.577/0.0.1097.577@0.0.1097.577" timestamp="1678028711196" />
     <state width="1259" height="179" key="GridCell.Tab.0.bottom/0.-1096.1280.673/0.0.1097.577/-1080.-842.720.1280@0.-1096.1280.673" timestamp="1677033084808" />
     <state width="1076" height="141" key="GridCell.Tab.0.bottom/0.0.1097.577/-1920.0.1097.617@0.0.1097.577" timestamp="1675605885031" />
     <state width="1259" height="77" key="GridCell.Tab.0.bottom/0.0.1097.577/0.-1080.1280.720/-1080.-1084.720.1280@0.-1080.1280.720" timestamp="1675663006332" />
     <state width="1076" height="128" key="GridCell.Tab.0.bottom/0.0.1097.577/0.-1080.1280.720/-1080.-1084.720.1280@0.0.1097.577" timestamp="1676290735028" />
-    <state width="1259" height="101" key="GridCell.Tab.0.bottom/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.-1096.1280.720" timestamp="1677804616786" />
+    <state width="1259" height="66" key="GridCell.Tab.0.bottom/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.-1096.1280.720" timestamp="1678251352042" />
     <state width="1076" height="11" key="GridCell.Tab.0.bottom/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.0.1097.577" timestamp="1677495666400" />
     <state width="1076" height="2" key="GridCell.Tab.0.bottom/0.0.1097.577@0.0.1097.577" timestamp="1677509814526" />
-    <state width="1259" height="101" key="GridCell.Tab.0.center" timestamp="1677804616786">
+    <state width="1259" height="66" key="GridCell.Tab.0.center" timestamp="1678251352042">
       <screen x="0" y="-1096" width="1280" height="720" />
     </state>
-    <state width="1076" height="35" key="GridCell.Tab.0.center/-1920.0.1097.577/0.0.1097.577@-1920.0.1097.577" timestamp="1677334651038" />
-    <state width="1076" height="87" key="GridCell.Tab.0.center/-1920.0.1097.577/0.0.1097.577@0.0.1097.577" timestamp="1677683204461" />
+    <state width="1076" height="71" key="GridCell.Tab.0.center/-1920.0.1097.577/0.0.1097.577@-1920.0.1097.577" timestamp="1678198205122" />
+    <state width="1076" height="133" key="GridCell.Tab.0.center/-1920.0.1097.577/0.0.1097.577@0.0.1097.577" timestamp="1678028711196" />
     <state width="1259" height="179" key="GridCell.Tab.0.center/0.-1096.1280.673/0.0.1097.577/-1080.-842.720.1280@0.-1096.1280.673" timestamp="1677033084808" />
     <state width="1076" height="141" key="GridCell.Tab.0.center/0.0.1097.577/-1920.0.1097.617@0.0.1097.577" timestamp="1675605885031" />
     <state width="1259" height="77" key="GridCell.Tab.0.center/0.0.1097.577/0.-1080.1280.720/-1080.-1084.720.1280@0.-1080.1280.720" timestamp="1675663006331" />
     <state width="1076" height="128" key="GridCell.Tab.0.center/0.0.1097.577/0.-1080.1280.720/-1080.-1084.720.1280@0.0.1097.577" timestamp="1676290735027" />
-    <state width="1259" height="101" key="GridCell.Tab.0.center/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.-1096.1280.720" timestamp="1677804616786" />
+    <state width="1259" height="66" key="GridCell.Tab.0.center/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.-1096.1280.720" timestamp="1678251352042" />
     <state width="1076" height="11" key="GridCell.Tab.0.center/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.0.1097.577" timestamp="1677495666399" />
     <state width="1076" height="2" key="GridCell.Tab.0.center/0.0.1097.577@0.0.1097.577" timestamp="1677509814526" />
-    <state width="1259" height="101" key="GridCell.Tab.0.left" timestamp="1677804616786">
+    <state width="1259" height="66" key="GridCell.Tab.0.left" timestamp="1678251352041">
       <screen x="0" y="-1096" width="1280" height="720" />
     </state>
-    <state width="1076" height="35" key="GridCell.Tab.0.left/-1920.0.1097.577/0.0.1097.577@-1920.0.1097.577" timestamp="1677334651038" />
-    <state width="1076" height="87" key="GridCell.Tab.0.left/-1920.0.1097.577/0.0.1097.577@0.0.1097.577" timestamp="1677683204461" />
+    <state width="1076" height="71" key="GridCell.Tab.0.left/-1920.0.1097.577/0.0.1097.577@-1920.0.1097.577" timestamp="1678198205122" />
+    <state width="1076" height="133" key="GridCell.Tab.0.left/-1920.0.1097.577/0.0.1097.577@0.0.1097.577" timestamp="1678028711196" />
     <state width="1259" height="179" key="GridCell.Tab.0.left/0.-1096.1280.673/0.0.1097.577/-1080.-842.720.1280@0.-1096.1280.673" timestamp="1677033084808" />
     <state width="1076" height="141" key="GridCell.Tab.0.left/0.0.1097.577/-1920.0.1097.617@0.0.1097.577" timestamp="1675605885031" />
     <state width="1259" height="77" key="GridCell.Tab.0.left/0.0.1097.577/0.-1080.1280.720/-1080.-1084.720.1280@0.-1080.1280.720" timestamp="1675663006331" />
     <state width="1076" height="128" key="GridCell.Tab.0.left/0.0.1097.577/0.-1080.1280.720/-1080.-1084.720.1280@0.0.1097.577" timestamp="1676290735027" />
-    <state width="1259" height="101" key="GridCell.Tab.0.left/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.-1096.1280.720" timestamp="1677804616786" />
+    <state width="1259" height="66" key="GridCell.Tab.0.left/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.-1096.1280.720" timestamp="1678251352041" />
     <state width="1076" height="11" key="GridCell.Tab.0.left/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.0.1097.577" timestamp="1677495666399" />
     <state width="1076" height="2" key="GridCell.Tab.0.left/0.0.1097.577@0.0.1097.577" timestamp="1677509814526" />
-    <state width="1259" height="101" key="GridCell.Tab.0.right" timestamp="1677804616786">
+    <state width="1259" height="66" key="GridCell.Tab.0.right" timestamp="1678251352042">
       <screen x="0" y="-1096" width="1280" height="720" />
     </state>
-    <state width="1076" height="35" key="GridCell.Tab.0.right/-1920.0.1097.577/0.0.1097.577@-1920.0.1097.577" timestamp="1677334651038" />
-    <state width="1076" height="87" key="GridCell.Tab.0.right/-1920.0.1097.577/0.0.1097.577@0.0.1097.577" timestamp="1677683204461" />
+    <state width="1076" height="71" key="GridCell.Tab.0.right/-1920.0.1097.577/0.0.1097.577@-1920.0.1097.577" timestamp="1678198205122" />
+    <state width="1076" height="133" key="GridCell.Tab.0.right/-1920.0.1097.577/0.0.1097.577@0.0.1097.577" timestamp="1678028711196" />
     <state width="1259" height="179" key="GridCell.Tab.0.right/0.-1096.1280.673/0.0.1097.577/-1080.-842.720.1280@0.-1096.1280.673" timestamp="1677033084808" />
     <state width="1076" height="141" key="GridCell.Tab.0.right/0.0.1097.577/-1920.0.1097.617@0.0.1097.577" timestamp="1675605885031" />
     <state width="1259" height="77" key="GridCell.Tab.0.right/0.0.1097.577/0.-1080.1280.720/-1080.-1084.720.1280@0.-1080.1280.720" timestamp="1675663006332" />
     <state width="1076" height="128" key="GridCell.Tab.0.right/0.0.1097.577/0.-1080.1280.720/-1080.-1084.720.1280@0.0.1097.577" timestamp="1676290735027" />
-    <state width="1259" height="101" key="GridCell.Tab.0.right/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.-1096.1280.720" timestamp="1677804616786" />
+    <state width="1259" height="66" key="GridCell.Tab.0.right/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.-1096.1280.720" timestamp="1678251352042" />
     <state width="1076" height="11" key="GridCell.Tab.0.right/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.0.1097.577" timestamp="1677495666400" />
     <state width="1076" height="2" key="GridCell.Tab.0.right/0.0.1097.577@0.0.1097.577" timestamp="1677509814526" />
-    <state width="1259" height="343" key="GridCell.Tab.1.bottom" timestamp="1677570595561">
+    <state width="1259" height="341" key="GridCell.Tab.1.bottom" timestamp="1678166626395">
       <screen x="0" y="-1096" width="1280" height="720" />
     </state>
     <state width="1076" height="283" key="GridCell.Tab.1.bottom/-1920.0.1097.577/0.0.1097.577@-1920.0.1097.577" timestamp="1676176478001" />
-    <state width="1076" height="257" key="GridCell.Tab.1.bottom/-1920.0.1097.577/0.0.1097.577@0.0.1097.577" timestamp="1677383611185" />
+    <state width="1076" height="280" key="GridCell.Tab.1.bottom/-1920.0.1097.577/0.0.1097.577@0.0.1097.577" timestamp="1677993653983" />
     <state width="1076" height="260" key="GridCell.Tab.1.bottom/0.0.1097.577/-1920.0.1097.617@0.0.1097.577" timestamp="1675490395333" />
     <state width="1259" height="346" key="GridCell.Tab.1.bottom/0.0.1097.577/0.-1080.1280.720/-1080.-1084.720.1280@0.-1080.1280.720" timestamp="1675659718743" />
-    <state width="1259" height="343" key="GridCell.Tab.1.bottom/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.-1096.1280.720" timestamp="1677570595561" />
-    <state width="1259" height="343" key="GridCell.Tab.1.center" timestamp="1677570595561">
+    <state width="1259" height="341" key="GridCell.Tab.1.bottom/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.-1096.1280.720" timestamp="1678166626395" />
+    <state width="1259" height="341" key="GridCell.Tab.1.center" timestamp="1678166626395">
       <screen x="0" y="-1096" width="1280" height="720" />
     </state>
     <state width="1076" height="283" key="GridCell.Tab.1.center/-1920.0.1097.577/0.0.1097.577@-1920.0.1097.577" timestamp="1676176478001" />
-    <state width="1076" height="257" key="GridCell.Tab.1.center/-1920.0.1097.577/0.0.1097.577@0.0.1097.577" timestamp="1677383611185" />
+    <state width="1076" height="280" key="GridCell.Tab.1.center/-1920.0.1097.577/0.0.1097.577@0.0.1097.577" timestamp="1677993653983" />
     <state width="1076" height="260" key="GridCell.Tab.1.center/0.0.1097.577/-1920.0.1097.617@0.0.1097.577" timestamp="1675490395333" />
     <state width="1259" height="346" key="GridCell.Tab.1.center/0.0.1097.577/0.-1080.1280.720/-1080.-1084.720.1280@0.-1080.1280.720" timestamp="1675659718743" />
-    <state width="1259" height="343" key="GridCell.Tab.1.center/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.-1096.1280.720" timestamp="1677570595561" />
-    <state width="1259" height="343" key="GridCell.Tab.1.left" timestamp="1677570595561">
+    <state width="1259" height="341" key="GridCell.Tab.1.center/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.-1096.1280.720" timestamp="1678166626395" />
+    <state width="1259" height="341" key="GridCell.Tab.1.left" timestamp="1678166626395">
       <screen x="0" y="-1096" width="1280" height="720" />
     </state>
     <state width="1076" height="283" key="GridCell.Tab.1.left/-1920.0.1097.577/0.0.1097.577@-1920.0.1097.577" timestamp="1676176478001" />
-    <state width="1076" height="257" key="GridCell.Tab.1.left/-1920.0.1097.577/0.0.1097.577@0.0.1097.577" timestamp="1677383611184" />
+    <state width="1076" height="280" key="GridCell.Tab.1.left/-1920.0.1097.577/0.0.1097.577@0.0.1097.577" timestamp="1677993653983" />
     <state width="1076" height="260" key="GridCell.Tab.1.left/0.0.1097.577/-1920.0.1097.617@0.0.1097.577" timestamp="1675490395333" />
     <state width="1259" height="346" key="GridCell.Tab.1.left/0.0.1097.577/0.-1080.1280.720/-1080.-1084.720.1280@0.-1080.1280.720" timestamp="1675659718743" />
-    <state width="1259" height="343" key="GridCell.Tab.1.left/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.-1096.1280.720" timestamp="1677570595561" />
-    <state width="1259" height="343" key="GridCell.Tab.1.right" timestamp="1677570595561">
+    <state width="1259" height="341" key="GridCell.Tab.1.left/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.-1096.1280.720" timestamp="1678166626395" />
+    <state width="1259" height="341" key="GridCell.Tab.1.right" timestamp="1678166626395">
       <screen x="0" y="-1096" width="1280" height="720" />
     </state>
     <state width="1076" height="283" key="GridCell.Tab.1.right/-1920.0.1097.577/0.0.1097.577@-1920.0.1097.577" timestamp="1676176478001" />
-    <state width="1076" height="257" key="GridCell.Tab.1.right/-1920.0.1097.577/0.0.1097.577@0.0.1097.577" timestamp="1677383611185" />
+    <state width="1076" height="280" key="GridCell.Tab.1.right/-1920.0.1097.577/0.0.1097.577@0.0.1097.577" timestamp="1677993653983" />
     <state width="1076" height="260" key="GridCell.Tab.1.right/0.0.1097.577/-1920.0.1097.617@0.0.1097.577" timestamp="1675490395333" />
     <state width="1259" height="346" key="GridCell.Tab.1.right/0.0.1097.577/0.-1080.1280.720/-1080.-1084.720.1280@0.-1080.1280.720" timestamp="1675659718743" />
-    <state width="1259" height="343" key="GridCell.Tab.1.right/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.-1096.1280.720" timestamp="1677570595561" />
-    <state x="102" y="-1041" key="Vcs.Push.Dialog.v2" timestamp="1677754975010">
+    <state width="1259" height="341" key="GridCell.Tab.1.right/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.-1096.1280.720" timestamp="1678166626395" />
+    <state x="102" y="-1041" key="Vcs.Push.Dialog.v2" timestamp="1677804711772">
       <screen x="0" y="-1096" width="1280" height="720" />
     </state>
     <state x="-1833" y="44" key="Vcs.Push.Dialog.v2/-1920.0.1097.577/0.0.1097.577@-1920.0.1097.577" timestamp="1676820438557" />
     <state x="87" y="44" key="Vcs.Push.Dialog.v2/-1920.0.1097.577/0.0.1097.577@0.0.1097.577" timestamp="1677396784120" />
     <state x="87" y="44" key="Vcs.Push.Dialog.v2/0.0.1097.577/-1920.0.1097.617@0.0.1097.577" timestamp="1675472073071" />
     <state x="87" y="44" key="Vcs.Push.Dialog.v2/0.0.1097.577/0.-1080.1280.720/-1080.-1084.720.1280@0.0.1097.577" timestamp="1676290588425" />
-    <state x="102" y="-1041" key="Vcs.Push.Dialog.v2/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.-1096.1280.720" timestamp="1677754975010" />
+    <state x="102" y="-1041" key="Vcs.Push.Dialog.v2/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.-1096.1280.720" timestamp="1677804711772" />
     <state x="87" y="44" key="Vcs.Push.Dialog.v2/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.0.1097.577" timestamp="1676856629520" />
+    <state x="448" y="-822" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1678079646432">
+      <screen x="0" y="-1096" width="1280" height="720" />
+    </state>
+    <state x="448" y="-822" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.-1096.1280.720" timestamp="1678079646432" />
+    <state x="0" y="0" width="980" height="616" maximized="true" key="dock-window-1" timestamp="1678062763266">
+      <screen x="0" y="0" width="1097" height="577" />
+    </state>
+    <state x="0" y="0" width="980" height="616" maximized="true" key="dock-window-1/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.-1096.1280.720" timestamp="1678062763266" />
     <state x="295" y="188" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1675471908590">
       <screen x="0" y="0" width="1097" height="577" />
     </state>
@@ -429,10 +497,10 @@
       <screen x="0" y="0" width="1097" height="577" />
     </state>
     <state x="389" y="73" key="refactoring.ChangeSignatureDialog/0.0.1097.577/-1920.0.1097.617@0.0.1097.577" timestamp="1675473668197" />
-    <state x="246" y="-1097" width="785" height="847" key="search.everywhere.popup" timestamp="1677732491577">
-      <screen x="0" y="-1096" width="1280" height="720" />
+    <state x="211" y="-1" width="672" height="678" key="search.everywhere.popup" timestamp="1678012636481">
+      <screen x="0" y="0" width="1097" height="577" />
     </state>
-    <state x="211" y="-1" width="672" height="678" key="search.everywhere.popup/-1920.0.1097.577/0.0.1097.577@0.0.1097.577" timestamp="1677374660322" />
-    <state x="246" y="-1097" width="785" height="847" key="search.everywhere.popup/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.-1096.1280.720" timestamp="1677732491577" />
+    <state x="211" y="-1" width="672" height="678" key="search.everywhere.popup/-1920.0.1097.577/0.0.1097.577@0.0.1097.577" timestamp="1678012636481" />
+    <state x="246" y="-1097" width="785" height="847" key="search.everywhere.popup/0.0.1097.577/0.-1096.1280.720/-1080.-842.720.1280@0.-1096.1280.720" timestamp="1677809928408" />
   </component>
 </project>

@@ -8,6 +8,38 @@
 background-color:#e6e6e6;
 }
 
+.math, .statistic{
+
+background-color:#4C7AF1 !important;
+}
+
+.filter{
+background-color:#05C793  !important;
+}
+
+.text-mod{
+background-color:#EF436B !important;
+}
+
+.database{
+background-color:#ff802a !important;
+}
+
+.converter{
+background-color:#d359ff !important;
+}
+
+.sticktop{
+    position: sticky;
+    top: 0;
+    z-index: 99;
+}
+
+.pt-6{
+ padding-top:4rem!important;
+}
+
+
 
 #joinimg{
 height:auto;

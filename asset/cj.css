@@ -30,6 +30,11 @@ h2 a,h1 a{
 color:black;
 }
 
+
+.width100{
+width:100%;
+}
+
 .max-width-50{
 max-width:50%;
 }

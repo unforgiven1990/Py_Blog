@@ -5,10 +5,20 @@ function tool() {
 }
 
 
+function config(){
+$('#n').attr('min', 0)
+$('#n').attr('max', 100)
+$('#n_label').html("Sample "+$('#n').val()+"%:")
+}
+
+
 //init function
 function init() {
-    listener_table([hot1])
-    listener_configure(["#sample","#n"])
-     $('#n').attr('max', data1 = 100)
+    listener_table([hot1],[config])
+    listener_configure(["#n"],[config])
+    listener_configure(["#sample"],[config],"click")
+
+    $('#n').attr('value',37)
+    config()
     tool()
 }
