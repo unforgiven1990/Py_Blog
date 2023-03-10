@@ -9,7 +9,14 @@
     <meta name="viewport" content="width=device-width,  initial-scale=1, maximum-scale=1">
 
     <script>
-    location.href="{redirect}"
+    url=window.location.href
+    hashtag=url.split("#")[1]
+    if (typeof hashtag =="string"){
+        hashtag="#"+hashtag
+    }else{
+        hashtag=""
+    }
+    location.href="{redirect}"+hashtag
     </script>
 </head>
 </html>

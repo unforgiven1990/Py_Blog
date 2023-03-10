@@ -1,17 +1,21 @@
 function exampletool(){
 return  {
 "#table1": [
-         [1.0, -2.1, -3.2],
-         [4.2, -5.2, -6.0],
-         [7.22, -8.1, 9.2],
-         [-10.0, 11, 4.0],
-    ]
+
+         ["Number A is 2.33", "Number B is 79.3", "Number C is 11.357"],
+         [4.2, 5.2, 6.0],
+         [7.22, 8.1, 9.2345],
+         [10.233, 11.23, 12.1],
+    ],
+
 }
 }
 
 function tool() {
+console.log("called")
     data=hot1.getData()
     result=[]
+    decimals=$("#n").val()
 
     countRows = hot1.countRows()
     countCols = hot1.countCols()
@@ -22,16 +26,23 @@ function tool() {
 
     for (var i = 0; i < countRows; i++) {
         for (var j = 0; j < countCols; j++) {
-        try{
+        //if the data is stirng+ number
+            myvar=data[i][j]
+            if (typeof myvar === 'string'){
+                finalstring=""
+                $.each(myvar.split(" "), function(key, value) {
+                    if (isNumber(value)){
+                        console.log(value)
+                        finalstring=finalstring+" "+String(Math.floor(parseFloat(value)))
+                    }else{
+                        finalstring=finalstring+" "+value
+                    }
 
-            number=parseFloat(data[i][j])
-            result[i][j] =absnumber= Math.floor(number)
-            if (isNaN(parseFloat(absnumber))){
-                result[i][j] = data[i][j]
+                })
+                result[i][j] = finalstring
+            }else if (isNumber(myvar)){
+                result[i][j] = Math.floor(myvar)
             }
-        }catch{
-            result[i][j] = data[i][j]
-        }
         }
     }
     datawithcol = result
@@ -39,8 +50,19 @@ function tool() {
 }
 
 
+function config(){
+$('#n').attr('min', 0)
+$('#n').attr('max', 6)
+$('#n_label').html("Round "+$('#n').val()+" digits")
+}
+
+
 //init function
 function init() {
-    listener_table([hot1])
+    listener_table([hot1],[config])
+    listener_configure(["#n"],[config])
+
+    $('#n').attr('value',1)
+    config()
     tool()
 }

@@ -2,18 +2,12 @@ function exampletool(){
 return  {
 "#table1": [
 
-         [1.2345, 2.2345, 3.223],
+         ["Number A is 2.33", "Number B is 79.3", "Number C is 11.357"],
          [4.2, 5.2, 6.0],
          [7.22, 8.1, 9.2345],
          [10.233, 11.23, 12.1],
     ],
 
-"#table2": [
-        [1, 2, 4],
-        [2, 2, 3],
-        [3, 2, 3],
-        [4, 2, 3],
-    ],
 }
 }
 
@@ -32,7 +26,23 @@ console.log("called")
 
     for (var i = 0; i < countRows; i++) {
         for (var j = 0; j < countCols; j++) {
-            result[i][j] = data[i][j].toFixed(decimals)
+        //if the data is stirng+ number
+            myvar=data[i][j]
+            if (typeof myvar === 'string'){
+                finalstring=""
+                $.each(myvar.split(" "), function(key, value) {
+                    if (isNumber(value)){
+                        console.log(value)
+                        finalstring=finalstring+" "+String(parseFloat(value).toFixed(decimals))
+                    }else{
+                        finalstring=finalstring+" "+value
+                    }
+
+                })
+                result[i][j] = finalstring
+            }else if (isNumber(myvar)){
+                result[i][j] = myvar.toFixed(decimals)
+            }
         }
     }
     datawithcol = result

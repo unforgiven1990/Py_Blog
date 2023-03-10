@@ -93,6 +93,7 @@ function myexport(hot, name) {
     const exportPlugin = hot.getPlugin('exportFile')
     const button = document.querySelector('#download')
     button.addEventListener('click', () => {
+        $('#exampleModal').modal("show")
         exportPlugin.downloadFile('csv', {
             bom: false,
             columnDelimiter: ',',
@@ -106,6 +107,8 @@ function myexport(hot, name) {
             rowHeaders: true
         })
     })
+
+
 }
 
 
@@ -269,6 +272,11 @@ function main() {
     }
 
     $(".mytooltip").tooltip()
+    //$(".accordion-item .accordion-collapse").first().addClass("show")
+    /**
+    $('#download').on('click', function() {
+        $('#exampleModal').show()
+    })**/
     hot1 = $("#table1").handsontable('getInstance')
     hot2 = $("#table2").handsontable('getInstance')
     hot3 = $("#table3").handsontable('getInstance')
@@ -281,7 +289,7 @@ function main() {
 
     //pyodided_test()
 }
-
+function isNumber(n) { return !isNaN(parseFloat(n)) && !isNaN(n - 0) }
 
 //init
 $(document).ready(main)

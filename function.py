@@ -154,16 +154,19 @@ def save(page, filename,removehtml=False,sitemap=[]):
 
     # two slashes means root e.g. ../sicksheet.com/index.html
     #if more than 2 slashes , then add 1 slash back to every url
+
+
     if filename.count("/")>2:
         #replace all url
         soup=BeautifulSoup(page, "html.parser")
 
         #replace elements in nav
         nav=soup.find("nav")
-        for a in nav.find_all("a"):
-            if not a['href'].startswith("#"):
-                a['href'] = "../"+a['href']
-        page = str(soup)
+        if nav:
+            for a in nav.find_all("a"):
+                if not a['href'].startswith("#"):
+                    a['href'] = "../"+a['href']
+
 
         # replace elements in head Link
         head = soup.find("head")
@@ -197,8 +200,9 @@ def save(page, filename,removehtml=False,sitemap=[]):
     return sitemap
 
 
-def pformat(template, d_fit):
+def pformat(template, d_fit_original):
     """fits a template partically"""
+    d_fit=d_fit_original.copy()
     for var in [fn for _, fn, _, _ in Formatter().parse(template) if fn is not None]:
         if var not in d_fit:
             d_fit[var]= "{" + var + "}"
@@ -211,7 +215,10 @@ def resolve_dict_automatic(d_data):
     """ resolve the dict with form {function: data} to {data:data} """
     result=d_data.copy()
     for key,val in d_data.items():
+        print("dict size ",(d_data))
         if callable(key):
+            print(key,val)
+            print(key(val,d_data))
             result[key.__name__]="".join(key(val,d_data))
 
     #after each solve, check data of each dict
@@ -260,10 +267,12 @@ def resolve_dict_manual(tool, d_tool_s):
     a_A=[y for x,y in d_helper.items() if x.startswith("_A")]
     tool_faq = ""
     for counter, (question, answer) in enumerate(zip(a_Q,a_A)):
+        show="show" if counter==0 else ""
         tool_faq += get("component_tool_faq.html").format(**{
             "faq_number": counter + 1,
             "faq_question": "Q: "+question,
             "faq_answer": "A: "+answer,
+            "show": show,
         })
     d_tool_s["tool_faq"] = pformat(tool_faq, d_website)
     return d_tool_s #returns dict
@@ -384,16 +393,71 @@ def content_target_blank(content,index):
     return str(soup)
 
 
+
 def nav(a_li,d_website):
-    result=[]
-    for li in a_li:
+    result_left=[]
+    for li in a_li[0]:
         nav_li=pformat(get("nav_li.html"), li)
-        result+=[nav_li]
-    result="".join(result)
-    result= pformat(get("nav.html"), {"navli":result})
-    result=pformat(result,d_website)
+        result_left+=[nav_li]
+    result_left="".join(result_left)
+    result_left = pformat(get("nav.html"), {"navli": result_left})
+
+    result_right = []
+    for li in a_li[1]:
+        nav_li = pformat(get("nav_li.html"), li)
+        result_right += [nav_li]
+    result_right = "".join(result_right)
+    result = pformat(result_left, {"navli_right": result_right})
+
+
+    result= pformat(result,d_website)
     return result
 
+
+def nav2(a_li,d_website):
+    todo={
+        0:"navli",
+        1:"navli_right",
+    }
+
+    result_left = []
+    for li in a_li[0]:
+        nav_li=pformat(get("nav_li.html"), li)
+        result_left+=[nav_li]
+    result_left="".join(result_left)
+    print(result_left)
+
+    result_right = []
+    for li in a_li[1]:
+        nav_li = pformat(get("nav_li.html"), li)
+        result_right += [nav_li]
+    result_right = "".join(result_right)
+    print()
+    print()
+    print(result_right)
+
+
+    result= pformat(get("nav.html"), {"navli":result_left})
+    result= pformat(result, {"navliright":result_right})
+    return pformat(result,d_website)
+
+
+def create_card(data,dirtytoremove="../"):
+    tooltype = '<span class="badge bg-secondary rounded-pill ' + data["type"] + '">' + data["type"].replace('-',
+                                                                                                            ' ') + '</span>'
+    if data["complexity"] == "advanced":
+        complexity = '<span class="badge bg-secondary rounded-pill ' + data["complexity"] + '">' + data[
+            "complexity"] + '</span>'
+    else:
+        complexity = ""
+    d_replace = {
+        "tool": data["tool"],
+        "h1": data["h1"],
+        "h1description": data["h1description"],
+        "type": tooltype + complexity,
+        "dirtytoremove":dirtytoremove,
+    }
+    return pformat(get("card.html"), d_replace)
 
 def tool_index_content():
     """go through all available tools and create one col for it"""
@@ -409,24 +473,20 @@ def tool_index_content():
     for keystuff, stuff in d_stuff.items():
         stuffresult=""
         for data in stuff:
-            a_type='<span class="badge bg-secondary rounded-pill '+data["type"]+'">'+data["type"].replace('-',' ')+'</span>'
-            d_replace={
-                "tool": data["tool"],
-                "h1":data["h1"],
-                "h1description":data["h1description"],
-                "type":a_type,
-            }
-            stuffresult+=pformat(get("card.html"), d_replace)
-        stuffresult=f'<div class="pt-6" id="{keystuff}"><div class="row">{stuffresult}</div></div>'
-        result+=stuffresult
+            stuffresult+=create_card(data)
+        result+=f'<div class="pt-6" id="{keystuff}"><div class="row">{stuffresult}</div></div>'
 
     #add result to scrollable container
-    result=f"""
+    return f"""
     <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example" tabindex="0">
         {result} </div>"""
 
-    return result
 
+
+def tool_related(tool, tooltype):
+    new_dict=[x for x in d_tools_txt_s if x["type"]==tooltype and x["tool"]!=tool]
+    result="".join([create_card(x,dirtytoremove="") for x in new_dict])
+    return result
 
 def create_blog(d_website):
     """
@@ -489,7 +549,7 @@ def create_blog(d_website):
         url = (remove_leadingnumber(document)
                .lstrip()
                .replace(" ","-"))
-
+        print(file)
         published = os.path.getmtime(d_expath['iroot']+"/"+file)
         published=datetime.datetime.fromtimestamp(published)
 
@@ -575,7 +635,9 @@ def create_blog(d_website):
             tool=d_tool["tool"]
             #create the final replacement dict to replace the template
             d_tool = resolve_dict_manual(tool=tool, d_tool_s=d_tool) # resolve dict to make function out of dict data
+            d_tool["related"]=tool_related(tool,d_tool["type"])
             d_tool={**d_website,**d_tool} #merge dicts together. second thing overwrites first
+
 
             page_tool = pformat(get("page_tool_function.html"), {"toolbody": get("component_tool.html")})
             page_tool = pformat(page_tool, d_tool)
@@ -634,6 +696,8 @@ def general_tool_content(tool, d_tool_txt_s):
             "step_data": d_tool_content_s[f"{key}.content"],
         })
         counter+=1
+
+    #add tutorial and why
     return "".join(d_result.values())
 
 
@@ -858,6 +922,10 @@ def upper(d_html, d_txt):
     return [d_html, d_txt]
 
 def lower(d_html, d_txt):
+    remove_step(d_html, d_txt)
+    return [d_html, d_txt]
+
+def add_space_comma(d_html, d_txt):
     remove_step(d_html, d_txt)
     return [d_html, d_txt]
 
