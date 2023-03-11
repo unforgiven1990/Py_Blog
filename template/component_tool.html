@@ -1,5 +1,7 @@
 <div class="container max-width-80  ">
 
+
+
   <header class="" data-tool="{tool}">
                 <div class="container">
                     <div class="row gx-5 align-items-center justify-content-center">
@@ -34,7 +36,7 @@
 
 
 
-<div id='start' class='wrapper pt-5'>
+<div id='start' class='wrapper pt-0'>
     <div class='steps' id='steps'>
         {tool_steps}
     </div>
@@ -46,21 +48,28 @@
 
 
     <p class=" spacer" ></p>
+
+
+    <div class='row my-5 mx-3 ' >
+         <h2 class="text-center bigh2 mb-5" >Any Questions?</h2>
 <div class="accordion" id="accordionExample">
+
     {tool_faq}
-</div><!-- accordion ends-->
+</div>
+        </div><!-- accordion ends-->
 
 
 
 <p class=" spacer" ></p>
 
 
-<div id='related' class='wrapper pt-5'>
-    <div class='row' >
-        <h3 ><a href="index.html">More Related Tools</a></h3>
-        {related}
-    </div>
+
+<div id='related' class='row my-5 mx-3 text-center' >
+    <h2 class="text-center bigh2 mb-5" >Find More Tools</h2>
+    {related}
+    <a href="index.html">More Related Tools</a>
 </div>
+
 
 
 
@@ -69,16 +78,15 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Successful Download!</h5>
+        <h5 class="modal-title" id="modalLabel">Successful Download!</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-center center-block">
-          <p>Submit bugs at <a target="_blank" href="https://www.reddit.com/r/sicksheet/comments/11looge/official_bug_list/">Official Bug List</a></p>
-          <p>Request features at <a target="_blank" href="https://www.reddit.com/r/sicksheet/comments/11lonto/official_feature_list/">Official Feature Request</a></p>
+          <p>Submit bug or feature request at <a target="_blank" href="https://nio.feishu.cn/share/base/form/shrcnWaYQKU6NuA3dSCT2rwJQOb">Bug and Feature Form</a></p>
         <img src="asset/img/download success.png"  alt="download successful celebration image" class="mx-auto d-block" style="width:40%">
 
       </div>
@@ -87,6 +95,19 @@
     </div>
   </div>
 </div>
+
+
+<!--toast-->
+<div id="liveToast" class="position-fixed bottom-0 start-50 translate-middle " style="z-index:999999999999999;">
+  <div class="toast text-bg-primary"  aria-live="assertive" aria-atomic="true" data-bs-delay="1400">
+    <div id='toastcontent' class="toast-body text-center">
+      Copied to clipboard.
+    </div>
+  </div>
+</div>
+
+
+
 
 
 

@@ -1,1 +1,30 @@
-<button id="{id}" type="button" class="btn btn-primary width50" style="display:inline-block;width:100%;margin:0px;" >{label}</button>
+<div class="btn-group " role="group" aria-label="Button group with nested dropdown" style="width:100%;margin:0px;">
+  <button id="{id}" type="button" class="btn btn-primary" style="border-right: 2px solid #ffffff;"><b>{label}</b></button>
+  <div class="btn-group" role="group" >
+    <button id="downloadtype" type="button" class="btn btn-primary dropdown-toggle" style="border-right: 1px solid #ffffff;" data-bs-toggle="dropdown" aria-expanded="false">
+      <b>.csv</b>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="downloadtype">
+      <li><a id="download_csv" class="dropdown-item" >.csv</a></li>
+      <li><a id="download_txt" class="dropdown-item" >.txt</a></li>
+      <li><a id="download_copy" class="dropdown-item" >Select Sheet</a></li>
+      <!--<li><a id="download_xls" class="dropdown-item" >.xls</a></li>-->
+      <!--<li><a id="download_xls" class="dropdown-item" >.pdf</a></li>-->
+      <!--<li><a id="download_xls" class="dropdown-item" >.jpg</a></li>-->
+      <!--<li><a id="download_xls" class="dropdown-item" >.ppt</a></li>-->
+      <!--<li><a id="download_xls" class="dropdown-item" >.word</a></li>-->
+      <!--<li><a id="download_xls" class="dropdown-item" >.json</a></li>-->
+      <!--<li><a id="download_xls" class="dropdown-item" >.py</a></li>-->
+      <!--<li><a id="download_xls" class="dropdown-item" >.feather</a></li>-->
+      <!--<li><a id="download_xls" class="dropdown-item" >array</a></li>-->
+      <!--<li><a id="download_xls" class="dropdown-item" >dict</a></li>-->
+      <!--<li><a id="download_xls" class="dropdown-item" >object</a></li>-->
+      <!--<li><a id="download_xls" class="dropdown-item" >dictionary</a></li>-->
+    </ul>
+  </div>
+</div>
+
+
+<!--
+<button  type="button" class="btn btn-primary width50" style="display:inline-block;width:100%;margin:0px;" >egal</button>
+-->
