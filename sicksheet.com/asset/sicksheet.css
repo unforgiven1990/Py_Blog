@@ -49,12 +49,23 @@ padding-top:20px;
 padding-bottom:20px;
 }
 
+.mb8{
+margin-bottom:20px;
+}
+
 .width50{
 width:50%;
 }
 
 .spacer{
-height:60px;
+height:70px;
+}
+.spacer_small{
+height:35px;
+}
+
+.bs-tooltip {
+  padding: 20px ;
 }
 
 .wrapper {
@@ -63,6 +74,8 @@ height:60px;
   justify-content: center;
   align-items: center;
 }
+
+
 
 .steps {
   width: 400px;
@@ -89,9 +102,10 @@ height:60px;
 .step .title {
   font-size: 1.6rem;
   font-weight: 700;
-  margin: 0 0 8px;
+  margin: 0 0 0px;
   line-height:1.2;
-  color: black;
+  color: #0d6efd;
+
 }
 .step .text {
   font-size: 12px;

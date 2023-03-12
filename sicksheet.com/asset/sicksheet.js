@@ -29,11 +29,12 @@ a_hooks={
 function default_example(){
 return {
     "#table1": [
-        ['Name', 'Age', 'Car Brand'],
-        ['Ali', "20", "NIO"],
-        ['Max', "33", "Tesla"],
+        ['Example Name', 'Example Age', 'Example Car'],
+        ['Ali', "20", "Tesla"],
+        ['Max', "33", "NIO"],
         ['James', "27", "BMW"],
         ['Jane', "25", "Mercedes"],
+        ['Bob', "17", "Volvo"],
     ],
     "#table2": [
         ['Name', 'Country', 'Height'],
@@ -107,6 +108,8 @@ function setColorNumeric(hot, color = color4) {
 
 
 function data_init(mydata) {
+    rows=mydata.length
+    rows= Math.min(rows,20)
     return {
         data: mydata,
         rowHeaders: true,
@@ -118,7 +121,10 @@ function data_init(mydata) {
         manualColumnMove: true,
         colWidths: 100,
         width: '100%',
-        height: 150,
+        rowHeights:20,
+        height: (rows*23)+50,//if horizontal bar comes, it also takes space
+        filters: true,
+        dropdownMenu: true,
         viewportColumnRenderingOffset: 5,
         viewportRowRenderingOffset: 5,
         licenseKey: 'non-commercial-and-evaluation'
@@ -134,6 +140,7 @@ function listener_table(a_elements,a_functions=[]){
             $.each(a_hooks, function(hookkey, hookfunc) {
                 hot.addHook(hookkey, (row, amount) => {
                   func()
+                  adjust_hot_size(hot)//might cause huge lag
                 })
             })
         })
@@ -186,14 +193,15 @@ function download_xls (){
 
 function download_csv(hot, name) {
         hot.getPlugin('exportFile').downloadFile('csv', {
-            bom: false,
+            bom: "UTF-8",
             columnDelimiter: ',',
             columnHeaders: false,
             exportHiddenColumns: true,
             exportHiddenRows: true,
             fileExtension: 'csv',
             filename: name.replace("-"," ") + ' [YYYY].[MM].[DD]',
-            mimeType: 'text/csv;charset=utf-8,',
+            //mimeType: 'text/csv;charset=utf-8',
+            mimeType: 'text/csv',
             rowDelimiter: '\r\n',
             rowHeaders: true
 
@@ -230,6 +238,19 @@ function download_copy(hot,name){
         });*/
 }
 
+
+function adjust_hot_size(hot){
+
+            rows=hot.countRows()
+            rows=Math.min(rows,20)
+            hot.updateSettings({
+               // colWidths: 70,
+                rowHeights: 20,
+                width: '100%',
+                height: rows*23+50,
+            })
+
+}
 
 
 function main() {
@@ -290,8 +311,41 @@ function main() {
         })
     })
 
+
+    a_tables=[hot1,hot2,hot3]
+
+    $('.reset_button').each(function(i, obj) {
+        $(this).click(function(e){
+            a_tables[i].clear()
+            e.preventDefault()
+        })
+    })
+
+    $('.undo_button').each(function(i, obj) {
+        $(this).click(function(e){
+            a_tables[i].undo()
+            e.preventDefault()
+        })
+    })
+
+    $('.fullscreen_button').each(function(i, obj) {
+        $(this).click(function(e){
+            a_tables[i].updateSettings({
+                colWidths: 70,
+                rowHeights: 20,
+                width: '100%',
+                height: 700,
+            })
+            e.preventDefault()
+        })
+    })
+
+
     $(".mytooltip").tooltip()
+    $(".reset_button").first().tooltip("show")
+
     init()
+    //adjust_hot_size()
 }
 
 
@@ -383,28 +437,6 @@ function hot_to_string(hot){
 
 
 
-
-
-
-    $("#download").bind("click", function(){
-        //download_csv(hot2, $("header").data("tool"))
-        window["download_csv"](hot2, $("header").data("tool"))
-        $('#exampleModal').modal("show")
-    })
-    $("#download_csv").bind("click", function(){
-        download_csv(hot2, $("header").data("tool"))
-        $('#exampleModal').modal("show")
-    })
-    $("#download_txt").bind("click", function(){
-        download_txt(hot2, $("header").data("tool"))
-        $('#exampleModal').modal("show")
-    })
-    $("#download_copy").bind("click", function(){
-        download_copy(hot2)
-    })
-    $("#download_xls").bind("click", function(){
-        $('#exampleModal').modal("show")
-    })
 */
 
 

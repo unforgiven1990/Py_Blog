@@ -485,6 +485,7 @@ def tool_index_content():
 
 def tool_related(tool, tooltype):
     new_dict=[x for x in d_tools_txt_s if x["type"]==tooltype and x["tool"]!=tool]
+    more_related=pformat(get("card2.html"), {"h1":"more related"})
     result="".join([create_card(x,dirtytoremove="") for x in new_dict])
     return result
 
@@ -628,6 +629,8 @@ def create_blog(d_website):
 
     """---------------- create Tools here ----------------"""
 
+    d_website["tool_count"]=len(d_tools_txt_s)
+
     #tool function
     if d_website["blog_url"]== "sicksheet.com":
         #generate individual tool
@@ -689,17 +692,73 @@ def general_tool_content(tool, d_tool_txt_s):
     for key in ["input","input2","configure","download"]: #input2 only used for join.
         if not [x for x in d_tool_txt_s.keys() if x.startswith(f"{key}.")]:
             continue
+
+        if "input" in key:
+            close=""" <div class='text-secondary'>
+           
+            
+            <button class="btn btn-outline-secondary btn-sm undo_button text-decoration-none mytooltip" href="" title="Undo" >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-90deg-left" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M1.146 4.854a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H12.5A2.5 2.5 0 0 1 15 6.5v8a.5.5 0 0 1-1 0v-8A1.5 1.5 0 0 0 12.5 5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4z"/>
+            </svg>
+            </button>
+            
+            
+            <button class="btn btn-outline-secondary btn-sm reset_button ml-3 text-decoration-none mytooltip tooltip-bg-primary" href="" title="Start New"  >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+            </svg>
+            </button>
+            
+            
+          
+            </div>"""
+
+            """
+            reset button to be added later
+            
+            
+            
+            
+            <a class="upload_button ml-3 text-decoration-none mytooltip " href="" title="Upload file formats: .xlsx, .xls, .numbers" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                  <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                  <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                </svg>
+            </a>
+            
+            
+            <a class="fullscreen_button ml-3 text-decoration-none mytooltip " href="" title="Fullscreen" >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-fullscreen" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344 0a.5.5 0 0 1 .707 0l4.096 4.096V11.5a.5.5 0 1 1 1 0v3.975a.5.5 0 0 1-.5.5H11.5a.5.5 0 0 1 0-1h2.768l-4.096-4.096a.5.5 0 0 1 0-.707zm0-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707zm-4.344 0a.5.5 0 0 1-.707 0L1.025 1.732V4.5a.5.5 0 0 1-1 0V.525a.5.5 0 0 1 .5-.5H4.5a.5.5 0 0 1 0 1H1.732l4.096 4.096a.5.5 0 0 1 0 .707z"/>
+            </svg>
+            </a>
+            """
+
+        else:
+            close=""
+
         d_result[key]=get("component_tool_step.html").format(**{
             "step_n":counter,
             "step_h1":d_tool_txt_s[f"{key}.title"],
             "step_descr":d_tool_txt_s[f"{key}.descr"],
             "step_data": d_tool_content_s[f"{key}.content"],
+            "close_button": close,
         })
         counter+=1
 
     #add tutorial and why
     return "".join(d_result.values())
 
+
+def remove_step(d_html, d_txt, step="configure."):
+    for key in list(d_html.keys()):
+        if key.startswith(step):
+            d_html.pop(key)
+
+    for key in list(d_txt.keys()):
+        if key.startswith(step):
+            d_txt.pop(key)
 
 def join_tables(d_html, d_txt):
     # change input 1 text
@@ -720,21 +779,9 @@ def join_tables(d_html, d_txt):
     return [d_html, d_txt]
 
 
-
-
-def remove_step(d_html, d_txt, step="configure."):
-    for key in list(d_html.keys()):
-        if key.startswith(step):
-            d_html.pop(key)
-
-    for key in list(d_txt.keys()):
-        if key.startswith(step):
-            d_txt.pop(key)
-
 def transpose_table(d_html, d_txt):
     remove_step(d_html, d_txt)
     return [d_html, d_txt]
-
 
 def sort_rows(d_html, d_txt):
     select1=getcf("select.html",id="sortcol",label="Sort Column")
@@ -784,19 +831,13 @@ def first_n_rows(d_html, d_txt):
     return [d_html, d_txt]
 
 def after_first_n_rows(d_html, d_txt):
-    range = getcf("range.html", id="n", label="First n Rows")
-    d_html["configure.content"] = range
-    return [d_html, d_txt]
+    return first_n_rows(d_html, d_txt)
 
 def last_n_rows(d_html, d_txt):
-    range = getcf("range.html", id="n",label="Last n Rows")
-    d_html["configure.content"] = range
-    return [d_html, d_txt]
+    return first_n_rows(d_html, d_txt)
 
 def before_last_n_rows(d_html, d_txt):
-    range = getcf("range.html", id="n",label="Last n Rows")
-    d_html["configure.content"] = range
-    return [d_html, d_txt]
+    return first_n_rows(d_html, d_txt)
 
 def slice_rows(d_html, d_txt):
     range1 = getcf("range.html", id="startn", label="Start at Row n")
@@ -819,27 +860,19 @@ def text_len(d_html, d_txt):
     remove_step(d_html, d_txt)
     return [d_html, d_txt]
 
-
 def left(d_html, d_txt):
     range = getcf("range.html", id="n", label="Left n Characters")
     d_html["configure.content"] = range
     return [d_html, d_txt]
 
 def right(d_html, d_txt):
-    range = getcf("range.html", id="n", label="Right n Characters")
-    d_html["configure.content"] = range
-    return [d_html, d_txt]
-
+    return left(d_html, d_txt)
 
 def nth_row(d_html, d_txt):
-    range = getcf("range.html", id="n", label="Right n Characters")
-    d_html["configure.content"] = range
-    return [d_html, d_txt]
+    return left(d_html, d_txt)
 
 def except_nth_row(d_html, d_txt):
-    range = getcf("range.html", id="n", label="Right n Characters")
-    d_html["configure.content"] = range
-    return [d_html, d_txt]
+    return left(d_html, d_txt)
 
 def even_rows(d_html, d_txt):
     remove_step(d_html, d_txt)
@@ -1040,17 +1073,11 @@ def remove_leading_zeros(d_html, d_txt):
 def remove_trailing_zeros(d_html, d_txt):
     return add_leading_zeros(d_html, d_txt)
 
-
 def sort_dict_list(lst, key):
     sorted_lst = sorted(lst, key=lambda x: x[key])
     return sorted_lst
 
 if __name__ == '__main__':
-
-    mysorted=sort_dict_list(d_tools_txt_s,"type")
-    global sorted_d_tools_txt_s
-    sorted_d_tools_txt_s=mysorted
-
     for d_website in d_websites_s:
         if d_website["blog_url"] =="sicksheet.com":
             create_blog(d_website=d_website)
