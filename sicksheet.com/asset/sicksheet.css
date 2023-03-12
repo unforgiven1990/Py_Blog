@@ -75,6 +75,9 @@ height:35px;
   align-items: center;
 }
 
+.red-background {
+background-color: red !important;
+}
 
 
 .steps {

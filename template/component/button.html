@@ -2,31 +2,35 @@
   <button id="{id}" type="button" class="btn btn-primary mytooltip" style="border-right: 2px solid #ffffff;" title="Click to download">
 
 
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
   <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
   <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
 </svg> <b>{label}</b>
   </button>
+
+
   <div class="btn-group" role="group" >
-    <button id="downloadtype" type="button" class="btn btn-primary dropdown-toggle mytooltip" style="border-right: 1px solid #ffffff;" data-bs-toggle="dropdown" aria-expanded="false" title="Choose download type">
+    <button id="download_type" type="button" class="btn btn-primary dropdown dropdown-toggle" style="border-right: 1px solid #ffffff;" data-bs-toggle="dropdown" aria-expanded="false" >
       <b>.csv</b>
     </button>
-    <ul class="dropdown-menu" aria-labelledby="downloadtype">
-      <li><a id="download_csv" class="dropdown-item" >.csv</a></li>
-      <li><a id="download_txt" class="dropdown-item" >.txt</a></li>
-      <li><a id="download_copy" class="dropdown-item" >Select Sheet</a></li>
-      <!--<li><a id="download_xls" class="dropdown-item" >.xls</a></li>-->
-      <!--<li><a id="download_xls" class="dropdown-item" >.pdf</a></li>-->
-      <!--<li><a id="download_xls" class="dropdown-item" >.jpg</a></li>-->
-      <!--<li><a id="download_xls" class="dropdown-item" >.ppt</a></li>-->
-      <!--<li><a id="download_xls" class="dropdown-item" >.word</a></li>-->
-      <!--<li><a id="download_xls" class="dropdown-item" >.json</a></li>-->
-      <!--<li><a id="download_xls" class="dropdown-item" >.py</a></li>-->
-      <!--<li><a id="download_xls" class="dropdown-item" >.feather</a></li>-->
-      <!--<li><a id="download_xls" class="dropdown-item" >array</a></li>-->
-      <!--<li><a id="download_xls" class="dropdown-item" >dict</a></li>-->
-      <!--<li><a id="download_xls" class="dropdown-item" >object</a></li>-->
-      <!--<li><a id="download_xls" class="dropdown-item" >dictionary</a></li>-->
+
+    <ul id="download_type_ul" class="dropdown-menu" aria-labelledby="downloadtype">
+      <li><span id="download_csv" class="dropdown-item pointer"  >.csv</span></li>
+      <li><span id="download_txt" class="dropdown-item pointer" >.txt</span></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><span id="download_copy" class="dropdown-item pointer" >Select Sheet</span></li>
+      <!--<li><span id="download_xls" class="dropdown-item pointer" >.xls</a></li>-->
+      <!--<li><span id="download_xls" class="dropdown-item pointer" >.pdf</a></li>-->
+      <!--<li><span id="download_xls" class="dropdown-item pointer" >.jpg</a></li>-->
+      <!--<li><span id="download_xls" class="dropdown-item pointer" >.ppt</a></li>-->
+      <!--<li><span id="download_xls" class="dropdown-item pointer" >.word</a></li>-->
+      <!--<li><span id="download_xls" class="dropdown-item pointer" >.json</a></li>-->
+      <!--<li><span id="download_xls" class="dropdown-item pointer" >.py</a></li>-->
+      <!--<li><span id="download_xls" class="dropdown-item pointer" >.feather</a></li>-->
+      <!--<li><span id="download_xls" class="dropdown-item pointer" >array</a></li>-->
+      <!--<li><span id="download_xls" class="dropdown-item pointer" >dict</a></li>-->
+      <!--<li><span id="download_xls" class="dropdown-item pointer" >object</a></li>-->
+      <!--<li><span id="download_xls" class="dropdown-item pointer" >dictionary</a></li>-->
     </ul>
   </div>
 </div>

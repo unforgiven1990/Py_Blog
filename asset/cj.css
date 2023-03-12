@@ -136,6 +136,30 @@ list-style: none;
 display: none;
 }
 
+.bg-green{
+background-color:#03E3135a !important;
+}
+
+.bg-blue{
+background-color:#0041ff5a !important;
+}
+
+.bg-red{
+background-color:#E600005a !important;
+}
+
+.bg-gray{
+background-color:#D9D9D95a !important;
+}
+
+.bg-yellow{
+background-color:#FFC0005a !important;
+}
+
+.bg-purple{
+background-color:#7030A05a !important;
+}
+
 
 .alias {cursor: alias;}
 .all-scroll {cursor: all-scroll;}

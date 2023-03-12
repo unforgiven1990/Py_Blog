@@ -16,7 +16,7 @@ tool
 7. Maybe a good design would be to let user choose no option?
 =split join into left join, right join, etc. no option needed
 8. content drives template design. if text exists, then create template.
-9.
-
+9. try to keep the format the same. show context related button at the same place with animation, instead of having 2 buttons
+10. invest time to make products, and not time to make marketing
 
 """

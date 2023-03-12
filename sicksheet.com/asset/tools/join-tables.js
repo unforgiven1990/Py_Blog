@@ -11,17 +11,18 @@ function tool() {
         $("#leftalert").hide()
         $("#jointype,#download").prop("disabled", false)
         $("#title3, #title4").removeClass("text-muted")
-        setColorRow(hot1)
-        setColorRow(hot2)
+        setColor(hot=hot1,  bgclass = "bg-green" , rowindex=-1, colindex=0)
+        setColor(hot=hot2,  bgclass = "bg-green" , rowindex=-1, colindex=0)
     } else {
         //some inputs are invalid
         $("#leftalert").show()
         $("#jointype,#download").prop("disabled", true)
         $("#title3,#title4").addClass("text-muted")
         $("#leftalert").html("Key Error: The first columns must have the same name. <b>" + key1 + " ≠ " + key2 + "</b>")
-        setColorRow(hot1, color2)
-        setColorRow(hot2, color2)
-        setColorRow(hot3, color2)
+        setColor(hot=hot1,  bgclass = "bg-red" , rowindex=-1, colindex=0)
+        setColor(hot=hot2,  bgclass = "bg-red" , rowindex=-1, colindex=0)
+        datawithcol = [[" ", " ", " "],[],[]]
+        data_to_hot("#table3",datawithcol)
         return
     }
 
@@ -33,7 +34,7 @@ function tool() {
     df3 = df1.join(df2, key1, jointype.replace("-join",""))
     datawithcol = [df3.listColumns()].concat(df3.toArray())
     data_to_hot("#table3",datawithcol)
-    setColorRow(hot3, color1)
+    setColor(hot=hot3,  bgclass = "bg-green" , rowindex=-1, colindex=0)
 }
 
 function showjoinimg() {

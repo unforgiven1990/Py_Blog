@@ -1051,6 +1051,7 @@ d_websites_s = [
         "metadescription": "This blog is a collection of useful career tips to help you climb up the career ladder.",
         "metakeywords": "career, tips, corporate ladder",
         "redirect": "blog/index.html",
+        "contact_form": "",
         function.nav: [[{"nav_text": "Blog", "nav_url": "blog/index.html"}, ], []]
     },
     {
@@ -1061,6 +1062,7 @@ d_websites_s = [
         "metadescription": "A collection of spreadsheet tools online. Each tool is specifically design to solve one spreadsheet problem.",
         "metakeywords": "Online, Spreadsheet, Table, Micro Saas",
         "redirect": "blog/index.html",
+        "contact_form": "",
         function.nav: [[{"nav_text": "Blog", "nav_url": "blog/index.html"}, ], []]
     },
     {
@@ -1071,6 +1073,7 @@ d_websites_s = [
         "metadescription": "This blog is a collection of useful career tips to help you climb up the career ladder.",
         "metakeywords": "career, tips, corporate ladder",
         "redirect": "tools/index.html",
+        "contact_form": "https://r134sarkw1m.feishu.cn/share/base/form/shrcnSoHkf7uEGXzHRikdx90vle",
         function.nav: [[{"nav_text": "Tools", "nav_url": "tools/index.html"},
                         ],
                        # {"nav_text": "Blog", "nav_url": "blog/index.html"}, ],

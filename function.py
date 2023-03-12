@@ -500,6 +500,7 @@ def create_blog(d_website):
 
 
     #define content
+    d_website["contact_form"]=f"<a target='_blank' href='{d_website['contact_form']}'>contact</a>" if d_website["contact_form"] else ""
     d_website={**d_website, **d_websites_g}
     d_website= resolve_dict_automatic(d_website)
     a_sitemap=[]

@@ -20,8 +20,8 @@ function tool() {
     data_to_hot("#table2",datawithcol)
 
     //add little highlight to indicate the swapped result
-    setColorColumn(hot1, color1)
-    setColorRow(hot2, color1)
+    setColor(hot=hot1,  bgclass = "bg-green" , rowindex=0, colindex=-1)
+    setColor(hot=hot2,  bgclass = "bg-green" , rowindex=-1, colindex=0)
 }
 
 

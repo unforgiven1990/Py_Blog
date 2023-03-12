@@ -37,13 +37,19 @@ return {
         ['Bob', "17", "Volvo"],
     ],
     "#table2": [
-        ['Name', 'Country', 'Height'],
+        ['Example Name', 'Example Land', 'Example Height'],
         ['Ali', "Italy", "1.7"],
         ['Eric', "USA", "1.8"],
         ['Jane', "Germany", "1.6"],
         ['Anna', "Japan", "1.7"],
     ],
-    "#table3": [],
+    "#table3": [
+        ['Example Name', 'Example Land', 'Example Height'],
+        ['Ali', "Italy", "1.7"],
+        ['Eric', "USA", "1.8"],
+        ['Jane', "Germany", "1.6"],
+        ['Anna', "Japan", "1.7"],
+    ],
 }
 }
 
@@ -53,26 +59,36 @@ function isNumber(n) {
 
 
 //set color of table 1 and 2
-function setColorRow(hot, color = "#fff", rowindex = 0) {
+function setColor(hot,  bgclass = "bg-green" , rowindex=-1, colindex=-1,) {
     var rows = hot.countRows(); // get the count of the rows in the table
-    for (var row = 0; row < rows; row++) { // go through each row of the table
-        var cell = hot.getCell(row, rowindex)
-        try{
-        cell.style.background = color
-        }catch{}
-
-    }
-}
-
-function setColorColumn(hot, color = "#fff", colindex = 0) {
     var cols = hot.countCols(); // get the count of the rows in the table
-    for (var col = 0; col < cols; col++) { // go through each row of the table
-        var cell = hot.getCell(colindex, col);
-        try{
-        cell.style.background = color
-        }catch{}
-    }
+    console.log("start transpose ")
+    console.log(hot.getData())
+    for (var row = 0; row < rows; row++) {
+        for (var col = 0; col < cols; col++) { // go through each row of the table
+            try{
+                if(rowindex >=0){
+                    real_row=rowindex
+                }else{
+                    real_row=row
+                }
+                if(colindex >=0){
+                    real_col=colindex
+                }else{
+                    real_col=col
+                }
+
+                hot.setCellMeta(real_row,real_col,"className",bgclass)
+            }catch (err){
+                console.log(err)
+            }
+        }
+     }
+
+     hot.render()
 }
+
+
 
 function setColorNonNumeric(hot, color = color3) {
     var cols = hot.countCols(); // get the count of the rows in the table
@@ -139,8 +155,8 @@ function listener_table(a_elements,a_functions=[]){
         $.each(a_functions, function(funckey, func) {
             $.each(a_hooks, function(hookkey, hookfunc) {
                 hot.addHook(hookkey, (row, amount) => {
-                  func()
-                  adjust_hot_size(hot)//might cause huge lag
+                  try{func()}catch(err){console.log(err)}
+                  //adjust_hot_size(hot)//might cause huge lag
                 })
             })
         })
@@ -171,7 +187,6 @@ function hot_to_dataframe(hot,col=true){
         return new dfjs.DataFrame(hot_data, hot_column)
     }else{
         hot_data = hot.getData()
-        console.log("3 hot_data ",hot_data)
         return new dfjs.DataFrame(hot_data)
     }
 }
@@ -240,9 +255,10 @@ function download_copy(hot,name){
 
 
 function adjust_hot_size(hot){
-
             rows=hot.countRows()
             rows=Math.min(rows,20)
+            //console.log("adjusted "+rows)
+            //console.log(hot)
             hot.updateSettings({
                // colWidths: 70,
                 rowHeights: 20,
@@ -267,21 +283,30 @@ function main() {
 
 
     */
+    d_data = default_example()
     if (typeof exampletool === "function"){
-        d_data = exampletool()
-    }else{
-        d_data = default_example()
+        d_tool_specific = exampletool()
+        d_data={
+        ...d_data,
+        ...d_tool_specific
+        }
     }
 
     downloadhot=-1//find the download table. ca be first, second, or third one
     $.each(["#table3","#table2", "#table1"], function(index, item) {
-        try {
+        if($(item).length) {
             //create handsontable
-            $(item).handsontable(data_init(data = d_data[item]))
+            $(item).handsontable(data_init(d_data[item]))
+
             //add hook for toast feedback
             thishot = $(item).handsontable('getInstance')
+
+
             $.each(a_hooks, function(hook_key, hook_text) {
                  thishot.addHook(hook_key, (row, amount) => {
+
+                    thishot = $(item).handsontable('getInstance')//todo nessesary right now, somehow thishot needs to be here again
+                    adjust_hot_size(thishot) // todo, not the most efficient way because there are 2 places where hooks are added for each table
                     if (hook_text!=""){
                         $("#toastcontent").html(hook_text)
                         $(".toast").toast("show")
@@ -289,12 +314,12 @@ function main() {
                 })
             })
 
-          if (downloadhot==-1){
-          downloadhot=thishot
-          console.log(downloadhot)
-          }
-        } catch {
-        //todo for the third table id
+              if (downloadhot==-1){
+              downloadhot=thishot
+              }
+
+        } else {
+            console.log(index,item)
         }
     })
 
@@ -303,11 +328,13 @@ function main() {
     hot2 = $("#table2").handsontable('getInstance')
     hot3 = $("#table3").handsontable('getInstance')
 
-    a_download_format=["download","download_csv","download_txt","download_xls"]
+    a_download_format=["download","download_csv","download_txt","download_copy"]
     $.each(a_download_format, function(counter, download_type) {
         $("#"+download_type).bind("click", function(){
             window[download_type](downloadhot, $("header").data("tool"))
-            $('#modal').modal("show")
+            if (download_type !="download_copy"){
+                $('#modal').modal("show")
+            }
         })
     })
 
@@ -316,36 +343,36 @@ function main() {
 
     $('.reset_button').each(function(i, obj) {
         $(this).click(function(e){
-            a_tables[i].clear()
             e.preventDefault()
+            a_tables[i].clear()
+
         })
     })
 
     $('.undo_button').each(function(i, obj) {
         $(this).click(function(e){
-            a_tables[i].undo()
             e.preventDefault()
+            a_tables[i].undo()
+
         })
     })
 
-    $('.fullscreen_button').each(function(i, obj) {
-        $(this).click(function(e){
-            a_tables[i].updateSettings({
-                colWidths: 70,
-                rowHeights: 20,
-                width: '100%',
-                height: 700,
-            })
-            e.preventDefault()
-        })
-    })
 
 
     $(".mytooltip").tooltip()
     $(".reset_button").first().tooltip("show")
+    $("#download_type").hover(function(){
+        if($("#download_type_ul").is(":hidden")){
+            $(this).click()
+        }
+
+      }, function(){
+    });
+
+
 
     init()
-    //adjust_hot_size()
+
 }
 
 
@@ -435,6 +462,27 @@ function hot_to_string(hot){
 
 
 
+
+
+function setColorRow(hot, bgclass = "bg-green", rowindex = 0) {
+    var rows = hot.countRows(); // get the count of the rows in the table
+    for (var row = 0; row < rows; row++) { // go through each row of the table
+        try{
+            hot.setCellMeta(row,rowindex,"className",bgclass)
+            //hot.setCellMeta(row,rowindex,"className","bg-primary")
+        }catch (err){console.log(err)}
+    }
+}
+
+function setColorColumn(hot, color = "#fff", colindex = 0) {
+    var cols = hot.countCols(); // get the count of the rows in the table
+    for (var col = 0; col < cols; col++) { // go through each row of the table
+        var cell = hot.getCell(colindex, col);
+        try{
+        cell.style.background = color
+        }catch{}
+    }
+}
 
 
 */
